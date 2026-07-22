@@ -706,6 +706,90 @@
       transition: background 0.2s;
     }
     .modal-btn:hover { background: rgba(0, 255, 65, 0.1); }
+    .modal-policy {
+      max-width: 560px;
+      max-height: 80vh;
+      overflow-y: auto;
+      text-align: left;
+      padding: 32px 28px;
+    }
+    .modal-policy .modal-title { margin-bottom: 20px; }
+    .modal-policy .modal-btn { margin-top: 20px; }
+    .policy-body h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: #00ff41;
+      margin: 20px 0 8px;
+    }
+    .policy-body p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+
+    /* ── Consent checkbox ── */
+    .agree-group { margin-bottom: 20px; margin-top: -4px; }
+    .agree-label {
+      display: flex !important;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .agree-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 1.5px solid rgba(0, 255, 65, 0.2);
+      border-radius: 3px;
+      background: transparent;
+      cursor: pointer;
+      margin-top: 1px;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .agree-checkbox:checked {
+      background: rgba(0, 255, 65, 0.12);
+      border-color: #00ff41;
+    }
+    .agree-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      left: 4.5px;
+      top: 1px;
+      width: 6px;
+      height: 10px;
+      border: solid #00ff41;
+      border-width: 0 1.5px 1.5px 0;
+      transform: rotate(45deg);
+    }
+    .agree-checkbox:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.15);
+    }
+    .agree-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.5;
+      user-select: none;
+    }
+    .agree-link {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      color: #00ff41;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(0, 255, 65, 0.3);
+    }
+    .agree-link:hover { text-decoration-color: #00ff41; }
 
     /* ── Footer ── */
     .footer {
@@ -1178,6 +1262,12 @@
               <label for="message">задача</label>
               <textarea id="message" name="message" placeholder="что хотите автоматизировать?" required></textarea>
             </div>
+            <div class="form-group agree-group">
+              <label class="agree-label">
+                <input type="checkbox" name="consent" required class="agree-checkbox">
+                <span class="agree-text">Нажимая на кнопку, я даю согласие на обработку <button type="button" class="agree-link" onclick="showPolicy()">персональных данных</button></span>
+              </label>
+            </div>
             <button type="submit" class="btn-submit">$ ./deploy.sh →</button>
           </form>
           <div class="modal-overlay" id="success-modal">
@@ -1186,6 +1276,29 @@
               <h3 class="modal-title">Сообщение отправлено!</h3>
               <p class="modal-text">Спасибо! Я свяжусь с вами в ближайшее время.</p>
               <button class="modal-btn" onclick="closeModal()">Закрыть</button>
+            </div>
+          </div>
+          <div class="modal-overlay" id="policy-modal">
+            <div class="modal modal-policy">
+              <h3 class="modal-title">Политика конфиденциальности</h3>
+              <div class="policy-body">
+                <p>Настоящая Политика конфиденциальности персональных данных (далее — Политика) действует в отношении всей информации, которую Павел Новиков (далее — Исполнитель) может получить о пользователе во время использования сайта noroutine.ru и его сервисов.</p>
+                <h4>1. Какие данные собираются</h4>
+                <p>При заполнении формы обратной связи пользователь предоставляет: имя, контактные данные (телефон или email), текст сообщения. Дополнительно может передаваться IP-адрес и техническая информация (user-agent).</p>
+                <h4>2. Цель сбора</h4>
+                <p>Сбор данных осуществляется исключительно для связи с пользователем по его запросу, консультирования и предоставления информации об услугах автоматизации.</p>
+                <h4>3. Правовое основание</h4>
+                <p>Обработка осуществляется на основании Федерального закона № 152-ФЗ «О персональных данных» и согласия пользователя, выраженного путём активного проставления галочки в форме.</p>
+                <h4>4. Хранение и защита</h4>
+                <p>Данные хранятся в защищённой электронной форме на серверах, расположенных на территории РФ. Исполнитель принимает необходимые организационные и технические меры для защиты информации от несанкционированного доступа, изменения, раскрытия или уничтожения. Срок хранения — не более 1 года с момента получения.</p>
+                <h4>5. Передача третьим лицам</h4>
+                <p>Передача персональных данных третьим лицам не осуществляется за исключением случаев, предусмотренных законодательством РФ. Для отправки электронных писем используется сервис FormSubmit.co, который выступает оператором транзакционной пересылки данных и не сохраняет их.</p>
+                <h4>6. Права пользователя</h4>
+                <p>Пользователь вправе в любой момент отозвать согласие на обработку, направив запрос на email personalartru@gmail.com. Также пользователь может запросить полное удаление своих данных из системы.</p>
+                <h4>7. Контакты</h4>
+                <p>По всем вопросам, связанным с обработкой персональных данных, обращайтесь:<br>Email: personalartru@gmail.com<br>Телефон: +7 927 728-08-27</p>
+              </div>
+              <button class="modal-btn" onclick="closePolicy()">Закрыть</button>
             </div>
           </div>
         </div>
@@ -1287,12 +1400,26 @@
       });
     });
 
+    // ── Close modals on overlay click ──
+    document.querySelectorAll('.modal-overlay').forEach(el => {
+      el.addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('active');
+      });
+    });
+
     // ── Form ──
     const form = document.getElementById('contact-form');
     const modal = document.getElementById('success-modal');
 
     function closeModal() {
       modal.classList.remove('active');
+    }
+
+    function showPolicy() {
+      document.getElementById('policy-modal').classList.add('active');
+    }
+    function closePolicy() {
+      document.getElementById('policy-modal').classList.remove('active');
     }
 
     form?.addEventListener('submit', async function(e) {
