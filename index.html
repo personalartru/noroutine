@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No ! Routine — Автоматизация без рутины</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #07070d;
+      color: #e0e0e8;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    code, .mono {
+      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Stars ── */
+    #stars-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Glow orbs ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.12;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 700px; height: 700px;
+      background: #7c3aed;
+      top: -250px; right: -200px;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: #00ff41;
+      bottom: -150px; left: -150px;
+    }
+    .orb-3 {
+      width: 400px; height: 400px;
+      background: #06b6d4;
+      top: 40%; left: 60%;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Scanline overlay ── */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.015) 2px,
+        rgba(0, 255, 65, 0.015) 4px
+      );
+    }
+
+    /* ── Header ── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 14px 0;
+      background: rgba(7, 7, 13, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 255, 65, 0.08);
+    }
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      color: #e0e0e8;
+    }
+    .logo .excl {
+      color: #00ff41;
+      display: inline-block;
+      animation: flicker 1.8s ease-in-out infinite;
+    }
+    .logo .letter {
+      transition: color 0.4s ease;
+    }
+    .logo .letter.purple { color: #a78bfa; }
+    .logo .letter.green { color: #00ff41; }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 1; }
+      55% { opacity: 0.3; }
+      60% { opacity: 1; }
+      85% { opacity: 1; }
+      90% { opacity: 0.4; }
+      95% { opacity: 1; }
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .header-nav a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-nav a:hover {
+      color: #00ff41;
+      background: rgba(0, 255, 65, 0.06);
+    }
+    .header-cta {
+      background: rgba(0, 255, 65, 0.1) !important;
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      color: #00ff41 !important;
+    }
+    .header-cta:hover {
+      background: rgba(0, 255, 65, 0.18) !important;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 80px;
+    }
+    .hero-content { max-width: 920px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: #00ff41;
+      background: rgba(0, 255, 65, 0.06);
+      border: 1px solid rgba(0, 255, 65, 0.12);
+      border-radius: 4px;
+      padding: 6px 14px 6px 10px;
+      margin-bottom: 36px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #00ff41;
+      box-shadow: 0 0 8px #00ff41;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px #00ff41; }
+      50% { opacity: 0.3; box-shadow: 0 0 2px #00ff41; }
+    }
+
+    .hero h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(40px, 8vw, 100px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      margin-bottom: 6px;
+    }
+    .hero h1 .no { color: #e0e0e8; }
+    .hero h1 .excl {
+      color: #00ff41;
+      display: inline-block;
+      animation: flicker 2s ease-in-out infinite;
+    }
+    .hero h1 .letter {
+      transition: color 0.4s ease;
+    }
+    .hero h1 .letter.purple { color: #a78bfa; }
+    .hero h1 .letter.green { color: #00ff41; }
+
+    .hero h1 .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.8em;
+      background: #00ff41;
+      margin-left: 4px;
+      vertical-align: baseline;
+      animation: blink-cursor 1s step-end infinite;
+    }
+    @keyframes blink-cursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(14px, 1.5vw, 17px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      max-width: 720px;
+      margin-top: 28px;
+      line-height: 1.7;
+      border-left: 2px solid rgba(0, 255, 65, 0.15);
+      padding-left: 20px;
+    }
+    .hero-sub .hl-green { color: #00ff41; }
+    .hero-sub .hl-pink { color: #a78bfa; }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 44px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.25s;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .btn-primary {
+      background: rgba(0, 255, 65, 0.08);
+      color: #00ff41;
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      padding: 14px 32px;
+    }
+    .btn-primary:hover {
+      background: rgba(0, 255, 65, 0.15);
+      box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px 28px;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+
+    /* ── Section headers ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #00ff41;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::before {
+      content: '// ';
+      color: rgba(0, 255, 65, 0.3);
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: rgba(0, 255, 65, 0.15);
+    }
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(30px, 4.5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .section-title .green { color: #00ff41; }
+    .section-title .lilac { color: #a78bfa; }
+    .section-title .cyan { color: #22d3ee; }
+    .section-desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+
+    /* ── Services ── */
+    .services { padding: 100px 0; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 28px 24px;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .service-card:hover {
+      background: rgba(0, 255, 65, 0.02);
+      border-color: rgba(0, 255, 65, 0.12);
+      transform: translateY(-2px);
+    }
+    .service-card:hover::after {
+      opacity: 1;
+    }
+    .service-icon-wrap {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .service-icon-wrap svg {
+      width: 42px;
+      height: 42px;
+    }
+    .service-card h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #f5f5fa;
+    }
+    .service-card p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+
+    /* ── Feature row ── */
+    .feature-row {
+      grid-column: 1 / -1;
+      background: rgba(0, 255, 65, 0.03);
+      border: 1px solid rgba(0, 255, 65, 0.08);
+      border-radius: 8px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .feature-row svg {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    .feature-row .fw {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    .feature-row .fs {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── Videos ── */
+    .videos {
+      padding: 100px 0;
+      background: rgba(255,255,255,0.01);
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+    .video-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .video-card:hover {
+      border-color: rgba(0, 255, 65, 0.12);
+    }
+    .video-card .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: rgba(0,0,0,0.4);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .video-card .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(7,7,13,0.6);
+      transition: background 0.3s;
+      z-index: 2;
+    }
+    .video-wrapper:hover .video-play-overlay {
+      background: rgba(7,7,13,0.4);
+    }
+    .video-play-overlay svg {
+      width: 56px;
+      height: 56px;
+      opacity: 0.8;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .video-wrapper:hover .video-play-overlay svg {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    .video-play-overlay span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .video-wrapper.loaded .video-play-overlay {
+      display: none;
+    }
+    .video-card .video-info {
+      padding: 14px 18px;
+      border-top: 1px solid rgba(255,255,255,0.03);
+    }
+    .video-card .video-info h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    /* ── Contact ── */
+    .contact { padding: 100px 0; }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-info h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .contact-info h2 .green { color: #00ff41; }
+    .contact-info p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: #00ff41; }
+    .contact-link .cl-icon {
+      width: 40px; height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 255, 65, 0.04);
+      border: 1px solid rgba(0, 255, 65, 0.08);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .contact-link .cl-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .contact-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0;
+    }
+    .contact-divider span {
+      flex: 1;
+      height: 1px;
+      background: rgba(0, 255, 65, 0.1);
+    }
+    .contact-link-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .contact-form {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(0, 255, 65, 0.06);
+      border-radius: 8px;
+      padding: 32px;
+    }
+    .contact-form h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .contact-form .form-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0, 255, 65, 0.5);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(0, 255, 65, 0.02);
+      border: 1px solid rgba(0, 255, 65, 0.08);
+      border-radius: 6px;
+      color: #e8e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #00ff41;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.04);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.1);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      border-radius: 6px;
+      background: rgba(0, 255, 65, 0.06);
+      color: #00ff41;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-submit:hover {
+      background: rgba(0, 255, 65, 0.1);
+      box-shadow: 0 0 30px rgba(0, 255, 65, 0.06);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 32px 0;
+      border-top: 1px solid rgba(0, 255, 65, 0.04);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── Mobile: tablets & below ── */
+    @media (max-width: 900px) {
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 12px 0; }
+      .header-nav a:not(.header-cta) { display: none; }
+      .header-nav a.header-cta { padding: 8px 14px; font-size: 11px; }
+      .hero { padding: 110px 0 50px; min-height: auto; }
+      .hero h1 { font-size: clamp(32px, 12vw, 52px); }
+      .hero-sub { font-size: 13px; padding-left: 14px; margin-top: 20px; }
+      .hero-actions { flex-direction: column; margin-top: 32px; }
+      .btn { justify-content: center; width: 100%; padding: 14px 20px; font-size: 13px; }
+      .services { padding: 60px 0; }
+      .services-grid { grid-template-columns: 1fr; gap: 12px; }
+      .service-card { padding: 22px 18px; }
+      .service-card h3 { font-size: 15px; }
+      .service-card p { font-size: 13px; }
+      .section-desc { margin-bottom: 36px; }
+      .videos { padding: 60px 0; }
+      .videos-grid { grid-template-columns: 1fr; gap: 16px; }
+      .contact { padding: 60px 0; }
+      .contact-form { padding: 20px; }
+      .contact-form h3 { font-size: 15px; }
+      .contact-form .form-sub { font-size: 13px; }
+      .btn-submit { font-size: 13px; }
+      .feature-row { flex-direction: column; text-align: center; gap: 14px; }
+      .feature-row svg { width: 36px; height: 36px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: clamp(22px, 7vw, 32px); }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 14px; }
+      .logo { font-size: 18px; }
+      .hero { padding: 100px 0 40px; }
+      .hero-badge { font-size: 10px; padding: 4px 12px 4px 8px; margin-bottom: 24px; }
+      .hero-sub { font-size: 12px; border-left-width: 1px; }
+      .hero-actions { gap: 8px; }
+      .service-card { padding: 18px 14px; }
+      .service-icon-wrap { width: 36px; height: 36px; margin-bottom: 12px; }
+      .service-icon-wrap svg { width: 32px; height: 32px; }
+      .service-card h3 { font-size: 14px; }
+      .service-card p { font-size: 12px; }
+      .feature-row { padding: 20px 16px; }
+      .video-card .video-info { padding: 10px 14px; }
+      .video-card .video-info h4 { font-size: 12px; }
+      .contact-form { padding: 16px; }
+      .form-group input, .form-group textarea { padding: 10px 14px; font-size: 14px; }
+      .btn-submit { padding: 14px; font-size: 13px; }
+      .footer { padding: 24px 0; font-size: 10px; }
+    }
+
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 28px; }
+      .hero-sub { font-size: 10px; }
+      .contact-link { font-size: 12px; }
+      .contact-link .cl-icon { width: 34px; height: 34px; }
+    }
+
+    /* ── Animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars canvas -->
+  <canvas id="stars-canvas"></canvas>
+
+  <!-- Glow orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- ========= HEADER ========= -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span style="color:#e0e0e8">No</span>
+        <span class="excl">!</span>
+        <span class="letter">R</span><span class="letter">o</span><span class="letter">u</span><span class="letter">t</span><span class="letter">i</span><span class="letter">n</span><span class="letter">e</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#services">Услуги</a>
+        <a href="#videos">Кейсы</a>
+        <a href="#contact">Контакты</a>
+        <a href="#contact" class="header-cta">Связаться</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========= HERO ========= -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          [system] online · 24/7
+        </div>
+        <h1>
+          <span class="no">No</span><span class="excl">!</span>&nbsp;
+          <span class="letter">R</span><span class="letter">o</span><span class="letter">u</span><span class="letter">t</span><span class="letter">i</span><span class="letter">n</span><span class="letter">e</span><span class="cursor"></span>
+        </h1>
+        <div class="hero-sub">
+          Помогаю освободиться от рутинных задач в проектном управлении и digital-сфере.<br>
+          Никакой магии — <span class="hl-green">только рабочие инструменты</span>: n8n, скрипты,<br>
+          облачные функции и интеграции, которые работают <span class="hl-pink">24/7 вместо вас</span>.
+        </div>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">$ ./start.sh</a>
+          <a href="#videos" class="btn btn-secondary">$ watch --ケース</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= SERVICES ========= -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-label">services</div>
+      <h2 class="section-title">Автоматизируй,<br>чтобы <span class="green">не утонуть в рутине</span></h2>
+      <p class="section-desc"># готовые решения для ваших задач</p>
+
+      <div class="services-grid">
+
+        <!-- 1 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.3"/>
+              <circle cx="16" cy="18" r="3" fill="#a78bfa"/>
+              <circle cx="32" cy="16" r="2.5" fill="#06b6d4"/>
+              <circle cx="28" cy="30" r="2.5" fill="#f59e0b"/>
+              <circle cx="14" cy="32" r="2" fill="#00ff41"/>
+              <line x1="18.5" y1="20.5" x2="29.5" y2="17.5" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
+              <line x1="30.5" y1="18.5" x2="26.5" y2="28.5" stroke="#06b6d4" stroke-width="1" opacity="0.5"/>
+              <line x1="20" y1="30" x2="15.5" y2="26" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+              <circle cx="24" cy="24" r="1.5" fill="#00ff41" opacity="0.4"/>
+            </svg>
+          </div>
+          <h3>Готовые воркфлоу для n8n</h3>
+          <p>Настроенные сценарии автоматизации под любые задачи — от сбора данных до сложных multi-step процессов.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
+              <path d="M24 8C20 8 14 12 14 20C14 26 17 30 20 32L22 38H26L28 32C31 30 34 26 34 20C34 12 28 8 24 8Z" stroke="#06b6d4" stroke-width="1.4" fill="none"/>
+              <circle cx="24" cy="20" r="4" fill="#a78bfa" opacity="0.6"/>
+              <path d="M22 34L20 40L18 42" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
+              <path d="M26 34L28 40L30 42" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
+              <line x1="20" y1="38" x2="28" y2="38" stroke="#00ff41" stroke-width="1" opacity="0.3"/>
+              <circle cx="24" cy="20" r="1.5" fill="#fff" opacity="0.5"/>
+            </svg>
+          </div>
+          <h3>Чат-боты для Telegram, Max, Яндекс Мессенджер</h3>
+          <p>Интерактивные боты для обратной связи, уведомлений и сбора заявок без единой строчки кода.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
+              <path d="M16 30C16 24 20 18 24 16C28 18 32 24 32 30" stroke="#a78bfa" stroke-width="1.4" fill="none"/>
+              <circle cx="24" cy="14" r="4" fill="#f59e0b" opacity="0.3"/>
+              <circle cx="24" cy="14" r="1.5" fill="#f59e0b" opacity="0.6"/>
+              <line x1="24" y1="18" x2="24" y2="22" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+              <circle cx="16" cy="28" r="2" fill="#00ff41" opacity="0.2"/>
+              <circle cx="32" cy="28" r="2" fill="#00ff41" opacity="0.2"/>
+              <circle cx="16" cy="28" r="0.8" fill="#00ff41" opacity="0.5"/>
+              <circle cx="32" cy="28" r="0.8" fill="#00ff41" opacity="0.5"/>
+            </svg>
+          </div>
+          <h3>AI-инструменты</h3>
+          <p>Интеграция нейросетей и AI-ассистентов в рабочие процессы — умная автоматизация на основе ИИ.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
+              <circle cx="18" cy="18" r="5" stroke="#a78bfa" stroke-width="1.2" fill="none" opacity="0.6"/>
+              <circle cx="30" cy="18" r="4" stroke="#06b6d4" stroke-width="1.2" fill="none" opacity="0.6"/>
+              <circle cx="24" cy="30" r="4.5" stroke="#f59e0b" stroke-width="1.2" fill="none" opacity="0.6"/>
+              <line x1="22.5" y1="21" x2="26.5" y2="21.5" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+              <line x1="20" y1="25.5" x2="23" y2="28" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+              <line x1="29" y1="22" x2="27" y2="26" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+              <circle cx="18" cy="18" r="1" fill="#a78bfa"/>
+              <circle cx="30" cy="18" r="0.8" fill="#06b6d4"/>
+              <circle cx="24" cy="30" r="1" fill="#f59e0b"/>
+            </svg>
+          </div>
+          <h3>Интеграции с таблицами и БД</h3>
+          <p>Google Таблицы, Airtable, Supabase, Яндекс Cloud и Яндекс360 — синхронизация данных между сервисами.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
+              <path d="M16 32L24 12L32 32" stroke="#f59e0b" stroke-width="1.4" fill="none"/>
+              <line x1="18.5" y1="27" x2="29.5" y2="27" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
+              <circle cx="24" cy="18" r="1.5" fill="#f59e0b" opacity="0.6"/>
+              <circle cx="18" cy="30" r="1" fill="#f59e0b" opacity="0.3"/>
+              <circle cx="30" cy="30" r="1" fill="#f59e0b" opacity="0.3"/>
+              <circle cx="24" cy="32" r="1" fill="#f59e0b" opacity="0.15"/>
+            </svg>
+          </div>
+          <h3>Быстрые скрипты</h3>
+          <p>Кастомные скрипты для ежедневных задач — от обработки файлов до автоматизации отчётов.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
+              <path d="M20 14C16 14 12 18 12 24C12 30 16 34 20 34" stroke="#06b6d4" stroke-width="1.4" fill="none"/>
+              <path d="M28 14C32 14 36 18 36 24C36 30 32 34 28 34" stroke="#06b6d4" stroke-width="1.4" fill="none"/>
+              <line x1="12" y1="24" x2="36" y2="24" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+              <path d="M20 14L24 4L28 14" stroke="#06b6d4" stroke-width="0.8" opacity="0.3"/>
+              <path d="M20 34L24 44L28 34" stroke="#06b6d4" stroke-width="0.8" opacity="0.3"/>
+              <circle cx="24" cy="24" r="2" fill="#00ff41" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Облачные функции и API</h3>
+          <p>Serverless-функции, API-интеграции и вебхуки — связываем любые сервисы в единую экосистему.</p>
+        </div>
+
+        <!-- 7: feature row -->
+        <div class="feature-row fade-in">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.2"/>
+            <circle cx="16" cy="16" r="3" stroke="#a78bfa" stroke-width="1" fill="none"/>
+            <circle cx="32" cy="16" r="3" stroke="#a78bfa" stroke-width="1" fill="none"/>
+            <circle cx="24" cy="30" r="4" stroke="#f59e0b" stroke-width="1" fill="none"/>
+            <circle cx="16" cy="16" r="1" fill="#a78bfa" opacity="0.6"/>
+            <circle cx="32" cy="16" r="1" fill="#a78bfa" opacity="0.6"/>
+            <circle cx="24" cy="30" r="1.5" fill="#f59e0b" opacity="0.6"/>
+            <line x1="19" y1="18" x2="21" y2="27" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+            <line x1="29" y1="18" x2="27" y2="27" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+            <path d="M24 6V10" stroke="#00ff41" stroke-width="0.8" opacity="0.2"/>
+            <path d="M24 38V42" stroke="#00ff41" stroke-width="0.8" opacity="0.2"/>
+          </svg>
+          <div>
+            <div class="fw">Оптимизация проектного менеджмента</div>
+            <div class="fs">Яндекс Трекер: воркфлоу, триггеры, макросы, дашборды — полная автоматизация управления задачами.</div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="service-card fade-in">
+          <div class="service-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
+              <path d="M14 34L24 12L34 34" stroke="#00ff41" stroke-width="1" fill="none" opacity="0.3"/>
+              <path d="M28 28C30 26 34 24 34 20C34 16 30 14 26 16L24 18L22 16C18 14 14 16 14 20C14 24 18 26 20 28" stroke="#a78bfa" stroke-width="1.4" fill="none"/>
+              <circle cx="24" cy="20" r="2" fill="#f59e0b" opacity="0.4"/>
+              <circle cx="24" cy="26" r="2" fill="#06b6d4" opacity="0.4"/>
+              <line x1="24" y1="22" x2="24" y2="24" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Кейсы из реальной практики</h3>
+          <p>Проверенные решения, которые уже работают в продакшене и приносят результат.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= VIDEOS ========= -->
+  <section class="videos" id="videos">
+    <div class="container">
+      <div class="section-label">case studies</div>
+      <h2 class="section-title">Автоматизация <span class="green">в деле</span></h2>
+      <p class="section-desc"># примеры внедрений, экономящих часы работы каждую неделю</p>
+
+      <div class="videos-grid">
+        <div class="video-card fade-in">
+          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/266f4784cbc6956660f878a1aaa3b89a/">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 56 56" fill="none">
+                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
+                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
+              </svg>
+              <span>▶ воспроизвести</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <h4>Автоматизация отправки сообщений через чат-бот в Max // Часть 1</h4>
+          </div>
+        </div>
+
+        <div class="video-card fade-in">
+          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/9717098d5b775538052c254cd4719b14/">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 56 56" fill="none">
+                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
+                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
+              </svg>
+              <span>▶ воспроизвести</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <h4>Бот обратной связи в Max + Google Таблицы | Автоматизация без программирования</h4>
+          </div>
+        </div>
+
+        <div class="video-card fade-in">
+          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/b57b0c7f1c39bc5a3b1ae1416209cdf7/">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 56 56" fill="none">
+                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
+                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
+              </svg>
+              <span>▶ воспроизвести</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <h4>Яндекс Трекер: автоматизация и интеграции. Быстрый старт | Часть 1</h4>
+          </div>
+        </div>
+
+        <div class="video-card fade-in">
+          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/881f34450229a01303ce7c5f6769be5a/">
+            <div class="video-play-overlay">
+              <svg viewBox="0 0 56 56" fill="none">
+                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
+                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
+              </svg>
+              <span>▶ воспроизвести</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <h4>Яндекс Трекер + Яндекс Формы: Авто-создание задач | Часть 2</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= CONTACT ========= -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-wrap">
+        <div class="contact-info">
+          <div class="section-label">contacts</div>
+          <h2>Давайте <span class="green">автоматизируем</span> вашу рутину</h2>
+          <p>Опишите задачу — и я покажу, как её решить современными инструментами.</p>
+          <div class="contact-links">
+            <a href="tel:+79277280827" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </span>
+              +7 927 728-08-27
+            </a>
+            <a href="mailto:personalartru@gmail.com" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              personalartru@gmail.com
+            </a>
+            <div class="contact-divider"><span></span></div>
+            <span class="contact-link-label">Социальные сети:</span>
+            <a href="https://rutube.ru/channel/57269828" target="_blank" rel="noopener" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="4" width="20" height="16" rx="3"/>
+                  <path d="M10 9l5 3-5 3V9z"/>
+                </svg>
+              </span>
+              Rutube
+            </a>
+            <a href="https://www.youtube.com/@noroutine2026" target="_blank" rel="noopener" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+                </svg>
+              </span>
+              YouTube
+            </a>
+            <a href="https://vk.ru/noroutine2026" target="_blank" rel="noopener" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+                  <path d="M12.5 17.5h-1c-3 0-5.5-2.5-5.5-5.5v-3h2v3c0 1.5 1 2.5 2.5 2.5h2v3z"/>
+                  <circle cx="12" cy="8.5" r="1.5"/>
+                </svg>
+              </span>
+              VK
+            </a>
+            <a href="https://dzen.ru/noroutine" target="_blank" rel="noopener" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 12l3 3 5-5"/>
+                </svg>
+              </span>
+              Яндекс Дзен
+            </a>
+          </div>
+        </div>
+        <div class="contact-form fade-in">
+          <h3>> _ Заявка</h3>
+          <p class="form-sub"># заполните форму, и я свяжусь с вами</p>
+          <form action="https://formsubmit.co/personalartru@gmail.com" method="POST">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="Новая заявка с No! Routine">
+            <input type="hidden" name="_next" value="https://noroutine.ru/thanks.html">
+            <div class="form-group">
+              <label for="name">имя *</label>
+              <input type="text" id="name" name="name" placeholder="как к вам обращаться?" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-info">контакт *</label>
+              <input type="text" id="contact-info" name="contact" placeholder="телефон / email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">задача</label>
+              <textarea id="message" name="message" placeholder="что хотите автоматизировать?" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">$ ./deploy.sh →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= FOOTER ========= -->
+  <footer class="footer">
+    <div class="container">
+      © 2026 Павел Новиков. [all rights reserved]
+    </div>
+  </footer>
+
+  <script>
+    // ── Stars ──
+    (function() {
+      const canvas = document.getElementById('stars-canvas');
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function createStars() {
+        stars = [];
+        const count = Math.floor((canvas.width * canvas.height) / 2500);
+        for (let i = 0; i < count; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.2 + 0.3,
+            a: Math.random() * 0.6 + 0.2,
+            speed: Math.random() * 0.3 + 0.1,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+      createStars();
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const time = Date.now() / 1000;
+        stars.forEach(s => {
+          const twinkle = 0.5 + 0.5 * Math.sin(time * s.speed + s.phase);
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200, 220, 255, ${s.a * twinkle})`;
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── Scroll animations ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Logo random colors ──
+    (function() {
+      const letters = document.querySelectorAll('.logo .letter');
+      const heroLetters = document.querySelectorAll('.hero h1 .letter');
+      const allLetters = [...letters, ...heroLetters];
+      const colors = ['purple', 'green'];
+      let currentIndices = new Set();
+
+      function randomize() {
+        allLetters.forEach(el => el.classList.remove('purple', 'green'));
+        const count = 1 + Math.floor(Math.random() * 2);
+        const pool = [...allLetters];
+        for (let i = 0; i < count && pool.length; i++) {
+          const idx = Math.floor(Math.random() * pool.length);
+          const el = pool.splice(idx, 1)[0];
+          el.classList.add(colors[Math.floor(Math.random() * colors.length)]);
+        }
+      }
+      randomize();
+      setInterval(randomize, 1800);
+    })();
+
+    // ── Video click-to-play ──
+    document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+      wrapper.addEventListener('click', function() {
+        if (this.classList.contains('loaded')) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = this.dataset.src;
+        iframe.setAttribute('allow', 'clipboard-write; autoplay');
+        iframe.setAttribute('allowFullScreen', '');
+        this.appendChild(iframe);
+        this.classList.add('loaded');
+      });
+    });
+
+    // ── Form ──
+    document.querySelector('form')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-submit');
+      const orig = btn.textContent;
+      btn.textContent = '$ ✓ deployed';
+      btn.style.borderColor = '#00ff41';
+      btn.style.color = '#00ff41';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.borderColor = '';
+        btn.style.color = '';
+        this.reset();
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

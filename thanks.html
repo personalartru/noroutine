@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спасибо — No ! Routine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #07070d;
+      color: #e0e0e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    h1 { font-size: clamp(28px, 6vw, 48px); font-weight: 800; }
+    h1 .green { color: #00ff41; }
+    p { color: rgba(255,255,255,0.5); font-size: 14px; max-width: 400px; line-height: 1.6; }
+    a { color: #00ff41; text-decoration: none; border: 1px solid rgba(0,255,65,0.2); padding: 12px 28px; border-radius: 6px; font-size: 13px; transition: background 0.2s; }
+    a:hover { background: rgba(0,255,65,0.08); }
+    .cursor { display: inline-block; width: 3px; height: 1em; background: #00ff41; margin-left: 4px; animation: blink 1s step-end infinite; vertical-align: text-bottom; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <h1>$ <span class="green">success</span><span class="cursor"></span></h1>
+  <p>Заявка отправлена! Я свяжусь с вами в ближайшее время.</p>
+  <a href="/">← На главную</a>
+</body>
+</html>
