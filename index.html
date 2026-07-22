@@ -1196,19 +1196,40 @@
     });
 
     // ── Form ──
-    document.querySelector('form')?.addEventListener('submit', function(e) {
+    document.querySelector('form')?.addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = this.querySelector('.btn-submit');
       const orig = btn.textContent;
-      btn.textContent = '$ ✓ deployed';
-      btn.style.borderColor = '#00ff41';
-      btn.style.color = '#00ff41';
-      setTimeout(() => {
-        btn.textContent = orig;
-        btn.style.borderColor = '';
-        btn.style.color = '';
-        this.reset();
-      }, 3000);
+
+      btn.textContent = '$ sending...';
+      btn.disabled = true;
+
+      try {
+        const data = new FormData(this);
+        const res = await fetch(this.action, { method: 'POST', body: data, mode: 'no-cors' });
+
+        btn.textContent = '$ ✓ deployed';
+        btn.style.borderColor = '#00ff41';
+        btn.style.color = '#00ff41';
+
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.disabled = false;
+          this.reset();
+        }, 3000);
+      } catch {
+        btn.textContent = '$ ! error';
+        btn.style.borderColor = '#ef4444';
+        btn.style.color = '#ef4444';
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.disabled = false;
+        }, 3000);
+      }
     });
   </script>
 </body>
