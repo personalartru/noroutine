@@ -1162,8 +1162,7 @@
         <div class="contact-form fade-in">
           <h3>> _ Заявка</h3>
           <p class="form-sub"># заполните форму, и я свяжусь с вами</p>
-          <iframe name="form-target" style="display:none"></iframe>
-          <form action="https://formsubmit.co/personalartru@gmail.com" method="POST" target="form-target">
+          <form id="contact-form" action="https://formsubmit.co/ajax/personalartru@gmail.com" method="POST">
             <input type="text" name="_honey" style="display:none">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_subject" value="Новая заявка с No! Routine">
@@ -1289,27 +1288,50 @@
     });
 
     // ── Form ──
-    document.querySelector('form')?.addEventListener('submit', function(e) {
-      const btn = this.querySelector('.btn-submit');
-      btn.textContent = '$ sending...';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = '$ ./deploy.sh →';
-        btn.disabled = false;
-      }, 8000);
-    });
+    const form = document.getElementById('contact-form');
+    const modal = document.getElementById('success-modal');
 
     function closeModal() {
-      document.getElementById('success-modal').classList.remove('active');
+      modal.classList.remove('active');
     }
 
-    document.querySelector('iframe[name="form-target"]')?.addEventListener('load', function() {
-      if (this.contentWindow?.location?.href !== 'about:blank') {
-        document.getElementById('success-modal').classList.add('active');
-        document.querySelector('form')?.reset();
-        const btn = document.querySelector('.btn-submit');
-        btn.textContent = '$ ./deploy.sh →';
+    form?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-submit');
+      const orig = btn.textContent;
+
+      btn.textContent = '$ sending...';
+      btn.disabled = true;
+
+      try {
+        const data = new FormData(this);
+        const res = await fetch(this.action, { method: 'POST', body: data });
+
+        if (res.ok) {
+          modal.classList.add('active');
+          this.reset();
+          btn.textContent = '$ ✓ deployed';
+          btn.style.borderColor = '#00ff41';
+          btn.style.color = '#00ff41';
+          setTimeout(() => {
+            btn.textContent = orig;
+            btn.style.borderColor = '';
+            btn.style.color = '';
+            btn.disabled = false;
+          }, 2000);
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        btn.textContent = '$ ! error';
+        btn.style.borderColor = '#ef4444';
+        btn.style.color = '#ef4444';
         btn.disabled = false;
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 3000);
       }
     });
   </script>
