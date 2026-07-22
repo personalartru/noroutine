@@ -639,6 +639,74 @@
       box-shadow: 0 0 30px rgba(0, 255, 65, 0.06);
     }
 
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(7,7,13,0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #0f0f1a;
+      border: 1px solid rgba(0, 255, 65, 0.15);
+      border-radius: 12px;
+      padding: 40px 36px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: modal-in 0.3s ease;
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(0, 255, 65, 0.1);
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      color: #00ff41;
+    }
+    .modal-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .modal-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .modal-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(0, 255, 65, 0.06);
+      border: 1px solid rgba(0, 255, 65, 0.12);
+      color: #00ff41;
+      padding: 10px 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal-btn:hover { background: rgba(0, 255, 65, 0.1); }
+
     /* ── Footer ── */
     .footer {
       padding: 32px 0;
@@ -1024,6 +1092,23 @@
               </span>
               +7 927 728-08-27
             </a>
+            <a href="https://t.me/Personalart" target="_blank" rel="noopener" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21.5 4.5l-19 7.5 7 2.5 3 9 3-6 6-3-16-7.5z"/>
+                </svg>
+              </span>
+              @Personalart
+            </a>
+            <a href="https://max.ru/join/jghsKDSdQfMXiV8CYod7JZqWuOG1GPmzCaQBJI_vqM4" target="_blank" rel="noopener" class="contact-link">
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 8h8v8H8z"/>
+                </svg>
+              </span>
+              Макс
+            </a>
             <a href="mailto:personalartru@gmail.com" class="contact-link">
               <span class="cl-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1077,11 +1162,11 @@
         <div class="contact-form fade-in">
           <h3>> _ Заявка</h3>
           <p class="form-sub"># заполните форму, и я свяжусь с вами</p>
-          <form action="https://formsubmit.co/personalartru@gmail.com" method="POST">
+          <iframe name="form-target" style="display:none"></iframe>
+          <form action="https://formsubmit.co/personalartru@gmail.com" method="POST" target="form-target">
             <input type="text" name="_honey" style="display:none">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_subject" value="Новая заявка с No! Routine">
-            <input type="hidden" name="_next" value="https://noroutine.ru/thanks.html">
             <div class="form-group">
               <label for="name">имя *</label>
               <input type="text" id="name" name="name" placeholder="как к вам обращаться?" required>
@@ -1096,6 +1181,14 @@
             </div>
             <button type="submit" class="btn-submit">$ ./deploy.sh →</button>
           </form>
+          <div class="modal-overlay" id="success-modal">
+            <div class="modal">
+              <div class="modal-icon">✓</div>
+              <h3 class="modal-title">Сообщение отправлено!</h3>
+              <p class="modal-text">Спасибо! Я свяжусь с вами в ближайшее время.</p>
+              <button class="modal-btn" onclick="closeModal()">Закрыть</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1196,39 +1289,27 @@
     });
 
     // ── Form ──
-    document.querySelector('form')?.addEventListener('submit', async function(e) {
-      e.preventDefault();
+    document.querySelector('form')?.addEventListener('submit', function(e) {
       const btn = this.querySelector('.btn-submit');
-      const orig = btn.textContent;
-
       btn.textContent = '$ sending...';
       btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = '$ ./deploy.sh →';
+        btn.disabled = false;
+      }, 8000);
+    });
 
-      try {
-        const data = new FormData(this);
-        const res = await fetch(this.action, { method: 'POST', body: data, mode: 'no-cors' });
+    function closeModal() {
+      document.getElementById('success-modal').classList.remove('active');
+    }
 
-        btn.textContent = '$ ✓ deployed';
-        btn.style.borderColor = '#00ff41';
-        btn.style.color = '#00ff41';
-
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.style.borderColor = '';
-          btn.style.color = '';
-          btn.disabled = false;
-          this.reset();
-        }, 3000);
-      } catch {
-        btn.textContent = '$ ! error';
-        btn.style.borderColor = '#ef4444';
-        btn.style.color = '#ef4444';
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.style.borderColor = '';
-          btn.style.color = '';
-          btn.disabled = false;
-        }, 3000);
+    document.querySelector('iframe[name="form-target"]')?.addEventListener('load', function() {
+      if (this.contentWindow?.location?.href !== 'about:blank') {
+        document.getElementById('success-modal').classList.add('active');
+        document.querySelector('form')?.reset();
+        const btn = document.querySelector('.btn-submit');
+        btn.textContent = '$ ./deploy.sh →';
+        btn.disabled = false;
       }
     });
   </script>
