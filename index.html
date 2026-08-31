@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- No-flash theme init -->
+  <script>
+    (function () {
+      var light = false;
+      try {
+        var stored = localStorage.getItem('noroutine-theme');
+        light = stored ? stored === 'light'
+          : (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches);
+      } catch (e) { light = false; }
+      document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+    })();
+  </script>
+
   <!-- SEO -->
   <title>No ! Routine — автоматизация проектного управления и digital без рутины | n8n, чат-боты, AI</title>
   <meta name="description" content="Помогаю освободиться от рутинных задач в проектном управлении и digital. Никакой магии — только рабочие инструменты: n8n, скрипты, облачные функции и интеграции, которые работают 24/7 вместо вас. Автоматизация Яндекс Трекер, чат-боты для Telegram и Max, интеграции с Google Таблицы, Airtable, Supabase.">
@@ -163,12 +176,87 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* ── Theme tokens (default: dark "terminal") ── */
+    :root {
+      --bg: #07070d;
+      --bg-elevated: #0f0f1a;
+      --header-bg: rgba(7, 7, 13, 0.85);
+      --overlay-bg: rgba(7, 7, 13, 0.85);
+      --overlay-ring: rgba(0, 255, 65, 0.15);
+      --panel: rgba(255,255,255,0.02);
+      --panel-2: rgba(255,255,255,0.03);
+      --panel-soft: rgba(255,255,255,0.01);
+      --panel-tint: rgba(0, 255, 65, 0.02);
+      --panel-tint-2: rgba(0, 255, 65, 0.03);
+      --line: rgba(255,255,255,0.04);
+      --line-2: rgba(255,255,255,0.05);
+      --line-3: rgba(255,255,255,0.03);
+      --text: #e0e0e8;
+      --text-strong: #f5f5fa;
+      --text-bright: #e8e8f0;
+      --text-80: rgba(255,255,255,0.8);
+      --text-70: rgba(255,255,255,0.7);
+      --text-65: rgba(255,255,255,0.65);
+      --text-60: rgba(255,255,255,0.6);
+      --text-55: rgba(255,255,255,0.55);
+      --text-50: rgba(255,255,255,0.5);
+      --text-35: rgba(255,255,255,0.35);
+      --text-25: rgba(255,255,255,0.25);
+      --text-10: rgba(255,255,255,0.1);
+      --accent: #00ff41;
+      --btn-sec-bg: rgba(255,255,255,0.03);
+      --btn-sec-border: rgba(255,255,255,0.06);
+      --btn-sec-text: rgba(255,255,255,0.8);
+      --btn-sec-hover-bg: rgba(255,255,255,0.06);
+      --btn-sec-hover-text: #fff;
+    }
+
+    /* ── Light theme ── */
+    [data-theme="light"] {
+      --bg: #f4f7f5;
+      --bg-elevated: #ffffff;
+      --header-bg: rgba(255, 255, 255, 0.82);
+      --overlay-bg: rgba(244, 247, 245, 0.92);
+      --overlay-ring: rgba(0, 160, 74, 0.18);
+      --panel: rgba(255,255,255,0.72);
+      --panel-2: rgba(255,255,255,0.85);
+      --panel-soft: rgba(255,255,255,0.55);
+      --panel-tint: rgba(0, 160, 74, 0.045);
+      --panel-tint-2: rgba(0, 160, 74, 0.07);
+      --line: rgba(13, 20, 32, 0.08);
+      --line-2: rgba(13, 20, 32, 0.1);
+      --line-3: rgba(13, 20, 32, 0.06);
+      --text: #1b2330;
+      --text-strong: #0e1524;
+      --text-bright: #0f1728;
+      --text-80: rgba(13, 20, 32, 0.82);
+      --text-70: rgba(13, 20, 32, 0.72);
+      --text-65: rgba(13, 20, 32, 0.66);
+      --text-60: rgba(13, 20, 32, 0.6);
+      --text-55: rgba(13, 20, 32, 0.56);
+      --text-50: rgba(13, 20, 32, 0.5);
+      --text-35: rgba(13, 20, 32, 0.4);
+      --text-25: rgba(13, 20, 32, 0.34);
+      --text-10: rgba(13, 20, 32, 0.18);
+      --accent: #00a04a;
+      --btn-sec-bg: rgba(13, 20, 32, 0.04);
+      --btn-sec-border: rgba(13, 20, 32, 0.12);
+      --btn-sec-text: rgba(13, 20, 32, 0.82);
+      --btn-sec-hover-bg: rgba(13, 20, 32, 0.07);
+      --btn-sec-hover-text: #0e1524;
+    }
+    [data-theme="light"] body {
+      background: linear-gradient(180deg, #f7faf7 0%, #eef3ef 100%);
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #07070d;
-      color: #e0e0e8;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
     code, .mono {
       font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
@@ -191,6 +279,7 @@
       opacity: 0.12;
       z-index: 0;
       pointer-events: none;
+      transition: opacity 0.4s ease, background 0.4s ease;
     }
     .orb-1 {
       width: 700px; height: 700px;
@@ -207,6 +296,10 @@
       background: #06b6d4;
       top: 40%; left: 60%;
     }
+    [data-theme="light"] .orb { opacity: 0.07; }
+    [data-theme="light"] .orb-1 { background: #6d28d9; }
+    [data-theme="light"] .orb-2 { background: #00a04a; }
+    [data-theme="light"] .orb-3 { background: #0891b2; }
 
     section { position: relative; z-index: 1; }
 
@@ -231,6 +324,15 @@
         rgba(0, 255, 65, 0.015) 4px
       );
     }
+    [data-theme="light"] .scanlines {
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 120, 60, 0.028) 3px,
+        rgba(0, 120, 60, 0.028) 5px
+      );
+    }
 
     /* ── Header ── */
     .header {
@@ -238,10 +340,11 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 14px 0;
-      background: rgba(7, 7, 13, 0.85);
+      background: var(--header-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(0, 255, 65, 0.08);
+      transition: background 0.4s ease;
     }
     .header .container {
       display: flex;
@@ -257,10 +360,10 @@
       display: flex;
       align-items: center;
       gap: 2px;
-      color: #e0e0e8;
+      color: var(--text);
     }
     .logo .excl {
-      color: #00ff41;
+      color: var(--accent);
       display: inline-block;
       animation: flicker 1.8s ease-in-out infinite;
     }
@@ -268,7 +371,7 @@
       transition: color 0.4s ease;
     }
     .logo .letter.purple { color: #a78bfa; }
-    .logo .letter.green { color: #00ff41; }
+    .logo .letter.green { color: var(--accent); }
 
     @keyframes flicker {
       0%, 100% { opacity: 1; }
@@ -289,7 +392,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       font-weight: 500;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-70);
       padding: 8px 16px;
       border-radius: 6px;
       transition: all 0.2s;
@@ -297,17 +400,94 @@
       letter-spacing: 0.05em;
     }
     .header-nav a:hover {
-      color: #00ff41;
+      color: var(--accent);
       background: rgba(0, 255, 65, 0.06);
     }
     .header-cta {
       background: rgba(0, 255, 65, 0.1) !important;
       border: 1px solid rgba(0, 255, 65, 0.2);
-      color: #00ff41 !important;
+      color: var(--accent) !important;
     }
     .header-cta:hover {
       background: rgba(0, 255, 65, 0.18) !important;
     }
+
+    /* ── Theme toggle (terminal / AI style) ── */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-60);
+      background: var(--panel-tint);
+      border: 1px solid var(--line-2);
+      border-radius: 7px;
+      padding: 8px 12px;
+      margin-left: 4px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    }
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(0, 255, 65, 0.06) 50%, transparent 70%);
+      background-size: 250% 100%;
+      animation: tt-scan 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes tt-scan {
+      0% { background-position: 200% 0; }
+      60%, 100% { background-position: -100% 0; }
+    }
+    .theme-toggle:hover {
+      color: var(--accent);
+      border-color: rgba(0, 255, 65, 0.35);
+      background: var(--panel-tint-2);
+      box-shadow: 0 0 18px rgba(0, 255, 65, 0.08);
+    }
+    .theme-toggle:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.18);
+    }
+    .theme-toggle .tt-cmd {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+    .theme-toggle .tt-flag {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .theme-toggle .tt-cursor {
+      width: 5px;
+      height: 11px;
+      display: inline-block;
+      background: var(--accent);
+      opacity: 0.85;
+      animation: blink-cursor 0.9s step-end infinite;
+    }
+    .theme-toggle .tt-ico {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      color: var(--text-60);
+      opacity: 0.85;
+      transition: color 0.25s, opacity 0.25s;
+    }
+    .theme-toggle:hover .tt-ico { color: var(--accent); opacity: 1; }
+    .theme-toggle .tt-sun { display: none; }
+    [data-theme="light"] .theme-toggle .tt-sun { display: block; }
+    [data-theme="light"] .theme-toggle .tt-moon { display: none; }
+    [data-theme="light"] .theme-toggle .tt-ico { color: var(--accent); opacity: 1; }
 
     /* ── Hero ── */
     .hero {
@@ -324,7 +504,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       font-weight: 500;
-      color: #00ff41;
+      color: var(--accent);
       background: rgba(0, 255, 65, 0.06);
       border: 1px solid rgba(0, 255, 65, 0.12);
       border-radius: 4px;
@@ -336,13 +516,13 @@
     .hero-badge .dot {
       width: 7px; height: 7px;
       border-radius: 50%;
-      background: #00ff41;
-      box-shadow: 0 0 8px #00ff41;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
       animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; box-shadow: 0 0 8px #00ff41; }
-      50% { opacity: 0.3; box-shadow: 0 0 2px #00ff41; }
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent); }
+      50% { opacity: 0.3; box-shadow: 0 0 2px var(--accent); }
     }
 
     .hero h1 {
@@ -353,9 +533,9 @@
       line-height: 0.95;
       margin-bottom: 6px;
     }
-    .hero h1 .no { color: #e0e0e8; }
+    .hero h1 .no { color: var(--text); }
     .hero h1 .excl {
-      color: #00ff41;
+      color: var(--accent);
       display: inline-block;
       animation: flicker 2s ease-in-out infinite;
     }
@@ -363,13 +543,13 @@
       transition: color 0.4s ease;
     }
     .hero h1 .letter.purple { color: #a78bfa; }
-    .hero h1 .letter.green { color: #00ff41; }
+    .hero h1 .letter.green { color: var(--accent); }
 
     .hero h1 .cursor {
       display: inline-block;
       width: 3px;
       height: 0.8em;
-      background: #00ff41;
+      background: var(--accent);
       margin-left: 4px;
       vertical-align: baseline;
       animation: blink-cursor 1s step-end infinite;
@@ -383,14 +563,14 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: clamp(14px, 1.5vw, 17px);
       font-weight: 400;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-70);
       max-width: 720px;
       margin-top: 28px;
       line-height: 1.7;
       border-left: 2px solid rgba(0, 255, 65, 0.15);
       padding-left: 20px;
     }
-    .hero-sub .hl-green { color: #00ff41; }
+    .hero-sub .hl-green { color: var(--accent); }
     .hero-sub .hl-pink { color: #a78bfa; }
     .hero-actions {
       display: flex;
@@ -414,7 +594,7 @@
     }
     .btn-primary {
       background: rgba(0, 255, 65, 0.08);
-      color: #00ff41;
+      color: var(--accent);
       border: 1px solid rgba(0, 255, 65, 0.2);
       padding: 14px 32px;
     }
@@ -424,14 +604,14 @@
       transform: translateY(-1px);
     }
     .btn-secondary {
-      background: rgba(255,255,255,0.03);
-      color: rgba(255,255,255,0.8);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: var(--btn-sec-bg);
+      color: var(--btn-sec-text);
+      border: 1px solid var(--btn-sec-border);
       padding: 14px 28px;
     }
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.06);
-      color: #fff;
+      background: var(--btn-sec-hover-bg);
+      color: var(--btn-sec-hover-text);
     }
 
     /* ── Section headers ── */
@@ -441,7 +621,7 @@
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #00ff41;
+      color: var(--accent);
       margin-bottom: 12px;
       display: flex;
       align-items: center;
@@ -466,13 +646,13 @@
       line-height: 1.1;
       margin-bottom: 14px;
     }
-    .section-title .green { color: #00ff41; }
+    .section-title .green { color: var(--accent); }
     .section-title .lilac { color: #a78bfa; }
     .section-title .cyan { color: #22d3ee; }
     .section-desc {
       font-family: 'JetBrains Mono', monospace;
       font-size: 15px;
-      color: rgba(255,255,255,0.6);
+      color: var(--text-60);
       max-width: 600px;
       margin-bottom: 56px;
       line-height: 1.6;
@@ -486,8 +666,8 @@
       gap: 16px;
     }
     .service-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
+      background: var(--panel);
+      border: 1px solid var(--line);
       border-radius: 8px;
       padding: 28px 24px;
       transition: all 0.3s;
@@ -503,7 +683,7 @@
       pointer-events: none;
     }
     .service-card:hover {
-      background: rgba(0, 255, 65, 0.02);
+      background: var(--panel-tint);
       border-color: rgba(0, 255, 65, 0.12);
       transform: translateY(-2px);
     }
@@ -527,19 +707,19 @@
       font-size: 16px;
       font-weight: 700;
       margin-bottom: 8px;
-      color: #f5f5fa;
+      color: var(--text-strong);
     }
     .service-card p {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-70);
       line-height: 1.6;
     }
 
     /* ── Feature row ── */
     .feature-row {
       grid-column: 1 / -1;
-      background: rgba(0, 255, 65, 0.03);
+      background: var(--panel-tint-2);
       border: 1px solid rgba(0, 255, 65, 0.08);
       border-radius: 8px;
       padding: 28px 24px;
@@ -561,13 +741,13 @@
     .feature-row .fs {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-70);
     }
 
     /* ── Videos ── */
     .videos {
       padding: 100px 0;
-      background: rgba(255,255,255,0.01);
+      background: var(--panel-soft);
     }
     .videos-grid {
       display: grid;
@@ -575,8 +755,8 @@
       gap: 20px;
     }
     .video-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
+      background: var(--panel);
+      border: 1px solid var(--line);
       border-radius: 8px;
       overflow: hidden;
       transition: border-color 0.3s;
@@ -635,13 +815,13 @@
     }
     .video-card .video-info {
       padding: 14px 18px;
-      border-top: 1px solid rgba(255,255,255,0.03);
+      border-top: 1px solid var(--line-3);
     }
     .video-card .video-info h4 {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       font-weight: 500;
-      color: rgba(255,255,255,0.8);
+      color: var(--text-80);
       line-height: 1.5;
     }
 
@@ -654,8 +834,8 @@
       max-width: 800px;
     }
     .faq-item {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: var(--panel);
+      border: 1px solid var(--line-2);
       border-radius: 8px;
       overflow: hidden;
       transition: border-color 0.3s;
@@ -666,7 +846,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       font-weight: 500;
-      color: rgba(255,255,255,0.8);
+      color: var(--text-80);
       padding: 18px 20px;
       cursor: pointer;
       list-style: none;
@@ -679,7 +859,7 @@
     .faq-item summary::after {
       content: '+';
       font-family: 'JetBrains Mono', monospace;
-      color: #00ff41;
+      color: var(--accent);
       font-size: 18px;
       flex-shrink: 0;
       transition: transform 0.25s;
@@ -691,7 +871,7 @@
     .faq-answer p {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: rgba(255,255,255,0.5);
+      color: var(--text-50);
       line-height: 1.7;
     }
 
@@ -711,11 +891,11 @@
       line-height: 1.1;
       margin-bottom: 16px;
     }
-    .contact-info h2 .green { color: #00ff41; }
+    .contact-info h2 .green { color: var(--accent); }
     .contact-info p {
       font-family: 'JetBrains Mono', monospace;
       font-size: 15px;
-      color: rgba(255,255,255,0.65);
+      color: var(--text-65);
       margin-bottom: 32px;
       line-height: 1.6;
     }
@@ -730,10 +910,10 @@
       gap: 14px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 15px;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-70);
       transition: color 0.2s;
     }
-    .contact-link:hover { color: #00ff41; }
+    .contact-link:hover { color: var(--accent); }
     .contact-link .cl-icon {
       width: 40px; height: 40px;
       display: flex;
@@ -764,11 +944,11 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.25);
+      color: var(--text-25);
     }
 
     .contact-form {
-      background: rgba(255,255,255,0.02);
+      background: var(--panel);
       border: 1px solid rgba(0, 255, 65, 0.06);
       border-radius: 8px;
       padding: 32px;
@@ -782,7 +962,7 @@
     .contact-form .form-sub {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      color: rgba(255,255,255,0.65);
+      color: var(--text-65);
       margin-bottom: 24px;
     }
     .form-group { margin-bottom: 16px; }
@@ -800,10 +980,10 @@
     .form-group textarea {
       width: 100%;
       padding: 12px 16px;
-      background: rgba(0, 255, 65, 0.02);
+      background: var(--panel-2);
       border: 1px solid rgba(0, 255, 65, 0.08);
       border-radius: 6px;
-      color: #e8e8f0;
+      color: var(--text-bright);
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       outline: none;
@@ -811,7 +991,7 @@
     }
     .form-group input:focus,
     .form-group textarea:focus {
-      border-color: #00ff41;
+      border-color: var(--accent);
       box-shadow: 0 0 20px rgba(0, 255, 65, 0.04);
     }
     .form-group textarea {
@@ -820,7 +1000,7 @@
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: rgba(255,255,255,0.1);
+      color: var(--text-10);
     }
     .btn-submit {
       width: 100%;
@@ -828,7 +1008,7 @@
       border: 1px solid rgba(0, 255, 65, 0.2);
       border-radius: 6px;
       background: rgba(0, 255, 65, 0.06);
-      color: #00ff41;
+      color: var(--accent);
       font-family: 'JetBrains Mono', monospace;
       font-weight: 600;
       font-size: 14px;
@@ -847,17 +1027,18 @@
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: rgba(7,7,13,0.85);
+      background: var(--overlay-bg);
       backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      transition: background 0.4s ease;
     }
     .modal-overlay.active { display: flex; }
     .modal {
-      background: #0f0f1a;
-      border: 1px solid rgba(0, 255, 65, 0.15);
+      background: var(--bg-elevated);
+      border: 1px solid var(--overlay-ring);
       border-radius: 12px;
       padding: 40px 36px;
       max-width: 400px;
@@ -881,7 +1062,7 @@
       margin: 0 auto 20px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 24px;
-      color: #00ff41;
+      color: var(--accent);
     }
     .modal-title {
       font-family: 'JetBrains Mono', monospace;
@@ -892,7 +1073,7 @@
     .modal-text {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      color: rgba(255,255,255,0.5);
+      color: var(--text-50);
       margin-bottom: 24px;
       line-height: 1.5;
     }
@@ -902,7 +1083,7 @@
       font-weight: 500;
       background: rgba(0, 255, 65, 0.06);
       border: 1px solid rgba(0, 255, 65, 0.12);
-      color: #00ff41;
+      color: var(--accent);
       padding: 10px 32px;
       border-radius: 6px;
       cursor: pointer;
@@ -922,13 +1103,13 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       font-weight: 600;
-      color: #00ff41;
+      color: var(--accent);
       margin: 20px 0 8px;
     }
     .policy-body p {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: rgba(255,255,255,0.55);
+      color: var(--text-55);
       line-height: 1.7;
       margin-bottom: 4px;
     }
@@ -958,7 +1139,7 @@
     }
     .agree-checkbox:checked {
       background: rgba(0, 255, 65, 0.12);
-      border-color: #00ff41;
+      border-color: var(--accent);
     }
     .agree-checkbox:checked::after {
       content: '';
@@ -967,7 +1148,7 @@
       top: 0.5px;
       width: 4px;
       height: 7px;
-      border: solid #00ff41;
+      border: solid var(--accent);
       border-width: 0 1.5px 1.5px 0;
       transform: rotate(45deg);
     }
@@ -978,7 +1159,7 @@
     .agree-text {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
+      color: var(--text-35);
       line-height: 1.5;
       user-select: none;
     }
@@ -987,13 +1168,13 @@
       border: none;
       padding: 0;
       font: inherit;
-      color: #00ff41;
+      color: var(--accent);
       cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 2px;
       text-decoration-color: rgba(0, 255, 65, 0.3);
     }
-    .agree-link:hover { text-decoration-color: #00ff41; }
+    .agree-link:hover { text-decoration-color: var(--accent); }
 
     /* ── Footer ── */
     .footer {
@@ -1002,7 +1183,7 @@
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: rgba(255,255,255,0.35);
+      color: var(--text-35);
     }
 
     /* ── Mobile: tablets & below ── */
@@ -1014,6 +1195,8 @@
       .header { padding: 12px 0; }
       .header-nav a:not(.header-cta) { display: none; }
       .header-nav a.header-cta { padding: 8px 14px; font-size: 11px; }
+      .theme-toggle { padding: 7px 10px; gap: 5px; margin-left: 2px; }
+      .theme-toggle .tt-cmd { font-size: 10px; }
       .hero { padding: 110px 0 50px; min-height: auto; }
       .hero h1 { font-size: clamp(32px, 12vw, 52px); }
       .hero-sub { font-size: 13px; padding-left: 14px; margin-top: 20px; }
@@ -1044,6 +1227,10 @@
     @media (max-width: 480px) {
       .container { padding: 0 14px; }
       .logo { font-size: 18px; }
+      .theme-toggle { padding: 7px 9px; }
+      .theme-toggle .tt-name { display: none; }
+      .theme-toggle .tt-cmd { font-size: 10px; }
+      .theme-toggle .tt-cursor { display: none; }
       .hero { padding: 100px 0 40px; }
       .hero-badge { font-size: 10px; padding: 4px 12px 4px 8px; margin-bottom: 24px; }
       .hero-sub { font-size: 12px; border-left-width: 1px; }
@@ -1067,6 +1254,8 @@
       .hero-sub { font-size: 10px; }
       .contact-link { font-size: 12px; }
       .contact-link .cl-icon { width: 34px; height: 34px; }
+      .theme-toggle { padding: 6px 8px; }
+      .theme-toggle .tt-cmd { font-size: 9px; }
     }
 
     /* ── Animations ── */
@@ -1098,7 +1287,7 @@
   <header class="header">
     <div class="container">
       <div class="logo">
-        <span style="color:#e0e0e8">No</span>
+        <span style="color:var(--text)">No</span>
         <span class="excl">!</span>
         <span class="letter">R</span><span class="letter">o</span><span class="letter">u</span><span class="letter">t</span><span class="letter">i</span><span class="letter">n</span><span class="letter">e</span>
       </div>
@@ -1107,6 +1296,21 @@
         <a href="#videos">Кейсы</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Контакты</a>
+        <button type="button" class="theme-toggle" id="themeToggle" role="switch" aria-checked="false"
+                aria-label="Переключить тему: тёмная / светлая" title="Переключить тему">
+          <span class="tt-cmd"><span class="tt-name">$ theme --</span><span class="tt-flag">dark</span></span>
+          <span class="tt-cursor" aria-hidden="true"></span>
+          <svg class="tt-ico tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg class="tt-ico tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
         <a href="#contact" class="header-cta">Связаться</a>
       </nav>
     </div>
@@ -1558,6 +1762,39 @@
   </footer>
 
   <script>
+    // ── Theme toggle (dark / light) ──
+    (function () {
+      const root = document.documentElement;
+      const KEY = 'noroutine-theme';
+      const toggle = document.getElementById('themeToggle');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      const starRGB = { dark: '200, 220, 255', light: '72, 96, 138' };
+      let useLight = (root.getAttribute('data-theme') === 'light');
+
+      function applyTheme() {
+        root.setAttribute('data-theme', useLight ? 'light' : 'dark');
+        window.__starRGB = starRGB[useLight ? 'light' : 'dark'];
+        if (meta) meta.setAttribute('content', useLight ? '#f4f7f5' : '#07070d');
+        if (toggle) {
+          toggle.setAttribute('aria-checked', useLight ? 'true' : 'false');
+          const flag = toggle.querySelector('.tt-flag');
+          if (flag) flag.textContent = useLight ? 'light' : 'dark';
+        }
+      }
+      function persist() {
+        try { localStorage.setItem(KEY, useLight ? 'light' : 'dark'); } catch (e) {}
+      }
+
+      applyTheme();
+
+      if (toggle) {
+        toggle.addEventListener('click', () => { useLight = !useLight; applyTheme(); persist(); });
+        toggle.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); useLight = !useLight; applyTheme(); persist(); }
+        });
+      }
+    })();
+
     // ── Stars ──
     (function() {
       const canvas = document.getElementById('stars-canvas');
@@ -1590,11 +1827,12 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const time = Date.now() / 1000;
+        const starRGB = window.__starRGB || '200, 220, 255';
         stars.forEach(s => {
           const twinkle = 0.5 + 0.5 * Math.sin(time * s.speed + s.phase);
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(200, 220, 255, ${s.a * twinkle})`;
+          ctx.fillStyle = `rgba(${starRGB}, ${s.a * twinkle})`;
           ctx.fill();
         });
         ctx.globalAlpha = 1;
@@ -1681,9 +1919,10 @@
         if (res.ok) {
           modal.classList.add('active');
           this.reset();
+          const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00ff41';
           btn.textContent = '$ ✓ deployed';
-          btn.style.borderColor = '#00ff41';
-          btn.style.color = '#00ff41';
+          btn.style.borderColor = accent;
+          btn.style.color = accent;
           setTimeout(() => {
             btn.textContent = orig;
             btn.style.borderColor = '';
