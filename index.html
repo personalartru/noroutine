@@ -875,6 +875,165 @@
       line-height: 1.7;
     }
 
+    /* ── About ── */
+    .about { padding: 100px 0; }
+    .about-collapse {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.5s ease;
+    }
+    .about.open .about-collapse { grid-template-rows: 1fr; }
+    .about-collapse > div { overflow: hidden; min-height: 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding-top: 8px;
+    }
+    .about-photo {
+      background: var(--panel);
+      border: 1px solid var(--line-2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .about-photo .term-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line-3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-35);
+    }
+    .about-photo .term-bar i {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .about-photo .term-bar i:nth-child(1) { background: #ef4444; }
+    .about-photo .term-bar i:nth-child(2) { background: #f59e0b; }
+    .about-photo .term-bar i:nth-child(3) { background: var(--accent); }
+    .about-photo .term-bar span { margin-left: 6px; }
+    .about-photo img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+    .about-photo.noimg img { display: none; }
+    .about-photo .photo-ph {
+      display: none;
+      aspect-ratio: 1 / 1;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 64px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--panel-tint);
+    }
+    .about-photo.noimg .photo-ph { display: flex; }
+    .about-photo figcaption {
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-50);
+      border-top: 1px solid var(--line-3);
+    }
+    .about-photo figcaption b { color: var(--accent); font-weight: 600; }
+    .about-bio {
+      background: var(--panel);
+      border: 1px solid var(--line-2);
+      border-radius: 8px;
+      padding: 28px 26px;
+    }
+    .about-bio h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .about-bio .role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .about-bio p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-70);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .about-specs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-70);
+    }
+    .about-specs li::before {
+      content: '$ ';
+      color: var(--accent);
+    }
+    .about-cert {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      background: var(--panel-tint-2);
+      border: 1px solid rgba(0, 255, 65, 0.08);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .about-cert img {
+      width: 180px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      border: 1px solid var(--line-2);
+      cursor: zoom-in;
+      transition: transform 0.3s;
+      background: #fff;
+    }
+    .about-cert img:hover { transform: scale(1.02); }
+    .about-cert.noimg img { display: none; }
+    .about-cert .fw {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .about-cert .fs {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-70);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .about-cert .cert-open {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: none;
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .about-cert .cert-open:hover { background: rgba(0, 255, 65, 0.08); }
+    .cert-modal-img {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
+      background: #fff;
+    }
+
     /* ── Contact ── */
     .contact { padding: 100px 0; }
     .contact-wrap {
@@ -1220,6 +1379,11 @@
       .faq-answer { padding: 0 16px 16px; }
       .feature-row { flex-direction: column; text-align: left; gap: 14px; padding: 22px 18px; align-items: flex-start; }
       .feature-row svg { width: 36px; height: 36px; }
+      .about { padding: 60px 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 320px; }
+      .about-cert { flex-direction: column; align-items: flex-start; padding: 20px 18px; }
+      .about-cert img { width: 100%; max-width: 280px; }
       .services-grid { grid-template-columns: 1fr; }
       .section-title { font-size: clamp(22px, 7vw, 32px); }
     }
@@ -1336,6 +1500,7 @@
         <div class="hero-actions">
           <a href="#services" class="btn btn-primary">$ ./start.sh</a>
           <a href="#videos" class="btn btn-secondary">$ watch cases</a>
+          <a href="#about" class="btn btn-secondary" id="aboutBtn" aria-expanded="false" aria-controls="aboutBody">$ about</a>
         </div>
       </div>
     </div>
@@ -1607,6 +1772,47 @@
     </div>
   </section>
 
+  <!-- ========= ABOUT ========= -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-label">about</div>
+      <h2 class="section-title">$ whoami: <span class="green">Павел Новиков</span></h2>
+      <p class="section-desc"># обо мне — раскрывается по клику на $ about</p>
+
+      <div class="about-collapse" id="aboutBody">
+        <div>
+          <div class="about-grid">
+            <figure class="about-photo" id="aboutPhoto">
+              <div class="term-bar"><i></i><i></i><i></i><span>~/photo.jpg</span></div>
+              <img src="photo.jpg" alt="Павел Новиков — специалист по автоматизации" loading="lazy" onerror="document.getElementById('aboutPhoto').classList.add('noimg')">
+              <div class="photo-ph" aria-hidden="true">ПН</div>
+              <figcaption><b>$ whoami</b> → Павел Новиков</figcaption>
+            </figure>
+            <div class="about-bio">
+              <h3>Павел Новиков</h3>
+              <div class="role">// специалист по внедрению автоматизации</div>
+              <p>Специалист по внедрению автоматизации рабочих процессов с 15+ годами опыта в IT и диджитал-сфере. Преобразую хаос в структуру: создаю системы управления, автоматизирую процессы, повышаю рентабельность проектов и управляю ресурсами.</p>
+              <ul class="about-specs">
+                <li>15+ лет в IT и диджитал-сфере</li>
+                <li>системы управления и структура из хаоса</li>
+                <li>автоматизация процессов: n8n, скрипты, облако, AI</li>
+                <li>рентабельность проектов и управление ресурсами</li>
+              </ul>
+            </div>
+            <div class="about-cert" id="aboutCert">
+              <img src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям, 2026" loading="lazy" onclick="showCert()" onerror="document.getElementById('aboutCert').classList.add('noimg')">
+              <div>
+                <div class="fw">Сертификат: ИИ-агенты и n8n</div>
+                <div class="fs">Школа «Бруноям», 2026 год, № 16950. Подтверждает успешное завершение обучения на курсе «ИИ-агенты и N8N».</div>
+                <button type="button" class="cert-open" onclick="showCert()">$ open certificate.jpg</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========= CONTACT ========= -->
   <section class="contact" id="contact">
     <div class="container">
@@ -1747,6 +1953,14 @@
                 <p>По всем вопросам, связанным с обработкой персональных данных, обращайтесь:<br>Email: noroutine@ro.ru<br>Телефон: +7 927 728-08-27</p>
               </div>
               <button class="modal-btn" onclick="closePolicy()">Закрыть</button>
+            </div>
+          </div>
+          <div class="modal-overlay" id="cert-modal">
+            <div class="modal modal-policy" style="text-align:center">
+              <h3 class="modal-title">Сертификат: ИИ-агенты и n8n</h3>
+              <img class="cert-modal-img" src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям">
+              <br><br>
+              <button class="modal-btn" onclick="closeCert()">Закрыть</button>
             </div>
           </div>
         </div>
@@ -1903,6 +2117,32 @@
     function closePolicy() {
       document.getElementById('policy-modal').classList.remove('active');
     }
+    function showCert() {
+      document.getElementById('cert-modal').classList.add('active');
+    }
+    function closeCert() {
+      document.getElementById('cert-modal').classList.remove('active');
+    }
+
+    // ── About expand/collapse ──
+    (function () {
+      const section = document.getElementById('about');
+      const btn = document.getElementById('aboutBtn');
+      if (!section || !btn) return;
+      function set(open) {
+        section.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.classList.toggle('btn-primary', open);
+        btn.classList.toggle('btn-secondary', !open);
+      }
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const open = !section.classList.contains('open');
+        set(open);
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      if (location.hash === '#about') set(true);
+    })();
 
     form?.addEventListener('submit', async function(e) {
       e.preventDefault();
