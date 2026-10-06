@@ -876,14 +876,7 @@
     }
 
     /* ── About ── */
-    .about { padding: 100px 0; }
-    .about-collapse {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s ease;
-    }
-    .about.open .about-collapse { grid-template-rows: 1fr; }
-    .about-collapse > div { overflow: hidden; min-height: 0; }
+    .about { padding: 100px 0; scroll-margin-top: 70px; }
     .about-grid {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -983,11 +976,8 @@
       flex-shrink: 0;
       border-radius: 6px;
       border: 1px solid var(--line-2);
-      cursor: zoom-in;
-      transition: transform 0.3s;
       background: #fff;
     }
-    .about-cert img:hover { transform: scale(1.02); }
     .about-cert.noimg img { display: none; }
     .about-cert .fw {
       font-family: 'JetBrains Mono', monospace;
@@ -1002,25 +992,6 @@
       line-height: 1.6;
       margin-bottom: 12px;
     }
-    .about-cert .cert-open {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      background: none;
-      border: 1px solid rgba(0, 255, 65, 0.2);
-      color: var(--accent);
-      padding: 8px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .about-cert .cert-open:hover { background: rgba(0, 255, 65, 0.08); }
-    .cert-modal-img {
-      max-width: 100%;
-      max-height: 70vh;
-      border-radius: 8px;
-      background: #fff;
-    }
-
     /* ── Contact ── */
     .contact { padding: 100px 0; }
     .contact-wrap {
@@ -1445,6 +1416,7 @@
       <nav class="header-nav">
         <a href="#services">Услуги</a>
         <a href="#videos">Кейсы</a>
+        <a href="#about">Обо мне</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Контакты</a>
         <button type="button" class="theme-toggle" id="themeToggle" role="switch" aria-checked="false"
@@ -1487,7 +1459,7 @@
         <div class="hero-actions">
           <a href="#services" class="btn btn-primary">$ ./start.sh</a>
           <a href="#videos" class="btn btn-secondary">$ watch cases</a>
-          <a href="#about" class="btn btn-secondary" id="aboutBtn" aria-expanded="false" aria-controls="aboutBody">$ about</a>
+          <a href="#about" class="btn btn-secondary">$ about</a>
         </div>
       </div>
     </div>
@@ -1762,13 +1734,7 @@
   <!-- ========= ABOUT ========= -->
   <section class="about" id="about">
     <div class="container">
-      <div class="section-label">about</div>
-      <h2 class="section-title">$ whoami: <span class="green">Павел Новиков</span></h2>
-      <p class="section-desc"># обо мне — раскрывается по клику на $ about</p>
-
-      <div class="about-collapse" id="aboutBody">
-        <div>
-          <div class="about-grid">
+      <div class="about-grid">
             <figure class="about-photo" id="aboutPhoto">
               <div class="term-bar"><i></i><i></i><i></i><span>~/novikov.jpg</span></div>
               <img src="novikov.jpg" alt="Павел Новиков — специалист по автоматизации" loading="lazy" onerror="document.getElementById('aboutPhoto').classList.add('noimg')">
@@ -1781,15 +1747,12 @@
               <p>Специалист по внедрению автоматизации рабочих процессов с 15+ годами опыта в IT и диджитал-сфере. Преобразую хаос в структуру: создаю системы управления, автоматизирую процессы, повышаю рентабельность проектов и управляю ресурсами.</p>
             </div>
             <div class="about-cert" id="aboutCert">
-              <img src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям, 2026" loading="lazy" onclick="showCert()" onerror="document.getElementById('aboutCert').classList.add('noimg')">
+              <img src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям, 2026" loading="lazy" onerror="document.getElementById('aboutCert').classList.add('noimg')">
               <div>
                 <div class="fw">Сертификат: ИИ-агенты и n8n</div>
                 <div class="fs">Школа «Бруноям», 2026 год, № 16950. Подтверждает успешное завершение обучения на курсе «ИИ-агенты и N8N».</div>
-                <button type="button" class="cert-open" onclick="showCert()">$ open certificate.jpg</button>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1934,14 +1897,6 @@
                 <p>По всем вопросам, связанным с обработкой персональных данных, обращайтесь:<br>Email: noroutine@ro.ru<br>Телефон: +7 927 728-08-27</p>
               </div>
               <button class="modal-btn" onclick="closePolicy()">Закрыть</button>
-            </div>
-          </div>
-          <div class="modal-overlay" id="cert-modal">
-            <div class="modal modal-policy" style="text-align:center">
-              <h3 class="modal-title">Сертификат: ИИ-агенты и n8n</h3>
-              <img class="cert-modal-img" src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям">
-              <br><br>
-              <button class="modal-btn" onclick="closeCert()">Закрыть</button>
             </div>
           </div>
         </div>
@@ -2098,32 +2053,7 @@
     function closePolicy() {
       document.getElementById('policy-modal').classList.remove('active');
     }
-    function showCert() {
-      document.getElementById('cert-modal').classList.add('active');
-    }
-    function closeCert() {
-      document.getElementById('cert-modal').classList.remove('active');
-    }
-
-    // ── About expand/collapse ──
-    (function () {
-      const section = document.getElementById('about');
-      const btn = document.getElementById('aboutBtn');
-      if (!section || !btn) return;
-      function set(open) {
-        section.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.classList.toggle('btn-primary', open);
-        btn.classList.toggle('btn-secondary', !open);
-      }
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const open = !section.classList.contains('open');
-        set(open);
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-      if (location.hash === '#about') set(true);
-    })();
+    // ── About: всегда открыт, $ about и меню — якорные ссылки ──
 
     form?.addEventListener('submit', async function(e) {
       e.preventDefault();
