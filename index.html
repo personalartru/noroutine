@@ -886,7 +886,7 @@
     .about-collapse > div { overflow: hidden; min-height: 0; }
     .about-grid {
       display: grid;
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: 220px 1fr;
       gap: 20px;
       align-items: start;
       padding-top: 8px;
@@ -967,19 +967,6 @@
       color: var(--text-70);
       line-height: 1.7;
       margin-bottom: 18px;
-    }
-    .about-specs {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-70);
-    }
-    .about-specs li::before {
-      content: '$ ';
-      color: var(--accent);
     }
     .about-cert {
       grid-column: 1 / -1;
@@ -1381,7 +1368,7 @@
       .feature-row svg { width: 36px; height: 36px; }
       .about { padding: 60px 0; }
       .about-grid { grid-template-columns: 1fr; }
-      .about-photo { max-width: 320px; }
+      .about-photo { max-width: 220px; }
       .about-cert { flex-direction: column; align-items: flex-start; padding: 20px 18px; }
       .about-cert img { width: 100%; max-width: 280px; }
       .services-grid { grid-template-columns: 1fr; }
@@ -1783,8 +1770,8 @@
         <div>
           <div class="about-grid">
             <figure class="about-photo" id="aboutPhoto">
-              <div class="term-bar"><i></i><i></i><i></i><span>~/photo.jpg</span></div>
-              <img src="photo.jpg" alt="Павел Новиков — специалист по автоматизации" loading="lazy" onerror="document.getElementById('aboutPhoto').classList.add('noimg')">
+              <div class="term-bar"><i></i><i></i><i></i><span>~/novikov.jpg</span></div>
+              <img src="novikov.jpg" alt="Павел Новиков — специалист по автоматизации" loading="lazy" onerror="document.getElementById('aboutPhoto').classList.add('noimg')">
               <div class="photo-ph" aria-hidden="true">ПН</div>
               <figcaption><b>$ whoami</b> → Павел Новиков</figcaption>
             </figure>
@@ -1792,12 +1779,6 @@
               <h3>Павел Новиков</h3>
               <div class="role">// специалист по внедрению автоматизации</div>
               <p>Специалист по внедрению автоматизации рабочих процессов с 15+ годами опыта в IT и диджитал-сфере. Преобразую хаос в структуру: создаю системы управления, автоматизирую процессы, повышаю рентабельность проектов и управляю ресурсами.</p>
-              <ul class="about-specs">
-                <li>15+ лет в IT и диджитал-сфере</li>
-                <li>системы управления и структура из хаоса</li>
-                <li>автоматизация процессов: n8n, скрипты, облако, AI</li>
-                <li>рентабельность проектов и управление ресурсами</li>
-              </ul>
             </div>
             <div class="about-cert" id="aboutCert">
               <img src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям, 2026" loading="lazy" onclick="showCert()" onerror="document.getElementById('aboutCert').classList.add('noimg')">
