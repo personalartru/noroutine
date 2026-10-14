@@ -1215,6 +1215,38 @@ html.dark{
 <span class="material-symbols-outlined text-[16px] text-primary-fixed-dim" id="theme-icon">dark_mode</span>
 </button>
 </div>
+<!-- ==================== SUPPORT CHAT WIDGET ==================== -->
+<div class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-3">
+<div id="chat-panel" class="hidden w-[calc(100vw-3.5rem)] max-w-sm rounded-2xl overflow-hidden bg-surface-container-low border border-white/10 shadow-[0_16px_48px_rgba(0,0,0,0.6)]">
+<div class="px-4 py-2.5 flex items-center justify-between bg-surface-container-high border-b border-white/5">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#ef4444]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#eab308]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="ml-1 font-mono text-xs text-on-surface-variant">~/support-chat</span>
+</div>
+<span class="font-mono text-[11px] text-primary-container flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>online</span>
+</div>
+<div class="p-4">
+<div id="chat-log" class="mb-3 max-h-44 overflow-y-auto space-y-2 font-mono text-xs">
+<div class="rounded-lg bg-surface-container-highest/60 border border-white/5 px-3 py-2 text-on-surface-variant">Привет! Это быстрый чат с Павлом. Сообщение сразу уйдёт ему в Telegram. Укажите, как с вами связаться.</div>
+</div>
+<div class="space-y-2">
+<input id="chat-name" type="text" maxlength="60" autocomplete="name" placeholder="Ваше имя" class="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 font-mono text-xs text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-primary-container/60">
+<input id="chat-contact" type="text" maxlength="80" autocomplete="tel" placeholder="Контакт: @username или телефон" class="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 font-mono text-xs text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-primary-container/60">
+<textarea id="chat-text" rows="3" maxlength="1000" placeholder="Ваше сообщение... (Ctrl+Enter — отправить)" class="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 font-mono text-xs text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-primary-container/60 resize-none"></textarea>
+</div>
+<div id="chat-status" class="hidden mt-2 font-mono text-xs"></div>
+<button id="chat-send" type="button" class="mt-3 w-full py-2.5 rounded-xl bg-primary-container text-on-primary-container font-mono text-sm font-bold shadow-[0_0_20px_rgba(0,255,65,0.35)] hover:shadow-[0_0_30px_rgba(0,255,65,0.55)] active:scale-[0.99] transition-all disabled:opacity-60">$ ./send.sh &rarr;</button>
+<p class="mt-2 font-mono text-[10px] leading-relaxed text-on-surface-variant/60">Нажимая кнопку, вы соглашаетесь на <button type="button" class="underline text-primary-container" onclick="openPrivacyModal(event)">обработку персональных данных</button>.</p>
+</div>
+</div>
+<button id="chat-fab" type="button" aria-label="Открыть чат поддержки" aria-expanded="false" class="relative w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_28px_rgba(0,255,65,0.45)] hover:scale-105 active:scale-95 transition-all">
+<span class="absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-30 animate-ping"></span>
+<span class="material-symbols-outlined text-[28px] relative" id="chat-fab-icon">forum</span>
+<span class="absolute top-0 right-0 w-3.5 h-3.5 rounded-full bg-primary-container border-2 border-surface-container-lowest"><span class="absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75 animate-ping"></span></span>
+</button>
+</div>
 </div>
 <script>
   // 1. Starfield Canvas Simulation
@@ -1361,4 +1393,63 @@ html.dark{
 
 
 
+<script>
+// 7. Support chat widget -> Telegram bot
+(function () {
+  var TG_BOT_TOKEN = '8846592752:AAGphRIo2S5iRJu4abQso4rSZUhqzL6HDCo';
+  var TG_CHAT_ID = ''; // TODO: numeric Telegram user/chat ID получателя (узнать через @userinfobot)
+  var fab = document.getElementById('chat-fab');
+  var fabIcon = document.getElementById('chat-fab-icon');
+  var panel = document.getElementById('chat-panel');
+  var log = document.getElementById('chat-log');
+  var sendBtn = document.getElementById('chat-send');
+  var statusEl = document.getElementById('chat-status');
+  if (!fab || !panel) return;
+  function setStatus(msg, ok) {
+    statusEl.classList.remove('hidden');
+    statusEl.style.color = ok ? 'var(--t-primary-fixed-dim, #00ff41)' : '#ef4444';
+    statusEl.textContent = msg;
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function addMine(text) {
+    var d = document.createElement('div');
+    d.className = 'rounded-lg bg-primary-container/15 border border-primary-container/25 px-3 py-2 text-on-surface text-right';
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+  fab.addEventListener('click', function () {
+    var open = panel.classList.toggle('hidden') === false;
+    fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    fabIcon.textContent = open ? 'close' : 'forum';
+  });
+  document.getElementById('chat-text').addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') sendBtn.click();
+  });
+  sendBtn.addEventListener('click', async function () {
+    var name = document.getElementById('chat-name').value.trim().slice(0, 60);
+    var contact = document.getElementById('chat-contact').value.trim().slice(0, 80);
+    var text = document.getElementById('chat-text').value.trim().slice(0, 1000);
+    if (!text) { setStatus('Введите сообщение.', false); return; }
+    if (!TG_CHAT_ID) { setStatus('Виджет подключается… а пока напишите в Telegram: @Personalart', false); return; }
+    sendBtn.disabled = true;
+    setStatus('$ sending...', true);
+    var body = '\uD83D\uDCE9 <b>Новое сообщение с сайта No! Routine</b>\n\uD83D\uDC64 Имя: ' + esc(name || '—') + '\n\uD83D\uDCDE Контакт: ' + esc(contact || '—') + '\n\uD83D\uDCAC ' + esc(text) + '\n\uD83D\uDD17 ' + esc(location.href);
+    try {
+      var res = await fetch('https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: body, parse_mode: 'HTML' })
+      });
+      var data = await res.json();
+      if (!data.ok) throw new Error('tg');
+      addMine(text);
+      document.getElementById('chat-text').value = '';
+      setStatus('Сообщение отправлено ✓ Павел ответит по указанному контакту.', true);
+    } catch (e) {
+      setStatus('Не удалось отправить. Попробуйте позже или напишите в Telegram: @Personalart', false);
+    }
+    sendBtn.disabled = false;
+  });
+})();
+</script>
 </body></html>
