@@ -1,2102 +1,1364 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- No-flash theme init -->
-  <script>
-    (function () {
-      var light = false;
-      try {
-        var stored = localStorage.getItem('noroutine-theme');
-        light = stored ? stored === 'light'
-          : (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches);
-      } catch (e) { light = false; }
-      document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
-    })();
-  </script>
-
-  <!-- SEO -->
-  <title>No ! Routine — автоматизация проектного управления и digital без рутины | n8n, чат-боты, AI</title>
-  <meta name="description" content="Помогаю освободиться от рутинных задач в проектном управлении и digital. Никакой магии — только рабочие инструменты: n8n, скрипты, облачные функции и интеграции, которые работают 24/7 вместо вас. Автоматизация Яндекс Трекер, чат-боты для Telegram и Max, интеграции с Google Таблицы, Airtable, Supabase.">
-  <meta name="keywords" content="автоматизация, no routine, n8n, чат-боты, telegram, max, яндекс трекер, интеграции, ai, нейросети, гугл таблицы, airtable, supabase, яндекс cloud, без рутины, оптимизация проектного менеджмента">
-  <meta name="author" content="Павел Новиков">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="theme-color" content="#07070d">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="No ! Routine">
-  <meta property="og:title" content="No ! Routine — автоматизация без рутины">
-  <meta property="og:description" content="Освободитесь от рутинных задач в проектном управлении и digital. n8n, чат-боты, AI-инструменты и интеграции, которые работают 24/7 вместо вас.">
-  <meta property="og:url" content="https://personalartru.github.io/noroutine/">
-  <meta property="og:image" content="https://personalartru.github.io/noroutine/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="No ! Routine — автоматизация без рутины">
-  <meta property="og:locale" content="ru_RU">
-  <meta property="og:image" content="https://personalartru.github.io/noroutine/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="No ! Routine — автоматизация без рутины">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="No ! Routine — автоматизация без рутины">
-  <meta name="twitter:description" content="n8n, чат-боты, AI-инструменты и интеграции, которые работают 24/7 вместо вас.">
-  <meta name="twitter:image" content="https://personalartru.github.io/noroutine/og-image.png">
-  <meta name="twitter:image" content="https://personalartru.github.io/noroutine/og-image.png">
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://personalartru.github.io/noroutine/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="alternate" href="https://personalartru.github.io/noroutine/sitemap.xml" type="application/xml" title="Sitemap">
-
-  <!-- Structured data: WebSite -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "No ! Routine",
-    "alternateName": "No! Routine — автоматизация без рутины",
-    "url": "https://personalartru.github.io/noroutine/",
-    "description": "Автоматизация проектного управления и digital без рутины: n8n, чат-боты, AI-инструменты, облачные функции и интеграции.",
-    "inLanguage": "ru",
-    "publisher": {
+<!DOCTYPE html><html class="dark" lang="ru" style=""><head>
+<script>
+/* no-flash theme init */
+(function(){var l=false;try{var v=localStorage.getItem('nr-theme');l=v?v==='light':(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches);}catch(e){}document.documentElement.classList.toggle('dark',!l);})();
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=110947701','ym');
+ym(110947701,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:'dataLayer',accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110947701" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter --><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>No! Routine — Автоматизация бизнес-процессов | Павел Новиков</title><meta name="description" content="Автоматизация бизнес-процессов под ключ: n8n, чат-боты для Telegram и Max, интеграция Яндекс Трекер, скрипты и облачные функции. Павел Новиков."><meta name="keywords" content="автоматизация, n8n, яндекс трекер, чат-боты, telegram бот, скрипты python, интеграция crm, павел новиков"><meta name="author" content="Павел Новиков"><meta property="og:title" content="No! Routine — Автоматизация бизнес-процессов | Павел Новиков"><meta property="og:description" content="Готовые связки n8n, кастомные чат-боты, интеграция Яндекс Трекер и сквозная автоматизация рутины без раздувания штата."><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://personalartru.github.io/noroutine/">
+<meta property="og:image" content="https://personalartru.github.io/noroutine/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="No! Routine — автоматизация без рутины">
+<meta name="twitter:image" content="https://personalartru.github.io/noroutine/og-image.png">
+<link rel="canonical" href="https://personalartru.github.io/noroutine/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="No! Routine — Автоматизация процессов"><meta name="twitter:description" content="Автоматизация бизнес-процессов с n8n, чат-ботами и Яндекс Трекером."><link rel="icon" type="image/svg+xml" href="favicon.svg"><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "No! Routine",
+      "description": "Сервис автоматизации бизнес-процессов и digital-конвейеров: n8n, чат-боты, интеграция Яндекс Трекер.",
+      "telephone": "+79277280827",
+      "email": "noroutine@ro.ru",
+      "founder": {
+        "@type": "Person",
+        "name": "Павел Новиков",
+        "jobTitle": "Специалист по внедрению автоматизации"
+      },
+      "knowsAbout": [
+        "n8n",
+        "Yandex Tracker",
+        "Chatbots",
+        "Python Automation",
+        "REST API"
+      ]
+    },
+    {
       "@type": "Person",
       "name": "Павел Новиков",
+      "url": "https://personalartru.github.io/noroutine/",
+      "jobTitle": "Специалист по внедрению автоматизации",
       "email": "noroutine@ro.ru",
-      "telephone": "+79277280827"
-    }
-  }
-  </script>
-
-  <!-- Structured data: Person / Contact -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Павел Новиков",
-    "url": "https://personalartru.github.io/noroutine/",
-    "jobTitle": "Специалист по автоматизации",
-    "description": "Специалист по автоматизации рутинных задач в проектном управлении и digital-сфере: n8n, чат-боты, AI-интеграции, облачные функции.",
-    "email": "noroutine@ro.ru",
-    "telephone": "+7 927 728-08-27",
-    "contactPoint": {
-      "@type": "ContactPoint",
       "telephone": "+7 927 728-08-27",
-      "contactType": "customer service",
-      "availableLanguage": ["Russian"]
+      "image": "https://personalartru.github.io/noroutine/novikov.jpg",
+      "sameAs": [
+        "https://rutube.ru/channel/57269828",
+        "https://www.youtube.com/@noroutine2026",
+        "https://vk.ru/noroutine2026",
+        "https://dzen.ru/noroutine"
+      ]
+    }
+  ]
+}
+</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}@keyframes crt-scan{0%{background-position:0 0;}100%{background-position:0 100%;}}@keyframes neon-flicker{0%,19.999%,22%,62.999%,64%,64.999%,70%,100%{opacity:1;text-shadow:0 0 10px #00ff41,0 0 20px #00ff41;}20%,21.999%,63%,63.999%,65%,69.999%{opacity:0.3;text-shadow:none;}}@keyframes cursor-blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}.neon-glitch-bang{animation:neon-flicker 3.5s infinite;}.terminal-cursor{animation:cursor-blink 1s infinite;}.crt-overlay{background:linear-gradient(rgba(18,16,16,0) 50%,rgba(0,0,0,0.25) 50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02));background-size:100% 4px,6px 100%;pointer-events:none;}</style><script src="https://cdn.tailwindcss.com"></script>
+<style>
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:88px}
+:root{
+  --t-surface: 244 246 243;
+  --t-surface-dim: 233 237 232;
+  --t-surface-bright: 255 255 255;
+  --t-surface-container-lowest: 223 229 222;
+  --t-surface-container-low: 236 239 236;
+  --t-surface-container: 255 255 255;
+  --t-surface-container-high: 247 249 247;
+  --t-surface-container-highest: 238 241 238;
+  --t-surface-variant: 227 233 226;
+  --t-on-surface: 17 24 39;
+  --t-on-surface-variant: 75 85 99;
+  --t-inverse-surface: 17 24 39;
+  --t-inverse-on-surface: 244 246 243;
+  --t-outline: 157 179 160;
+  --t-outline-variant: 213 221 212;
+  --t-surface-tint: 5 150 105;
+  --t-primary: 4 120 87;
+  --t-on-primary: 255 255 255;
+  --t-primary-container: 16 185 129;
+  --t-on-primary-container: 5 46 22;
+  --t-inverse-primary: 6 95 70;
+  --t-secondary: 109 40 217;
+  --t-on-secondary: 255 255 255;
+  --t-secondary-container: 237 233 254;
+  --t-on-secondary-container: 76 29 149;
+  --t-tertiary: 14 116 144;
+  --t-on-tertiary: 255 255 255;
+  --t-tertiary-container: 207 250 254;
+  --t-on-tertiary-container: 22 78 99;
+  --t-error: 220 38 38;
+  --t-on-error: 255 255 255;
+  --t-error-container: 254 226 226;
+  --t-on-error-container: 127 29 29;
+  --t-primary-fixed: 5 150 105;
+  --t-primary-fixed-dim: 4 120 87;
+  --t-on-primary-fixed: 255 255 255;
+  --t-on-primary-fixed-variant: 209 250 229;
+  --t-secondary-fixed: 124 58 237;
+  --t-secondary-fixed-dim: 109 40 217;
+  --t-on-secondary-fixed: 255 255 255;
+  --t-on-secondary-fixed-variant: 237 233 254;
+  --t-tertiary-fixed: 14 116 144;
+  --t-tertiary-fixed-dim: 2 132 199;
+  --t-on-tertiary-fixed: 255 255 255;
+  --t-on-tertiary-fixed-variant: 207 250 254;
+  --t-background: 244 246 243;
+  --t-on-background: 17 24 39;
+}
+html.dark{
+  --t-on-tertiary-fixed-variant: 0 78 90;
+  --t-on-primary: 0 57 7;
+  --t-on-background: 228 225 235;
+  --t-on-error-container: 255 218 214;
+  --t-on-secondary-fixed-variant: 79 49 156;
+  --t-secondary-fixed: 232 221 255;
+  --t-secondary-container: 79 49 156;
+  --t-error-container: 147 0 10;
+  --t-error: 255 180 171;
+  --t-inverse-primary: 0 110 22;
+  --t-on-secondary-fixed: 33 0 94;
+  --t-surface-container-lowest: 14 14 20;
+  --t-surface-tint: 0 230 57;
+  --t-tertiary-fixed: 162 238 255;
+  --t-inverse-on-surface: 48 48 55;
+  --t-on-tertiary-fixed: 0 31 37;
+  --t-secondary-fixed-dim: 206 189 255;
+  --t-surface-container-high: 42 41 48;
+  --t-inverse-surface: 228 225 235;
+  --t-on-error: 105 0 5;
+  --t-outline-variant: 59 75 55;
+  --t-surface-container: 31 31 38;
+  --t-primary-container: 0 255 65;
+  --t-tertiary-fixed-dim: 47 217 244;
+  --t-surface: 19 19 25;
+  --t-on-secondary-container: 190 168 255;
+  --t-tertiary: 239 252 255;
+  --t-secondary: 206 189 255;
+  --t-on-primary-fixed: 0 34 3;
+  --t-outline: 132 150 126;
+  --t-on-tertiary: 0 54 62;
+  --t-primary-fixed-dim: 0 230 57;
+  --t-primary-fixed: 114 255 112;
+  --t-primary: 235 255 226;
+  --t-on-surface: 228 225 235;
+  --t-background: 19 19 25;
+  --t-on-surface-variant: 185 204 178;
+  --t-surface-container-low: 27 27 34;
+  --t-surface-container-highest: 53 52 59;
+  --t-surface-dim: 19 19 25;
+  --t-surface-variant: 53 52 59;
+  --t-on-secondary: 56 19 133;
+  --t-tertiary-container: 138 235 255;
+  --t-on-primary-fixed-variant: 0 83 14;
+  --t-on-tertiary-container: 0 107 122;
+  --t-on-primary-container: 0 113 23;
+  --t-surface-bright: 57 56 64;
+}
+</style><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-fixed-variant": "rgb(var(--t-on-tertiary-fixed-variant) / <alpha-value>)",
+          "on-primary": "rgb(var(--t-on-primary) / <alpha-value>)",
+          "on-background": "rgb(var(--t-on-background) / <alpha-value>)",
+          "on-error-container": "rgb(var(--t-on-error-container) / <alpha-value>)",
+          "on-secondary-fixed-variant": "rgb(var(--t-on-secondary-fixed-variant) / <alpha-value>)",
+          "secondary-fixed": "rgb(var(--t-secondary-fixed) / <alpha-value>)",
+          "secondary-container": "rgb(var(--t-secondary-container) / <alpha-value>)",
+          "error-container": "rgb(var(--t-error-container) / <alpha-value>)",
+          "error": "rgb(var(--t-error) / <alpha-value>)",
+          "inverse-primary": "rgb(var(--t-inverse-primary) / <alpha-value>)",
+          "on-secondary-fixed": "rgb(var(--t-on-secondary-fixed) / <alpha-value>)",
+          "surface-container-lowest": "rgb(var(--t-surface-container-lowest) / <alpha-value>)",
+          "surface-tint": "rgb(var(--t-surface-tint) / <alpha-value>)",
+          "tertiary-fixed": "rgb(var(--t-tertiary-fixed) / <alpha-value>)",
+          "inverse-on-surface": "rgb(var(--t-inverse-on-surface) / <alpha-value>)",
+          "on-tertiary-fixed": "rgb(var(--t-on-tertiary-fixed) / <alpha-value>)",
+          "secondary-fixed-dim": "rgb(var(--t-secondary-fixed-dim) / <alpha-value>)",
+          "surface-container-high": "rgb(var(--t-surface-container-high) / <alpha-value>)",
+          "inverse-surface": "rgb(var(--t-inverse-surface) / <alpha-value>)",
+          "on-error": "rgb(var(--t-on-error) / <alpha-value>)",
+          "outline-variant": "rgb(var(--t-outline-variant) / <alpha-value>)",
+          "surface-container": "rgb(var(--t-surface-container) / <alpha-value>)",
+          "primary-container": "rgb(var(--t-primary-container) / <alpha-value>)",
+          "tertiary-fixed-dim": "rgb(var(--t-tertiary-fixed-dim) / <alpha-value>)",
+          "surface": "rgb(var(--t-surface) / <alpha-value>)",
+          "on-secondary-container": "rgb(var(--t-on-secondary-container) / <alpha-value>)",
+          "tertiary": "rgb(var(--t-tertiary) / <alpha-value>)",
+          "secondary": "rgb(var(--t-secondary) / <alpha-value>)",
+          "on-primary-fixed": "rgb(var(--t-on-primary-fixed) / <alpha-value>)",
+          "outline": "rgb(var(--t-outline) / <alpha-value>)",
+          "on-tertiary": "rgb(var(--t-on-tertiary) / <alpha-value>)",
+          "primary-fixed-dim": "rgb(var(--t-primary-fixed-dim) / <alpha-value>)",
+          "primary-fixed": "rgb(var(--t-primary-fixed) / <alpha-value>)",
+          "primary": "rgb(var(--t-primary) / <alpha-value>)",
+          "on-surface": "rgb(var(--t-on-surface) / <alpha-value>)",
+          "background": "rgb(var(--t-background) / <alpha-value>)",
+          "on-surface-variant": "rgb(var(--t-on-surface-variant) / <alpha-value>)",
+          "surface-container-low": "rgb(var(--t-surface-container-low) / <alpha-value>)",
+          "surface-container-highest": "rgb(var(--t-surface-container-highest) / <alpha-value>)",
+          "surface-dim": "rgb(var(--t-surface-dim) / <alpha-value>)",
+          "surface-variant": "rgb(var(--t-surface-variant) / <alpha-value>)",
+          "on-secondary": "rgb(var(--t-on-secondary) / <alpha-value>)",
+          "tertiary-container": "rgb(var(--t-tertiary-container) / <alpha-value>)",
+          "on-primary-fixed-variant": "rgb(var(--t-on-primary-fixed-variant) / <alpha-value>)",
+          "on-tertiary-container": "rgb(var(--t-on-tertiary-container) / <alpha-value>)",
+          "on-primary-container": "rgb(var(--t-on-primary-container) / <alpha-value>)",
+          "surface-bright": "rgb(var(--t-surface-bright) / <alpha-value>)"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "gutter": "1.25rem",
+          "space-sm": "0.5rem",
+          "margin-mobile": "1rem",
+          "gutter-mobile": "0.75rem",
+          "space-xl": "2.5rem",
+          "space-md": "1rem",
+          "margin": "2rem",
+          "space-lg": "1.5rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "JetBrains Mono"
+          ],
+          "headline-md": [
+            "JetBrains Mono"
+          ],
+          "label-sm": [
+            "JetBrains Mono"
+          ],
+          "label-lg": [
+            "JetBrains Mono"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "label-md": [
+            "JetBrains Mono"
+          ],
+          "headline-xl-mobile": [
+            "JetBrains Mono"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "JetBrains Mono"
+          ],
+          "headline-lg-mobile": [
+            "JetBrains Mono"
+          ],
+          "headline-xl": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-xl-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "700"
+            }
+          ],
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg-mobile": [
+            "26px",
+            {
+              "lineHeight": "34px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-xl": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "fontWeight": "700"
+            }
+          ]
+        }
+      },
     },
-    "sameAs": [
-      "https://rutube.ru/channel/57269828",
-      "https://www.youtube.com/@noroutine2026",
-      "https://vk.ru/noroutine2026",
-      "https://dzen.ru/noroutine"
-    ]
-  }
-  </script>
-
-  <!-- Structured data: Services -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Услуги No ! Routine",
-    "itemListElement": [
-      { "@type": "Service", "position": 1, "name": "Готовые воркфлоу для n8n", "description": "Настроенные сценарии автоматизации для n8n под любые задачи." },
-      { "@type": "Service", "position": 2, "name": "Чат-боты для Telegram, Max, Яндекс Мессенджер", "description": "Интерактивные боты для обратной связи, уведомлений и сбора заявок." },
-      { "@type": "Service", "position": 3, "name": "AI-инструменты", "description": "Интеграция нейросетей и AI-ассистентов в рабочие процессы." },
-      { "@type": "Service", "position": 4, "name": "Интеграции с таблицами и БД", "description": "Google Таблицы, Airtable, Supabase, Яндекс Cloud и Яндекс360." },
-      { "@type": "Service", "position": 5, "name": "Быстрые скрипты для ежедневных задач", "description": "Кастомные скрипты для автоматизации отчётов и обработки данных." },
-      { "@type": "Service", "position": 6, "name": "Облачные функции и API-интеграции", "description": "Serverless-функции, API-интеграции и вебхуки." },
-      { "@type": "Service", "position": 7, "name": "Оптимизация проектного менеджмента в Яндекс Трекер", "description": "Воркфлоу, триггеры, макросы, дашборды для полной автоматизации управления задачами." },
-      { "@type": "Service", "position": 8, "name": "Кейсы из реальной практики", "description": "Проверенные решения автоматизации, работающие в продакшене." }
-    ]
-  }
-  </script>
-
-  <!-- Structured data: FAQ -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Что такое No ! Routine?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No ! Routine — это сервис автоматизации рутинных задач в проектном управлении и digital-сфере с помощью n8n, скриптов, облачных функций и интеграций, которые работают 24/7 вместо вас." }
-      },
-      {
-        "@type": "Question",
-        "name": "Что можно автоматизировать с помощью n8n?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Готовые воркфлоу для n8n решают задачи сбора данных, отправки уведомлений, интеграции сервисов и сложных multi-step процессов без программирования." }
-      },
-      {
-        "@type": "Question",
-        "name": "Какие чат-боты можно создать?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Чат-боты для Telegram, Max и Яндекс Мессенджер: боты обратной связи, уведомлений и сбора заявок без единой строчки кода." }
-      },
-      {
-        "@type": "Question",
-        "name": "С какими сервисами работают интеграции?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Google Таблицы, Airtable, Supabase, Яндекс Cloud, Яндекс360, а также API-интеграции и вебхуки любых сервисов." }
-      },
-      {
-        "@type": "Question",
-        "name": "Как автоматизировать Яндекс Трекер?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Оптимизация проектного менеджмента в Яндекс Трекер: настройка воркфлоу, триггеров, макросов и дашбордов для автоматического управления задачами, включая авто-создание задач из Яндекс Форм." }
-      },
-      {
-        "@type": "Question",
-        "name": "Сколько это стоит и как начать?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Опишите задачу через форму на сайте или напишите в Telegram @Personalart или Макс. Специалист покажет, как решить её современными инструментами автоматизации." }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110947701', 'ym');
-
-    ym(110947701, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/110947701" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    /* ── Theme tokens (default: dark "terminal") ── */
-    :root {
-      --bg: #07070d;
-      --bg-elevated: #0f0f1a;
-      --header-bg: rgba(7, 7, 13, 0.85);
-      --overlay-bg: rgba(7, 7, 13, 0.85);
-      --overlay-ring: rgba(0, 255, 65, 0.15);
-      --panel: rgba(255,255,255,0.02);
-      --panel-2: rgba(255,255,255,0.03);
-      --panel-soft: rgba(255,255,255,0.01);
-      --panel-tint: rgba(0, 255, 65, 0.02);
-      --panel-tint-2: rgba(0, 255, 65, 0.03);
-      --line: rgba(255,255,255,0.04);
-      --line-2: rgba(255,255,255,0.05);
-      --line-3: rgba(255,255,255,0.03);
-      --text: #e0e0e8;
-      --text-strong: #f5f5fa;
-      --text-bright: #e8e8f0;
-      --text-80: rgba(255,255,255,0.8);
-      --text-70: rgba(255,255,255,0.7);
-      --text-65: rgba(255,255,255,0.65);
-      --text-60: rgba(255,255,255,0.6);
-      --text-55: rgba(255,255,255,0.55);
-      --text-50: rgba(255,255,255,0.5);
-      --text-35: rgba(255,255,255,0.35);
-      --text-25: rgba(255,255,255,0.25);
-      --text-10: rgba(255,255,255,0.1);
-      --accent: #00ff41;
-      --btn-sec-bg: rgba(255,255,255,0.03);
-      --btn-sec-border: rgba(255,255,255,0.06);
-      --btn-sec-text: rgba(255,255,255,0.8);
-      --btn-sec-hover-bg: rgba(255,255,255,0.06);
-      --btn-sec-hover-text: #fff;
-    }
-
-    /* ── Light theme ── */
-    [data-theme="light"] {
-      --bg: #f4f7f5;
-      --bg-elevated: #ffffff;
-      --header-bg: rgba(255, 255, 255, 0.82);
-      --overlay-bg: rgba(244, 247, 245, 0.92);
-      --overlay-ring: rgba(0, 160, 74, 0.18);
-      --panel: rgba(255,255,255,0.72);
-      --panel-2: rgba(255,255,255,0.85);
-      --panel-soft: rgba(255,255,255,0.55);
-      --panel-tint: rgba(0, 160, 74, 0.045);
-      --panel-tint-2: rgba(0, 160, 74, 0.07);
-      --line: rgba(13, 20, 32, 0.08);
-      --line-2: rgba(13, 20, 32, 0.1);
-      --line-3: rgba(13, 20, 32, 0.06);
-      --text: #1b2330;
-      --text-strong: #0e1524;
-      --text-bright: #0f1728;
-      --text-80: rgba(13, 20, 32, 0.82);
-      --text-70: rgba(13, 20, 32, 0.72);
-      --text-65: rgba(13, 20, 32, 0.66);
-      --text-60: rgba(13, 20, 32, 0.6);
-      --text-55: rgba(13, 20, 32, 0.56);
-      --text-50: rgba(13, 20, 32, 0.5);
-      --text-35: rgba(13, 20, 32, 0.4);
-      --text-25: rgba(13, 20, 32, 0.34);
-      --text-10: rgba(13, 20, 32, 0.18);
-      --accent: #00a04a;
-      --btn-sec-bg: rgba(13, 20, 32, 0.04);
-      --btn-sec-border: rgba(13, 20, 32, 0.12);
-      --btn-sec-text: rgba(13, 20, 32, 0.82);
-      --btn-sec-hover-bg: rgba(13, 20, 32, 0.07);
-      --btn-sec-hover-text: #0e1524;
-    }
-    [data-theme="light"] body {
-      background: linear-gradient(180deg, #f7faf7 0%, #eef3ef 100%);
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      transition: background-color 0.4s ease, color 0.4s ease;
-    }
-    code, .mono {
-      font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
-    }
-    a { color: inherit; text-decoration: none; }
-
-    /* ── Stars ── */
-    #stars-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ── Glow orbs ── */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(140px);
-      opacity: 0.12;
-      z-index: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease, background 0.4s ease;
-    }
-    .orb-1 {
-      width: 700px; height: 700px;
-      background: #7c3aed;
-      top: -250px; right: -200px;
-    }
-    .orb-2 {
-      width: 500px; height: 500px;
-      background: #00ff41;
-      bottom: -150px; left: -150px;
-    }
-    .orb-3 {
-      width: 400px; height: 400px;
-      background: #06b6d4;
-      top: 40%; left: 60%;
-    }
-    [data-theme="light"] .orb { opacity: 0.07; }
-    [data-theme="light"] .orb-1 { background: #6d28d9; }
-    [data-theme="light"] .orb-2 { background: #00a04a; }
-    [data-theme="light"] .orb-3 { background: #0891b2; }
-
-    section { position: relative; z-index: 1; }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Scanline overlay ── */
-    .scanlines {
-      position: fixed;
-      inset: 0;
-      z-index: 9998;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 255, 65, 0.015) 2px,
-        rgba(0, 255, 65, 0.015) 4px
-      );
-    }
-    [data-theme="light"] .scanlines {
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 3px,
-        rgba(0, 120, 60, 0.028) 3px,
-        rgba(0, 120, 60, 0.028) 5px
-      );
-    }
-
-    /* ── Header ── */
-    .header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 14px 0;
-      background: var(--header-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0, 255, 65, 0.08);
-      transition: background 0.4s ease;
-    }
-    .header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      color: var(--text);
-    }
-    .logo .excl {
-      color: var(--accent);
-      display: inline-block;
-      animation: flicker 1.8s ease-in-out infinite;
-    }
-    .logo .letter {
-      transition: color 0.4s ease;
-    }
-    .logo .letter.purple { color: #a78bfa; }
-    .logo .letter.green { color: var(--accent); }
-
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 1; }
-      55% { opacity: 0.3; }
-      60% { opacity: 1; }
-      85% { opacity: 1; }
-      90% { opacity: 0.4; }
-      95% { opacity: 1; }
-    }
-
-    .header-nav {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .header-nav a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-70);
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: all 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .header-nav a:hover {
-      color: var(--accent);
-      background: rgba(0, 255, 65, 0.06);
-    }
-    .header-cta {
-      background: rgba(0, 255, 65, 0.1) !important;
-      border: 1px solid rgba(0, 255, 65, 0.2);
-      color: var(--accent) !important;
-    }
-    .header-cta:hover {
-      background: rgba(0, 255, 65, 0.18) !important;
-    }
-
-    /* ── Theme toggle (terminal / AI style) ── */
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-60);
-      background: var(--panel-tint);
-      border: 1px solid var(--line-2);
-      border-radius: 7px;
-      padding: 8px 12px;
-      margin-left: 4px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
-    }
-    .theme-toggle::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(0, 255, 65, 0.06) 50%, transparent 70%);
-      background-size: 250% 100%;
-      animation: tt-scan 3.2s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes tt-scan {
-      0% { background-position: 200% 0; }
-      60%, 100% { background-position: -100% 0; }
-    }
-    .theme-toggle:hover {
-      color: var(--accent);
-      border-color: rgba(0, 255, 65, 0.35);
-      background: var(--panel-tint-2);
-      box-shadow: 0 0 18px rgba(0, 255, 65, 0.08);
-    }
-    .theme-toggle:focus-visible {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.18);
-    }
-    .theme-toggle .tt-cmd {
-      display: inline-flex;
-      align-items: center;
-      white-space: nowrap;
-      font-size: 11px;
-    }
-    .theme-toggle .tt-flag {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .theme-toggle .tt-cursor {
-      width: 5px;
-      height: 11px;
-      display: inline-block;
-      background: var(--accent);
-      opacity: 0.85;
-      animation: blink-cursor 0.9s step-end infinite;
-    }
-    .theme-toggle .tt-ico {
-      width: 13px;
-      height: 13px;
-      flex-shrink: 0;
-      color: var(--text-60);
-      opacity: 0.85;
-      transition: color 0.25s, opacity 0.25s;
-    }
-    .theme-toggle:hover .tt-ico { color: var(--accent); opacity: 1; }
-    .theme-toggle .tt-sun { display: none; }
-    [data-theme="light"] .theme-toggle .tt-sun { display: block; }
-    [data-theme="light"] .theme-toggle .tt-moon { display: none; }
-    [data-theme="light"] .theme-toggle .tt-ico { color: var(--accent); opacity: 1; }
-
-    /* ── Hero ── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 140px 0 80px;
-    }
-    .hero-content { max-width: 920px; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--accent);
-      background: rgba(0, 255, 65, 0.06);
-      border: 1px solid rgba(0, 255, 65, 0.12);
-      border-radius: 4px;
-      padding: 6px 14px 6px 10px;
-      margin-bottom: 36px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .hero-badge .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent); }
-      50% { opacity: 0.3; box-shadow: 0 0 2px var(--accent); }
-    }
-
-    .hero h1 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(40px, 8vw, 100px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 0.95;
-      margin-bottom: 6px;
-    }
-    .hero h1 .no { color: var(--text); }
-    .hero h1 .excl {
-      color: var(--accent);
-      display: inline-block;
-      animation: flicker 2s ease-in-out infinite;
-    }
-    .hero h1 .letter {
-      transition: color 0.4s ease;
-    }
-    .hero h1 .letter.purple { color: #a78bfa; }
-    .hero h1 .letter.green { color: var(--accent); }
-
-    .hero h1 .cursor {
-      display: inline-block;
-      width: 3px;
-      height: 0.8em;
-      background: var(--accent);
-      margin-left: 4px;
-      vertical-align: baseline;
-      animation: blink-cursor 1s step-end infinite;
-    }
-    @keyframes blink-cursor {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .hero-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(14px, 1.5vw, 17px);
-      font-weight: 400;
-      color: var(--text-70);
-      max-width: 720px;
-      margin-top: 28px;
-      line-height: 1.7;
-      border-left: 2px solid rgba(0, 255, 65, 0.15);
-      padding-left: 20px;
-    }
-    .hero-sub .hl-green { color: var(--accent); }
-    .hero-sub .hl-pink { color: #a78bfa; }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 44px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 6px;
-      transition: all 0.25s;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .btn-primary {
-      background: rgba(0, 255, 65, 0.08);
-      color: var(--accent);
-      border: 1px solid rgba(0, 255, 65, 0.2);
-      padding: 14px 32px;
-    }
-    .btn-primary:hover {
-      background: rgba(0, 255, 65, 0.15);
-      box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
-      transform: translateY(-1px);
-    }
-    .btn-secondary {
-      background: var(--btn-sec-bg);
-      color: var(--btn-sec-text);
-      border: 1px solid var(--btn-sec-border);
-      padding: 14px 28px;
-    }
-    .btn-secondary:hover {
-      background: var(--btn-sec-hover-bg);
-      color: var(--btn-sec-hover-text);
-    }
-
-    /* ── Section headers ── */
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .section-label::before {
-      content: '// ';
-      color: rgba(0, 255, 65, 0.3);
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      max-width: 60px;
-      height: 1px;
-      background: rgba(0, 255, 65, 0.15);
-    }
-    .section-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(30px, 4.5vw, 56px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-    .section-title .green { color: var(--accent); }
-    .section-title .lilac { color: #a78bfa; }
-    .section-title .cyan { color: #22d3ee; }
-    .section-desc {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 15px;
-      color: var(--text-60);
-      max-width: 600px;
-      margin-bottom: 56px;
-      line-height: 1.6;
-    }
-
-    /* ── Services ── */
-    .services { padding: 100px 0; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-    }
-    .service-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 28px 24px;
-      transition: all 0.3s;
-      position: relative;
-    }
-    .service-card::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 8px;
-      opacity: 0;
-      transition: opacity 0.4s;
-      pointer-events: none;
-    }
-    .service-card:hover {
-      background: var(--panel-tint);
-      border-color: rgba(0, 255, 65, 0.12);
-      transform: translateY(-2px);
-    }
-    .service-card:hover::after {
-      opacity: 1;
-    }
-    .service-icon-wrap {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .service-icon-wrap svg {
-      width: 42px;
-      height: 42px;
-    }
-    .service-card h3 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text-strong);
-    }
-    .service-card p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--text-70);
-      line-height: 1.6;
-    }
-
-    /* ── Feature row ── */
-    .feature-row {
-      grid-column: 1 / -1;
-      background: var(--panel-tint-2);
-      border: 1px solid rgba(0, 255, 65, 0.08);
-      border-radius: 8px;
-      padding: 28px 24px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .feature-row svg {
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-    }
-    .feature-row .fw {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-    .feature-row .fs {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--text-70);
-    }
-
-    /* ── Videos ── */
-    .videos {
-      padding: 100px 0;
-      background: var(--panel-soft);
-    }
-    .videos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 20px;
-    }
-    .video-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-    .video-card:hover {
-      border-color: rgba(0, 255, 65, 0.12);
-    }
-    .video-card .video-wrapper {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: rgba(0,0,0,0.4);
-      cursor: pointer;
-      overflow: hidden;
-    }
-    .video-card .video-wrapper iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .video-play-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: rgba(7,7,13,0.6);
-      transition: background 0.3s;
-      z-index: 2;
-    }
-    .video-wrapper:hover .video-play-overlay {
-      background: rgba(7,7,13,0.4);
-    }
-    .video-play-overlay svg {
-      width: 56px;
-      height: 56px;
-      opacity: 0.8;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    .video-wrapper:hover .video-play-overlay svg {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    .video-play-overlay span {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .video-wrapper.loaded .video-play-overlay {
-      display: none;
-    }
-    .video-card .video-info {
-      padding: 14px 18px;
-      border-top: 1px solid var(--line-3);
-    }
-    .video-card .video-info h4 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-80);
-      line-height: 1.5;
-    }
-
-    /* ── FAQ ── */
-    .faq { padding: 100px 0; }
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-width: 800px;
-    }
-    .faq-item {
-      background: var(--panel);
-      border: 1px solid var(--line-2);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-    .faq-item:hover { border-color: rgba(0, 255, 65, 0.12); }
-    .faq-item[open] { border-color: rgba(0, 255, 65, 0.2); }
-    .faq-item summary {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-80);
-      padding: 18px 20px;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after {
-      content: '+';
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-      font-size: 18px;
-      flex-shrink: 0;
-      transition: transform 0.25s;
-    }
-    .faq-item[open] summary::after { transform: rotate(45deg); }
-    .faq-answer {
-      padding: 0 20px 18px;
-    }
-    .faq-answer p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-50);
-      line-height: 1.7;
-    }
-
-    /* ── About ── */
-    .about { padding: 100px 0; scroll-margin-top: 70px; }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 20px;
-      align-items: start;
-      padding-top: 8px;
-    }
-    .about-photo {
-      background: var(--panel);
-      border: 1px solid var(--line-2);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .about-photo .term-bar {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--line-3);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-35);
-    }
-    .about-photo .term-bar i {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-    .about-photo .term-bar i:nth-child(1) { background: #ef4444; }
-    .about-photo .term-bar i:nth-child(2) { background: #f59e0b; }
-    .about-photo .term-bar i:nth-child(3) { background: var(--accent); }
-    .about-photo .term-bar span { margin-left: 6px; }
-    .about-photo img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-    }
-    .about-photo.noimg img { display: none; }
-    .about-photo .photo-ph {
-      display: none;
-      aspect-ratio: 1 / 1;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 64px;
-      font-weight: 800;
-      color: var(--accent);
-      background: var(--panel-tint);
-    }
-    .about-photo.noimg .photo-ph { display: flex; }
-    .about-photo figcaption {
-      padding: 12px 16px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-50);
-      border-top: 1px solid var(--line-3);
-    }
-    .about-photo figcaption b { color: var(--accent); font-weight: 600; }
-    .about-bio {
-      background: var(--panel);
-      border: 1px solid var(--line-2);
-      border-radius: 8px;
-      padding: 28px 26px;
-    }
-    .about-bio h3 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .about-bio .role {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .about-bio p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--text-70);
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-    .about-cert {
-      grid-column: 1 / -1;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      background: var(--panel-tint-2);
-      border: 1px solid rgba(0, 255, 65, 0.08);
-      border-radius: 8px;
-      padding: 24px;
-    }
-    .about-cert img {
-      width: 180px;
-      flex-shrink: 0;
-      border-radius: 6px;
-      border: 1px solid var(--line-2);
-      background: #fff;
-    }
-    .about-cert.noimg img { display: none; }
-    .about-cert .fw {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-    .about-cert .fs {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-70);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-    /* ── Contact ── */
-    .contact { padding: 100px 0; }
-    .contact-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-    .contact-info h2 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(30px, 4vw, 48px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    .contact-info h2 .green { color: var(--accent); }
-    .contact-info p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 15px;
-      color: var(--text-65);
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 15px;
-      color: var(--text-70);
-      transition: color 0.2s;
-    }
-    .contact-link:hover { color: var(--accent); }
-    .contact-link .cl-icon {
-      width: 40px; height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 255, 65, 0.04);
-      border: 1px solid rgba(0, 255, 65, 0.08);
-      border-radius: 6px;
-      flex-shrink: 0;
-    }
-    .contact-link .cl-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-    .contact-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 8px 0;
-    }
-    .contact-divider span {
-      flex: 1;
-      height: 1px;
-      background: rgba(0, 255, 65, 0.1);
-    }
-    .contact-link-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-25);
-    }
-
-    .contact-form {
-      background: var(--panel);
-      border: 1px solid rgba(0, 255, 65, 0.06);
-      border-radius: 8px;
-      padding: 32px;
-    }
-    .contact-form h3 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .contact-form .form-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--text-65);
-      margin-bottom: 24px;
-    }
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 600;
-      color: rgba(0, 255, 65, 0.5);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--panel-2);
-      border: 1px solid rgba(0, 255, 65, 0.08);
-      border-radius: 6px;
-      color: var(--text-bright);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.04);
-    }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--text-10);
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 16px;
-      border: 1px solid rgba(0, 255, 65, 0.2);
-      border-radius: 6px;
-      background: rgba(0, 255, 65, 0.06);
-      color: var(--accent);
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .btn-submit:hover {
-      background: rgba(0, 255, 65, 0.1);
-      box-shadow: 0 0 30px rgba(0, 255, 65, 0.06);
-    }
-
-    /* ── Modal ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: var(--overlay-bg);
-      backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      transition: background 0.4s ease;
-    }
-    .modal-overlay.active { display: flex; }
-    .modal {
-      background: var(--bg-elevated);
-      border: 1px solid var(--overlay-ring);
-      border-radius: 12px;
-      padding: 40px 36px;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-      animation: modal-in 0.3s ease;
-    }
-    @keyframes modal-in {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .modal-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: rgba(0, 255, 65, 0.1);
-      border: 1px solid rgba(0, 255, 65, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 24px;
-      color: var(--accent);
-    }
-    .modal-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .modal-text {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--text-50);
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-    .modal-btn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      background: rgba(0, 255, 65, 0.06);
-      border: 1px solid rgba(0, 255, 65, 0.12);
-      color: var(--accent);
-      padding: 10px 32px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .modal-btn:hover { background: rgba(0, 255, 65, 0.1); }
-    .modal-policy {
-      max-width: 560px;
-      max-height: 80vh;
-      overflow-y: auto;
-      text-align: left;
-      padding: 32px 28px;
-    }
-    .modal-policy .modal-title { margin-bottom: 20px; }
-    .modal-policy .modal-btn { margin-top: 20px; }
-    .policy-body h4 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin: 20px 0 8px;
-    }
-    .policy-body p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-55);
-      line-height: 1.7;
-      margin-bottom: 4px;
-    }
-
-    /* ── Consent checkbox ── */
-    .agree-group { margin-bottom: 20px; margin-top: -4px; }
-    .agree-label {
-      display: flex !important;
-      align-items: flex-start;
-      gap: 6px;
-      cursor: pointer;
-    }
-    .agree-checkbox {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 12px;
-      height: 12px;
-      min-width: 12px;
-      max-width: 12px;
-      border: 1.5px solid rgba(0, 255, 65, 0.25);
-      border-radius: 2px;
-      background: transparent;
-      cursor: pointer;
-      margin-top: 3px;
-      position: relative;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .agree-checkbox:checked {
-      background: rgba(0, 255, 65, 0.12);
-      border-color: var(--accent);
-    }
-    .agree-checkbox:checked::after {
-      content: '';
-      position: absolute;
-      left: 2.5px;
-      top: 0.5px;
-      width: 4px;
-      height: 7px;
-      border: solid var(--accent);
-      border-width: 0 1.5px 1.5px 0;
-      transform: rotate(45deg);
-    }
-    .agree-checkbox:focus-visible {
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.15);
-    }
-    .agree-text {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-35);
-      line-height: 1.5;
-      user-select: none;
-    }
-    .agree-link {
-      background: none;
-      border: none;
-      padding: 0;
-      font: inherit;
-      color: var(--accent);
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      text-decoration-color: rgba(0, 255, 65, 0.3);
-    }
-    .agree-link:hover { text-decoration-color: var(--accent); }
-
-    /* ── Footer ── */
-    .footer {
-      padding: 32px 0;
-      border-top: 1px solid rgba(0, 255, 65, 0.04);
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-35);
-    }
-
-    /* ── Mobile: tablets & below ── */
-    @media (max-width: 900px) {
-      .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    @media (max-width: 768px) {
-      .header { padding: 12px 0; }
-      .header-nav a:not(.header-cta) { display: none; }
-      .header-nav a.header-cta { padding: 8px 14px; font-size: 11px; }
-      .theme-toggle { padding: 7px 10px; gap: 5px; margin-left: 2px; }
-      .theme-toggle .tt-cmd { font-size: 10px; }
-      .hero { padding: 110px 0 50px; min-height: auto; }
-      .hero h1 { font-size: clamp(32px, 12vw, 52px); }
-      .hero-sub { font-size: 13px; padding-left: 14px; margin-top: 20px; }
-      .hero-actions { flex-direction: column; margin-top: 32px; }
-      .btn { justify-content: center; width: 100%; padding: 14px 20px; font-size: 13px; }
-      .services { padding: 60px 0; }
-      .services-grid { grid-template-columns: 1fr; gap: 12px; }
-      .service-card { padding: 22px 18px; }
-      .service-card h3 { font-size: 15px; }
-      .service-card p { font-size: 13px; }
-      .section-desc { margin-bottom: 36px; }
-      .videos { padding: 60px 0; }
-      .videos-grid { grid-template-columns: 1fr; gap: 16px; }
-      .contact { padding: 60px 0; }
-      .contact-form { padding: 20px; }
-      .contact-form h3 { font-size: 15px; }
-      .contact-form .form-sub { font-size: 13px; }
-      .btn-submit { font-size: 13px; }
-      .faq { padding: 60px 0; }
-      .faq-item summary { font-size: 13px; padding: 16px 16px; }
-      .faq-answer { padding: 0 16px 16px; }
-      .feature-row { flex-direction: column; text-align: left; gap: 14px; padding: 22px 18px; align-items: flex-start; }
-      .feature-row svg { width: 36px; height: 36px; }
-      .about { padding: 60px 0; }
-      .about-grid { grid-template-columns: 1fr; }
-      .about-photo { max-width: 220px; }
-      .about-cert { flex-direction: column; align-items: flex-start; padding: 20px 18px; }
-      .about-cert img { width: 100%; max-width: 280px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .section-title { font-size: clamp(22px, 7vw, 32px); }
-    }
-
-    @media (max-width: 480px) {
-      .container { padding: 0 14px; }
-      .logo { font-size: 18px; }
-      .theme-toggle { padding: 7px 9px; }
-      .theme-toggle .tt-name { display: none; }
-      .theme-toggle .tt-cmd { font-size: 10px; }
-      .theme-toggle .tt-cursor { display: none; }
-      .hero { padding: 100px 0 40px; }
-      .hero-badge { font-size: 10px; padding: 4px 12px 4px 8px; margin-bottom: 24px; }
-      .hero-sub { font-size: 12px; border-left-width: 1px; }
-      .hero-actions { gap: 8px; }
-      .service-card { padding: 18px 14px; }
-      .service-icon-wrap { width: 36px; height: 36px; margin-bottom: 12px; }
-      .service-icon-wrap svg { width: 32px; height: 32px; }
-      .service-card h3 { font-size: 14px; }
-      .service-card p { font-size: 12px; }
-      .feature-row { padding: 20px 16px; }
-      .video-card .video-info { padding: 10px 14px; }
-      .video-card .video-info h4 { font-size: 12px; }
-      .contact-form { padding: 16px; }
-      .form-group input, .form-group textarea { padding: 10px 14px; font-size: 14px; }
-      .btn-submit { padding: 14px; font-size: 13px; }
-      .footer { padding: 24px 0; font-size: 10px; }
-    }
-
-    @media (max-width: 380px) {
-      .hero h1 { font-size: 28px; }
-      .hero-sub { font-size: 10px; }
-      .contact-link { font-size: 12px; }
-      .contact-link .cl-icon { width: 34px; height: 34px; }
-      .theme-toggle { padding: 6px 8px; }
-      .theme-toggle .tt-cmd { font-size: 9px; }
-    }
-
-    /* ── Animations ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Stars canvas -->
-  <canvas id="stars-canvas"></canvas>
-
-  <!-- Glow orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-
-  <!-- Scanlines -->
-  <div class="scanlines"></div>
-
-  <!-- ========= HEADER ========= -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <span style="color:var(--text)">No</span>
-        <span class="excl">!</span>
-        <span class="letter">R</span><span class="letter">o</span><span class="letter">u</span><span class="letter">t</span><span class="letter">i</span><span class="letter">n</span><span class="letter">e</span>
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen relative selection:bg-primary-container selection:text-on-primary-container"><div class="fixed inset-0 crt-overlay z-40 pointer-events-none"></div><div class="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(79,49,156,0.15),rgba(19,19,25,0))] pointer-events-none z-0"></div><header id="top" class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.6)]"><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="group flex items-center gap-space-xs font-headline-md text-headline-md tracking-tight" data-path="glavnaya" href="#top"><span class="text-on-surface">No</span><span class="text-primary-container neon-glitch-bang">!</span><span class="text-on-surface">Routine</span><span class="ml-space-xs font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">sys://v2.6</span></a><nav class="hidden xl:flex items-center gap-space-sm" data-active-classes="bg-surface-container text-primary font-label-md"><a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" data-path="uslugi" href="#services">Услуги</a><a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" data-path="keysy" href="#cases">Кейсы</a><a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" data-path="obo-mne" href="#about">Обо мне</a><a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" data-path="faq" href="#faq">FAQ</a><a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" data-path="kontakty" href="#contact">Контакты</a></nav></div><div class="flex items-center gap-space-md"><button class="xl:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface transition-all font-mono" type="button" id="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span class="material-symbols-outlined text-[22px]" id="nav-toggle-icon">menu</span></button><button class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all shadow-inner font-label-sm text-label-sm" type="button" id="top-theme-toggle" aria-label="Переключить тему оформления"><span class="text-primary-container font-mono">$</span><span id="top-theme-label" class="">theme --dark</span><span class="w-1.5 h-3.5 bg-primary-container terminal-cursor"></span><span class="material-symbols-outlined text-[16px] text-primary-fixed-dim ml-space-xs" id="top-theme-icon">dark_mode</span></button><a class="group relative inline-flex items-center gap-space-xs px-space-md py-2 rounded-full bg-primary-container text-on-primary-container font-headline-sm text-label-lg font-bold shadow-[0_0_20px_rgba(0,255,65,0.35)] hover:shadow-[0_0_28px_rgba(0,255,65,0.55)] hover:scale-[1.02] active:scale-[0.98] transition-all" data-path="kontakty" href="#contact"><span class="text-on-primary-container font-mono text-[14px]">$ ./connect.sh</span><span class="material-symbols-outlined text-[16px] text-on-primary-container">arrow_forward</span></a></div></div>    <nav id="mobile-menu" class="xl:hidden hidden border-t border-white/5 bg-inherit">
+      <div class="max-w-7xl mx-auto px-gutter py-3 flex flex-col gap-1 font-mono text-sm">
+        <a class="px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="uslugi" href="#services">Услуги</a>
+        <a class="px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="keysy" href="#cases">Кейсы</a>
+        <a class="px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="obo-mne" href="#about">Обо мне</a>
+        <a class="px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="faq" href="#faq">FAQ</a>
+        <a class="px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="kontakty" href="#contact">Контакты</a>
       </div>
-      <nav class="header-nav">
-        <a href="#services">Услуги</a>
-        <a href="#videos">Кейсы</a>
-        <a href="#about">Обо мне</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Контакты</a>
-        <button type="button" class="theme-toggle" id="themeToggle" role="switch" aria-checked="false"
-                aria-label="Переключить тему: тёмная / светлая" title="Переключить тему">
-          <span class="tt-cmd"><span class="tt-name">$ theme --</span><span class="tt-flag">dark</span></span>
-          <span class="tt-cursor" aria-hidden="true"></span>
-          <svg class="tt-ico tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-          <svg class="tt-ico tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
+    </nav>
+  </header>ain class="w-full pt-20 bg-surface relative z-10"><div class="flex flex-col w-full relative overflow-hidden text-on-surface">
+<!-- Subtle Canvas Ambient Starfield -->
+<canvas class="fixed inset-0 pointer-events-none z-0 opacity-40" id="cosmic-canvas" width="1280" height="5693"></canvas>
+<!-- Ambient Glow Blobs -->
+<div class="absolute top-16 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-secondary-container/20 rounded-full blur-[140px] pointer-events-none"></div>
+<div class="absolute top-[800px] -left-32 w-[500px] h-[500px] bg-primary-container/10 rounded-full blur-[160px] pointer-events-none"></div>
+<div class="absolute top-[2200px] -right-32 w-[600px] h-[600px] bg-tertiary-fixed-dim/10 rounded-full blur-[180px] pointer-events-none"></div>
+<!-- ==================== 1. HERO SECTION ==================== -->
+<section class="relative z-10 max-w-7xl mx-auto px-gutter pt-space-xl pb-24 w-full">
+<div class="flex flex-col items-center text-center">
+<!-- Status Badge -->
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high/90 text-primary-fixed-dim font-label-sm text-label-sm shadow-[0_0_12px_rgba(0,255,65,0.2)] mb-space-lg backdrop-blur-md">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+<span class="font-mono tracking-wider">[system] online · 24/7 · production ready</span>
+</div>
+<!-- Giant Display Headline -->
+<div class="relative max-w-5xl mx-auto mb-space-md select-none">
+<h1 class="font-headline-xl text-[68px] sm:text-[92px] lg:text-[112px] leading-[0.95] tracking-tight font-extrabold">
+<span class="text-on-surface">No</span><span class="text-primary-container drop-shadow-[0_0_28px_rgba(0,255,65,0.65)] neon-glitch-bang">!</span><span class="text-on-surface"> Routine</span>
+</h1>
+
+</div>
+<!-- Hero Subtitle -->
+<p class="max-w-3xl mx-auto font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-space-xl text-center">
+        Помогаю освободиться от рутинных задач в проектном управлении и digital-сфере. Никакой магии — только рабочие инструменты:
+        <span class="text-primary-container font-mono font-medium">n8n</span>, кастомные скрипты, облачные функции и сквозные интеграции, которые стабильно работают 24/7 вместо вас.
+      </p>
+<!-- Terminal Command Buttons -->
+<div class="flex flex-wrap items-center justify-center gap-space-md mb-space-xl">
+<a class="group relative inline-flex items-center gap-space-xs px-space-xl py-3.5 rounded-full bg-primary-container text-on-primary-container font-headline-sm text-label-lg font-bold shadow-[0_0_30px_rgba(0,255,65,0.45)] hover:shadow-[0_0_42px_rgba(0,255,65,0.7)] hover:scale-105 active:scale-95 transition-all" href="#contact" aria-label="Начать проект и отправить заявку на автоматизацию">
+<span class="font-mono text-base font-bold">$ ./start.sh</span>
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+</a>
+<a class="group inline-flex items-center gap-space-xs px-space-lg py-3 rounded-full bg-surface-container-high text-on-surface hover:text-primary-container hover:bg-surface-container-highest transition-all font-label-lg text-label-lg shadow-sm" href="#cases">
+<span class="text-secondary font-mono">$</span>
+<span class="font-mono">watch cases</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">play_circle</span>
+</a>
+<a class="group inline-flex items-center gap-space-xs px-space-lg py-3 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all font-label-lg text-label-lg" href="#about">
+<span class="text-primary-fixed-dim font-mono">$</span>
+<span class="font-mono">cat /about</span>
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+</a>
+</div>
+<!-- Live Interactive Terminal Preview -->
+<div class="w-full max-w-4xl bg-surface-container-lowest/95 backdrop-blur-xl rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.65)] overflow-hidden text-left">
+<!-- Terminal Titlebar -->
+<div class="bg-surface-container-high/90 px-space-md py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#ef4444] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#eab308] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span>
+<span class="ml-2 font-mono text-label-sm text-on-surface-variant">bash ~ /usr/bin/pipeline-monitor</span>
+</div>
+<div class="flex items-center gap-2 font-mono text-label-sm text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span class="">node: n8n-primary-prod</span>
+</div>
+</div>
+<!-- Terminal Body -->
+<div class="p-space-lg font-mono text-label-md leading-relaxed space-y-2 select-text" id="terminal-feed">
+<div class="text-on-surface-variant flex items-center gap-2">
+<span class="text-primary-container">$</span>
+<span class="">curl -X POST https://flow.noroutine.dev/webhook/v1/lead-ingest</span>
+</div>
+<div class="text-secondary flex items-start gap-2">
+<span class="text-primary-container">✓</span>
+<span class="">HTTP/2 200 OK · payload: {"client":"pm_agency","pipeline":"tracker_sync","status":"init"}</span>
+</div>
+<div class="text-on-surface flex items-start gap-2">
+<span class="text-tertiary-fixed-dim">↳</span>
+<span class="text-primary-fixed-dim">[n8n core]</span>
+<span class="">trigger: webhook_received → parsing payload → classification: LLM agent (GPT-4o)</span>
+</div>
+<div class="text-on-surface flex items-start gap-2">
+<span class="text-tertiary-fixed-dim">↳</span>
+<span class="text-secondary-fixed-dim">[yandex.tracker]</span>
+<span class="">queue: DEV · issue created: DEV-482 "Автоматизация онбординга" · assignee: auto</span>
+</div>
+<div class="text-primary-container flex items-center gap-2 font-semibold">
+<span class="">[OK]</span>
+<span class="">Workflow pipeline finished in 412ms · 0 manual hours spent</span>
+<span class="w-2 h-4 bg-primary-container terminal-cursor inline-block ml-1"></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 2. SERVICES GRID ==================== -->
+<section class="relative z-10 max-w-7xl mx-auto px-gutter py-space-xl w-full" id="services" aria-label="Услуги и модули автоматизации">
+<div class="flex flex-col items-center text-center mb-space-xl">
+<div class="font-mono text-label-sm uppercase tracking-widest text-primary-fixed-dim bg-surface-container px-3 py-1 rounded-full mb-space-sm inline-block">
+        $ ls -la ./services --modules
+      </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight mb-space-xs">
+        Автоматизируй, чтобы не утонуть в рутине
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Готовые связки, кастомные сценарии и сквозная интеграция digital-процессов без раздувания штата.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Card 1: n8n Workflows -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(0,255,65,0.15)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M4 12v-3a3 3 0 0 1 3-3h3m0 0l-2-2m2 2l-2 2M20 12v3a3 3 0 0 1-3 3h-3m0 0l2 2m-2-2l2-2M12 4v16"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-primary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">01 // CORE</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">
+              n8n Workflows
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Автоматизация сложных бизнес-цепочек любой вложенности, мгновенная обработка вебхуков, сложная трансформация и валидация данных без лимитов сторонних сервисов.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-primary-fixed-dim">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">n8n</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">webhooks</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">zero-lock</span>
+</div>
+</div>
+<!-- Card 2: Чат-боты -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(47,217,244,0.15)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary-fixed-dim group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+<circle cx="9" cy="10" fill="currentColor" r="1"></circle>
+<circle cx="15" cy="10" fill="currentColor" r="1"></circle>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-tertiary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">02 // BOT</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-tertiary-fixed-dim transition-colors mb-2">
+              Чат-боты нового поколения
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Боты для Telegram,&nbsp; мессенджера Max и Яндекс Мессенджера. Поддержка диалогового контекста, инлайн-кнопок, ролевой модели и полной интеграции с LLM.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-tertiary-fixed-dim">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Telegram</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Max Messenger</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Yandex</span>
+</div>
+</div>
+<!-- Card 3: AI Tools & Агенты -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(206,189,255,0.15)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.17-6.83l-2.83 2.83m-8 8l-2.83 2.83m0-13.66l2.83 2.83m8 8l2.83 2.83"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-secondary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">03 // AI</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-secondary-fixed-dim transition-colors mb-2">
+              AI-инструменты
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Интеграция нейросетей и AI-ассистентов в рабочие процессы — умная автоматизация на основе ИИ.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-secondary-fixed-dim">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">OpenAI</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">YandexGPT</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">RAG</span>
+</div>
+</div>
+<!-- Card 4: Таблицы & БД -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(245,158,11,0.15)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-[#f59e0b] group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+<path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-[#f59e0b] px-2 py-0.5 rounded bg-surface-container-high">04 // DATA</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-[#f59e0b] transition-colors mb-2">
+              Интеграции с таблицами и БД
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Google Таблицы, Airtable, Supabase, Яндекс Cloud и Яндекс360 — синхронизация данных между сервисами.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-[#f59e0b]">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Яндекс Cloud</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Supabase</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Sheets</span>
+</div>
+</div>
+<!-- Card 5: Скрипты & Парсеры -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(47,217,244,0.15)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary-fixed-dim group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<polyline points="4 17 10 11 4 5"></polyline>
+<line x1="12" x2="20" y1="19" y2="19"></line>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-tertiary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">05 // CODE</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-tertiary-fixed-dim transition-colors mb-2">
+              Быстрые скрипты
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Кастомные скрипты для ежедневных задач — от обработки файлов до автоматизации отчётов.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-tertiary-fixed-dim">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Python</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Node.js</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Scraping</span>
+</div>
+</div>
+<!-- Card 6: Cloud Functions & API -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(0,255,65,0.15)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-primary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">06 // CLOUD</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">
+              Облачные функции и API
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Serverless-функции, API-интеграции и вебхуки — связываем любые сервисы в единую экосистему.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-primary-fixed-dim">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Serverless</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">REST API</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Yandex Cloud</span>
+</div>
+</div>
+<!-- Card 7: Yandex Tracker (Wide 2-col span) -->
+<div class="group relative md:col-span-2 bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 shadow-lg hover:shadow-[0_12px_36px_rgba(206,189,255,0.2)] flex flex-col justify-between">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg items-center">
+<div class="md:col-span-2 space-y-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M9 11l3 3L22 4"></path>
+<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-secondary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">07 // ENTERPRISE PM</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-secondary-fixed-dim transition-colors">
+              Глубокая оптимизация Yandex Tracker
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Наведение идеального порядка в проектном управлении: проектирование кастомных очередей, настройка триггеров и автодействий, автоназначение ответственных по матрице компетенций, бесшовная связка с тайм-трекингом и выгрузка отчетов.
+            </p>
+<div class="flex flex-wrap gap-2 pt-2 font-mono text-label-sm text-secondary-fixed-dim">
+<span class="px-2.5 py-1 rounded bg-surface-container-highest">Очереди &amp; Триггеры</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-highest">Авто-эскалация</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-highest">Дашборды SLA</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/60 rounded-xl p-space-md font-mono text-label-sm space-y-2 text-on-surface-variant">
+<div class="text-primary-container font-semibold">// Результат внедрения:</div>
+<div class="">&gt; -78% времени на ручное создание задач</div>
+<div class="">&gt; 0 потерянных дедлайнов в спринтах</div>
+<div class="">&gt; Прозрачный учет трудозатрат команды</div>
+</div>
+</div>
+</div>
+<!-- Card 8: Комплексный запуск под ключ -->
+<div class="group relative bg-surface-container-low hover:bg-surface-container rounded-xl p-space-lg transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_12px_32px_rgba(0,255,65,0.2)] flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+</svg>
+</div>
+<span class="font-mono text-label-sm text-primary-fixed-dim px-2 py-0.5 rounded bg-surface-container-high">08 // TURNKEY</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">
+              Решения «под ключ»
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Комплексный предпроектный аудит текущих процессов, проектировaание масштабируемой архитектуры, проверенные решения, которые уже работают в продакшене и приносят результат.
+            </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md flex flex-wrap gap-1.5 font-mono text-label-sm text-primary-fixed-dim">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Аудит</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">SLA 99.9%</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest">Поддержка</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 3. VIDEO CASE STUDIES ==================== -->
+<section class="relative z-10 max-w-7xl mx-auto px-gutter py-space-xl w-full" id="cases" aria-label="Видео-кейсы работающих систем">
+<div class="flex flex-col items-center text-center mb-space-xl">
+<div class="font-mono text-label-sm uppercase tracking-widest text-primary-fixed-dim bg-surface-container px-3 py-1 rounded-full mb-space-sm inline-block">
+        $ player --stream ./cases.mp4
+      </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight mb-space-xs">
+        Автоматизация в деле
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Видео-разборы работающих конвейеров: от захвата лида до синхронизации корпоративных систем.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg"><!-- Video Card 1 -->
+<a class="group bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-xl hover:shadow-[0_16px_36px_rgba(0,0,0,0.8)] transition-all flex flex-col border border-surface-container-highest/40" href="https://rutube.ru/video/266f4784cbc6956660f878a1aaa3b89a/" rel="noopener noreferrer" target="_blank">
+<div class="relative aspect-video w-full bg-surface-container-highest overflow-hidden cursor-pointer">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Автоматизация отправки сообщений через чат-бот в Max" style="background-image: url(&quot;case-max-send.jpg&quot;);"></div>
+<div class="absolute inset-0 bg-surface/40 backdrop-blur-[2px] flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(0,255,65,0.7)] group-hover:scale-110 group-hover:shadow-[0_0_36px_rgba(0,255,65,0.9)] transition-all">
+<span class="material-symbols-outlined text-[32px] ml-1">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 text-[#ef4444] font-mono text-label-sm font-semibold flex items-center gap-1 backdrop-blur-md"><span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>Rutube</span>
+</div>
+</div>
+<div class="p-space-lg flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2 font-mono text-label-sm text-tertiary-fixed-dim">
+<span class="">#case_01</span>
+<span class="">//</span>
+<span class="">Яндекс Трекер</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">Яндекс Трекер: триггеры на смену статусов</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+Показываю, как автоматизировать отправку сообщений через чат-бот в мессенджере Max. Первая часть серии. </p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-mono text-label-sm text-primary-fixed-dim">
+<span class="">Экономия: 30 ч/мес</span>
+<span class="text-tertiary-fixed-dim flex items-center gap-1 group-hover:underline">Смотреть на Rutube <span class="material-symbols-outlined text-[14px]">arrow_outward</span></span>
+</div>
+</div>
+</a>
+
+<!-- Video Card 2 -->
+<a class="group bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-xl hover:shadow-[0_16px_36px_rgba(0,0,0,0.8)] transition-all flex flex-col border border-surface-container-highest/40" href="https://rutube.ru/video/881f34450229a01303ce7c5f6769be5a/" rel="noopener noreferrer" target="_blank">
+<div class="relative aspect-video w-full bg-surface-container-highest overflow-hidden cursor-pointer">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Яндекс Трекер + Яндекс Формы Rutube video cover" style="background-image: url(&quot;case-start.jpg&quot;);"></div>
+<div class="absolute inset-0 bg-surface/40 backdrop-blur-[2px] flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(0,255,65,0.7)] group-hover:scale-110 group-hover:shadow-[0_0_36px_rgba(0,255,65,0.9)] transition-all">
+<span class="material-symbols-outlined text-[32px] ml-1">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 text-[#ef4444] font-mono text-label-sm font-semibold flex items-center gap-1 backdrop-blur-md"><span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>Rutube</span>
+</div>
+</div>
+<div class="p-space-lg flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2 font-mono text-label-sm text-primary-fixed-dim">
+<span class="">#case_02</span>
+<span class="">//</span>
+<span class="">Яндекс Трекер</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">Яндекс Трекер + Яндекс Формы: Авто-создание задач</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+В этом видео я показываю, как настроить автоматическое создание задач из Яндекс Форм. Идеально для сбора заявок, обращений в поддержку и любых других запросов.
+</p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-mono text-label-sm text-primary-fixed-dim">
+<span class="">Экономия: 65 ч/мес</span>
+<span class="text-tertiary-fixed-dim flex items-center gap-1 group-hover:underline">Смотреть на Rutube <span class="material-symbols-outlined text-[14px]">arrow_outward</span></span>
+</div>
+</div>
+</a>
+
+<!-- Video Card 3 -->
+<a class="group bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-xl hover:shadow-[0_16px_36px_rgba(0,0,0,0.8)] transition-all flex flex-col border border-surface-container-highest/40" href="https://rutube.ru/video/b57b0c7f1c39bc5a3b1ae1416209cdf7/" rel="noopener noreferrer" target="_blank">
+<div class="relative aspect-video w-full bg-surface-container-highest overflow-hidden cursor-pointer">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Яндекс Трекер: автоматизация и интеграции Rutube video cover" style="background-image: url(&quot;case-forms.jpg&quot;);"></div>
+<div class="absolute inset-0 bg-surface/40 backdrop-blur-[2px] flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(0,255,65,0.7)] group-hover:scale-110 group-hover:shadow-[0_0_36px_rgba(0,255,65,0.9)] transition-all">
+<span class="material-symbols-outlined text-[32px] ml-1">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 text-[#ef4444] font-mono text-label-sm font-semibold flex items-center gap-1 backdrop-blur-md"><span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>Rutube</span>
+</div>
+</div>
+<div class="p-space-lg flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2 font-mono text-label-sm text-secondary">
+<span class="">#case_03</span>
+<span class="">//</span>
+<span class="">Яндекс Трекер</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">Яндекс Трекер: автоматизация и интеграции. Быстрый старт</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+Новая серия видео про Яндекс Трекер — систему управления проектами и бизнес-процессами, которую используют сотни компаний. В этой серии поделюсь опытом, накопленным за почти 10 лет работы с Трекером.
+</p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-mono text-label-sm text-primary-fixed-dim">
+<span class="">Экономия: 60 ч/мес</span>
+<span class="text-tertiary-fixed-dim flex items-center gap-1 group-hover:underline">Смотреть на Rutube <span class="material-symbols-outlined text-[14px]">arrow_outward</span></span>
+</div>
+</div>
+</a>
+
+<!-- Video Card 4 -->
+<a class="group bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-xl hover:shadow-[0_16px_36px_rgba(0,0,0,0.8)] transition-all flex flex-col border border-surface-container-highest/40" href="https://rutube.ru/video/9717098d5b775538052c254cd4719b14/" rel="noopener noreferrer" target="_blank">
+<div class="relative aspect-video w-full bg-surface-container-highest overflow-hidden cursor-pointer">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Бот обратной связи в Max + Google Таблицы Rutube video cover" style="background-image: url(&quot;case-max-bot.jpg&quot;);"></div>
+<div class="absolute inset-0 bg-surface/40 backdrop-blur-[2px] flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(0,255,65,0.7)] group-hover:scale-110 group-hover:shadow-[0_0_36px_rgba(0,255,65,0.9)] transition-all">
+<span class="material-symbols-outlined text-[32px] ml-1">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 text-[#ef4444] font-mono text-label-sm font-semibold flex items-center gap-1 backdrop-blur-md"><span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>Rutube</span>
+</div>
+</div>
+<div class="p-space-lg flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2 font-mono text-label-sm text-tertiary-fixed-dim">
+<span class="">#case_04</span>
+<span class="">//</span>
+<span class="">Max + Google Sheets + n8n</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors mb-2">Бот обратной связи в Max + Google Таблицы</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Создаем бота в мессенджере Max, который будет принимать сообщения от пользователей, сохранять их в Google Таблицу и отправлять подтверждение. Всё это настраивается в n8n без написания кода!</p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-mono text-label-sm text-primary-fixed-dim">
+<span class="">Экономия: 40 ч/мес</span>
+<span class="text-tertiary-fixed-dim flex items-center gap-1 group-hover:underline">Смотреть на Rutube <span class="material-symbols-outlined text-[14px]">arrow_outward</span></span>
+</div>
+</div>
+</a></div>
+</section>
+<!-- ==================== 4. ABOUT SECTION ==================== -->
+<section class="relative z-10 max-w-7xl mx-auto px-gutter py-space-xl w-full" id="about">
+<div class="flex flex-col items-center text-center mb-space-xl">
+<div class="font-mono text-label-sm uppercase tracking-widest text-primary-fixed-dim bg-surface-container px-3 py-1 rounded-full mb-space-sm inline-block">
+        $ whoami --verbose
+      </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight mb-space-xs">
+        ABOUT ME
+      </h2>
+
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Terminal Card & Avatar -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl">
+<div class="bg-surface-container-high px-space-md py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#ef4444] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#eab308] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span>
+<span class="ml-2 font-mono text-label-sm text-on-surface-variant">~/novikov_profile.png</span>
+</div>
+<span class="font-mono text-label-sm text-primary-fixed-dim">live_feed</span>
+</div>
+<div class="p-space-lg flex flex-col items-center">
+<div class="relative w-48 h-48 rounded-xl overflow-hidden mb-space-md shadow-[0_0_30px_rgba(0,255,65,0.25)]">
+<img src="novikov.jpg" alt="Павел Новиков — специалист по внедрению автоматизации" class="w-full h-full object-cover" loading="lazy">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+</div>
+<div class="w-full bg-surface-container-low rounded-lg p-space-md font-mono text-label-sm space-y-2">
+<div class="text-on-surface flex items-center justify-between">
+<span class="text-on-surface-variant">NAME:</span>
+<span class="text-primary-container font-semibold">Павел Новиков</span>
+</div>
+<div class="text-on-surface flex items-center justify-between">
+<span class="text-on-surface-variant">ROLE:</span>
+<span class="">специалист по внедрению автоматизации</span>
+</div>
+<div class="text-on-surface flex items-center justify-between">
+<span class="text-on-surface-variant">EXP:</span>
+<span class="text-primary-fixed-dim">15+ лет в IT &amp; Project Management</span>
+</div>
+<div class="text-on-surface flex items-center justify-between">
+<span class="text-on-surface-variant">UPTIME:</span>
+<span class="text-secondary">99.98% / Non-stop</span>
+</div>
+<div class="text-on-surface flex items-center justify-between">
+<span class="text-on-surface-variant">LOCATION:</span>
+<span class="">Global · Remote</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Bio & Certificate Card -->
+<div class="lg:col-span-7 space-y-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-xl shadow-lg">
+<div class="flex items-center gap-space-xs text-primary-container font-mono text-label-md mb-space-xs">
+<span class="">&gt;</span>
+<span class="">bio.init()</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mb-space-sm">
+            Павел Новиков // специалист по внедрению автоматизации
+          </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-md">
+            За 15+ лет в digital и проектном менеджменте я видел десятки команд, которые тонут в ручных пересылках файлов, бесконечных перепроверках статусов и механическом заполнении таблиц. 
+          </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg">
+            Моя цель — убрать человеческий фактор из повторяющихся процессов, соединить разрозненные сервисы в слаженную экосистему и освободить время ключевых специалистов для стратегического роста и креативных задач.
+          </p>
+<!-- Key Metrics Counter -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-md pt-space-sm">
+<div class="bg-surface-container rounded-lg p-space-md text-center">
+<div class="font-headline-lg text-headline-lg font-bold text-primary-container font-mono">100+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Автоматизированных процессов</div>
+</div>
+<div class="bg-surface-container rounded-lg p-space-md text-center">
+<div class="font-headline-lg text-headline-lg font-bold text-secondary font-mono">450+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Часов сэкономлено клиентам / мес</div>
+</div>
+<div class="bg-surface-container rounded-lg p-space-md text-center col-span-2 sm:col-span-1">
+<div class="font-headline-lg text-headline-lg font-bold text-tertiary-fixed-dim font-mono">15+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Лет совокупного опыта в IT</div>
+</div>
+</div>
+</div>
+<!-- Official Certificate Card -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-lg relative overflow-hidden">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[32px]">verified</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-mono text-label-sm font-semibold">ВЕРИФИЦИРОВАН</span>
+<span class="font-mono text-label-sm text-on-surface-variant">ID #16950</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">
+                  ИИ-агенты и n8n · Школа «Бруноям», 2026
+                </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Официальная сертификация по архитектуре агентных систем и сложной оркестрации n8n.
+                </p>
+</div>
+</div>
+<div class="font-mono text-label-sm text-on-surface-variant bg-surface-container-highest px-3 py-2 rounded text-right shrink-0">
+<span class="text-primary-fixed-dim">SHA256: 7f8a..91e4</span><br>
+<span class="text-on-surface">status: VALID</span>
+</div>
+</div>
+</div>
+</div>
+</div> <a href="certificate.jpg" target="_blank" rel="noopener" class="mt-space-md block rounded-xl overflow-hidden border border-white/10 hover:border-primary-container/40 transition-colors"><img src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям, 2026, № 16950" class="w-full h-auto block bg-white" loading="lazy"></a></section>
+<!-- ==================== 5. FAQ ACCORDION ==================== -->
+<section class="relative z-10 max-w-5xl mx-auto px-gutter py-space-xl w-full" id="faq" aria-label="Часто задаваемые вопросы">
+<div class="flex flex-col items-center text-center mb-space-xl">
+<div class="font-mono text-label-sm uppercase tracking-widest text-primary-fixed-dim bg-surface-container px-3 py-1 rounded-full mb-space-sm inline-block">
+        $ cat ./faq.md --read
+      </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight mb-space-xs">
+        Частые вопросы
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Короткие ответы на главные вопросы об автоматизации
+      </p>
+</div>
+<div class="space-y-space-sm" id="faq-accordion">
+<!-- Item 1 -->
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden transition-all duration-200">
+<button class="faq-trigger w-full px-space-lg py-space-md flex items-center justify-between text-left group" type="button">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-label-lg text-primary-container font-bold faq-icon">[+]</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors">
+              Что такое No ! Routine?
+            </span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 group-hover:text-on-surface">expand_more</span>
+</button>
+<div class="faq-content px-space-lg pb-space-lg pt-space-xs text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest/40 hidden">
+          No ! Routine — сервис автоматизации рутинных задач в проектном управлении и digital-сфере. Никакой магии — только рабочие инструменты: n8n, скрипты, облачные функции и интеграции, которые работают 24/7 вместо вас.
+        </div>
+</div>
+<!-- Item 2 -->
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden transition-all duration-200">
+<button class="faq-trigger w-full px-space-lg py-space-md flex items-center justify-between text-left group" type="button">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-label-lg text-primary-container font-bold faq-icon">[+]</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors">
+              Что можно автоматизировать с помощью n8n?
+            </span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 group-hover:text-on-surface">expand_more</span>
+</button>
+<div class="faq-content px-space-lg pb-space-lg pt-space-xs text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest/40 hidden">
+          Готовые воркфлоу для n8n решают задачи сбора данных, отправки уведомлений, интеграции сервисов и сложных multi-step процессов. Это работает без программирования и экономит часы работы каждую неделю.
+        </div>
+</div>
+<!-- Item 3 -->
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden transition-all duration-200">
+<button class="faq-trigger w-full px-space-lg py-space-md flex items-center justify-between text-left group" type="button">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-label-lg text-primary-container font-bold faq-icon">[+]</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors">
+              Какие чат-боты можно создать?
+            </span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 group-hover:text-on-surface">expand_more</span>
+</button>
+<div class="faq-content px-space-lg pb-space-lg pt-space-xs text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest/40 hidden">
+          Создаю чат-боты для Telegram, Max и Яндекс Мессенджер: боты обратной связи, уведомлений и сбора заявок без единой строчки кода — с готовой интеграцией в Google Таблицы, Яндекс Трекер, WIKI и другие сервисы.
+        </div>
+</div>
+<!-- Item 4 -->
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden transition-all duration-200">
+<button class="faq-trigger w-full px-space-lg py-space-md flex items-center justify-between text-left group" type="button">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-label-lg text-primary-container font-bold faq-icon">[+]</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors">
+              С какими сервисами работают интеграции?
+            </span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 group-hover:text-on-surface">expand_more</span>
+</button>
+<div class="faq-content px-space-lg pb-space-lg pt-space-xs text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest/40 hidden">
+          Google Таблицы, Airtable, Supabase, Яндекс Cloud, Яндекс360, а также API-интеграции и вебхуки практически любых сервисов. Объединяю их в единую экосистему.
+        </div>
+</div>
+<!-- Item 5 -->
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden transition-all duration-200">
+<button class="faq-trigger w-full px-space-lg py-space-md flex items-center justify-between text-left group" type="button">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-label-lg text-primary-container font-bold faq-icon">[+]</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors">
+              Как автоматизировать Яндекс Трекер?
+            </span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 group-hover:text-on-surface">expand_more</span>
+</button>
+<div class="faq-content px-space-lg pb-space-lg pt-space-xs text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest/40 hidden">
+          Оптимизация проектного менеджмента в Яндекс Трекер: настройка воркфлоу, триггеров, макросов и дашбордов для автоматического создания и управления задачами, включая авто-создание задач из Яндекс Форм.
+        </div>
+</div>
+<!-- Item 6 -->
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden transition-all duration-200">
+<button class="faq-trigger w-full px-space-lg py-space-md flex items-center justify-between text-left group" type="button">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-label-lg text-primary-container font-bold faq-icon">[-]</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary-container transition-colors">
+              Сколько стоит внедрение и как начать работу?
+            </span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0 group-hover:text-on-surface">expand_more</span>
+</button>
+<div class="faq-content px-space-lg pb-space-lg pt-space-xs text-on-surface-variant font-body-md text-body-md border-t border-surface-container-highest/40">
+          Опишите свою задачу через форму или напишите в Telegram @Personalart / Макс. Я покажу, как её решить современными инструментами автоматизации, и предложу оптимальное решение.
+        </div>
+</div>
+</div>
+</section>
+<!-- ==================== 6. CONTACTS & LEAD FORM ==================== -->
+<section class="relative z-10 max-w-7xl mx-auto px-gutter py-space-xl w-full" id="contact" aria-label="Форма заявки и контакты">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left Info Column -->
+<div class="lg:col-span-5 space-y-space-lg">
+<div>
+<div class="font-mono text-label-sm uppercase tracking-widest text-primary-fixed-dim bg-surface-container px-3 py-1 rounded-full mb-space-sm inline-block">
+            $ ./contact.sh --create-ticket
+          </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight mb-space-xs">
+            Начать проект
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Расскажите о процессах, которые отнимают ваше время. Я проанализирую узкие места и предложу рабочий план автоматизации.
+          </p>
+</div>
+<!-- Direct Contact Links -->
+<div class="space-y-space-sm font-mono text-label-md">
+<a class="flex items-center gap-space-md p-space-md bg-surface-container-low hover:bg-surface-container rounded-xl transition-colors group" href="tel:+79277280827">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</div>
+<div>
+<div class="text-on-surface-variant text-label-sm">ТЕЛЕФОН</div>
+<div class="text-on-surface font-semibold group-hover:text-primary-container transition-colors">+7 927 728-08-27</div>
+</div>
+</a>
+<a class="flex items-center gap-space-md p-space-md bg-surface-container-low hover:bg-surface-container rounded-xl transition-colors group" href="https://t.me/Personalart" rel="noopener" target="_blank">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary-fixed-dim group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</div>
+<div>
+<div class="text-on-surface-variant text-label-sm">TELEGRAM</div>
+<div class="text-on-surface font-semibold group-hover:text-tertiary-fixed-dim transition-colors">@Personalart</div>
+</div>
+</a> <a class="flex items-center gap-space-md p-space-md bg-surface-container-low hover:bg-surface-container rounded-xl transition-colors group" href="https://max.ru/u/f9LHodD0cOIwGbNYBgFU6RkmddNyGUlJfQWfrJulagIHM2MEh921Wh9SkzY" rel="noopener" target="_blank"> <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform"> <span class="material-symbols-outlined text-[20px]">forum</span> </div> <div> <div class="text-on-surface-variant text-label-sm">МАКС</div> <div class="text-on-surface font-semibold group-hover:text-primary-container transition-colors">Написать в Max</div> </div> </a> 
+<a class="flex items-center gap-space-md p-space-md bg-surface-container-low hover:bg-surface-container rounded-xl transition-colors group" href="mailto:noroutine@ro.ru">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]">alternate_email</span>
+</div>
+<div>
+<div class="text-on-surface-variant text-label-sm">EMAIL</div>
+<div class="text-on-surface font-semibold group-hover:text-secondary transition-colors">noroutine@ro.ru</div>
+</div>
+</a>
+</div>
+<!-- Media channels badges -->
+<div>
+<div class="font-mono text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-sm">
+            // Медиа-каналы и разборы
+          </div>
+<div class="flex flex-wrap gap-2 font-mono text-label-sm">
+<a class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors flex items-center gap-1.5" href="https://rutube.ru/channel/57269828" rel="noopener" target="_blank">
+<span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
+<span class="">Rutube</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors flex items-center gap-1.5" href="https://www.youtube.com/@noroutine2026" rel="noopener" target="_blank">
+<span class="w-2 h-2 rounded-full bg-[#ff0000]"></span>
+<span class="">YouTube</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors flex items-center gap-1.5" href="https://vk.ru/noroutine2026" rel="noopener" target="_blank">
+<span class="w-2 h-2 rounded-full bg-[#0077ff]"></span>
+<span class="">VK</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors flex items-center gap-1.5" href="https://dzen.ru/noroutine" rel="noopener" target="_blank">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="">Дзен</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Right Form Column: Interactive Lead Terminal -->
+<div class="lg:col-span-7 bg-surface-container-low rounded-xl p-space-xl shadow-2xl relative">
+<div class="bg-surface-container-high -mx-space-xl -mt-space-xl px-space-lg py-3 rounded-t-xl mb-space-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#ef4444]"></span>
+<span class="w-3 h-3 rounded-full bg-[#eab308]"></span>
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="ml-2 font-mono text-label-sm text-on-surface">&gt; _ заявка_на_автоматизацию.sh</span>
+</div>
+<span class="font-mono text-label-sm text-primary-container">stdin://ready</span>
+</div>
+<form class="space-y-space-md" id="lead-form" onsubmit="handleLeadSubmit(event)">
+<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="Новая заявка с No! Routine">
+<!-- Field 1: Name -->
+<div>
+<label class="block font-mono text-label-sm text-on-surface mb-1">
+              &gt; param: --client-name <span class="text-primary-container">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest/80 text-on-surface font-mono text-label-md px-space-md py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-on-surface-variant/40" name="name" placeholder="Иван / Digital Agency 'Вектор'" required="" type="text">
+</div>
+</div>
+<!-- Field 2: Contact -->
+<div>
+<label class="block font-mono text-label-sm text-on-surface mb-1">
+              &gt; param: --contact-endpoint (Telegram / телефон) <span class="text-primary-container">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest/80 text-on-surface font-mono text-label-md px-space-md py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-on-surface-variant/40" name="contact" placeholder="@username или +7 (999) 000-00-00" required="" type="text">
+</div>
+</div>
+<!-- Field 3: Task Description -->
+<div>
+<label class="block font-mono text-label-sm text-on-surface mb-1">
+              &gt; param: --payload (Опишите задачу / узкое место в рутине) <span class="text-primary-container">*</span>
+</label>
+<textarea name="message" class="w-full bg-surface-container-lowest/80 text-on-surface font-mono text-label-md px-space-md py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-on-surface-variant/40" placeholder="Например: нужно связать лиды из Telegram-бота с Yandex Tracker и таблицей Supabase, настроить уведомления менеджерам..." required="" rows="4"></textarea>
+</div>
+<!-- Consent Checkbox -->
+<div class="flex items-start gap-space-sm pt-space-xs">
+<input class="mt-1 w-4 h-4 rounded bg-surface-container-lowest accent-primary-container cursor-pointer" name="consent" id="consent" required="" type="checkbox">
+<label class="font-body-sm text-body-sm text-on-surface-variant select-none cursor-pointer" for="consent">
+              Нажимая на кнопку, я даю согласие на <a class="text-primary-container underline hover:text-primary-fixed" href="#" onclick="openPrivacyModal(event)">обработку персональных данных</a> в соответствии с 152-ФЗ.
+            </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-4 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-bold shadow-[0_0_24px_rgba(0,255,65,0.4)] hover:shadow-[0_0_36px_rgba(0,255,65,0.65)] hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-space-xs font-mono" id="submit-btn" type="submit">
+<span id="btn-text" class="">$ ./deploy.sh → отправить задачу</span>
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</form>
+</div>
+</div>
+</section>
+<!-- ==================== SUCCESS MODAL ==================== -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md hidden flex items-center justify-center p-gutter" id="success-modal">
+<div class="bg-surface-container-low max-w-lg w-full rounded-2xl p-space-xl shadow-2xl relative text-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto mb-space-md shadow-[0_0_24px_rgba(0,255,65,0.5)]">
+<span class="material-symbols-outlined text-[36px]">task_alt</span>
+</div>
+<div class="font-mono text-label-sm text-primary-container mb-1">[HTTP/2 201 Created]</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mb-space-xs">
+        Сообщение успешно отправлено!
+      </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
+        Павел свяжется с вами в течение 2 часов для обсуждения деталей и предварительного расчета архитектуры автоматизации.
+      </p>
+<button class="w-full py-3 rounded-xl bg-surface-container-highest hover:bg-surface-container-high text-on-surface font-mono text-label-lg transition-colors" onclick="closeSuccessModal()" type="button">
+        $ ./close.sh
+      </button>
+</div>
+</div>
+<!-- ==================== PRIVACY POLICY MODAL ==================== -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center p-gutter hidden" id="privacy-modal">
+<div class="bg-surface-container-low max-w-2xl w-full rounded-2xl p-space-xl shadow-2xl max-h-[80vh] overflow-y-auto">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Политика конфиденциальности</h3>
+<button class="text-on-surface-variant hover:text-on-surface font-mono text-label-lg" onclick="closePrivacyModal()" type="button">[x]</button>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant space-y-3 leading-relaxed"> <p class="">Настоящая Политика конфиденциальности персональных данных действует в отношении всей информации, которую Павел Новиков может получить о пользователе во время использования сайта и его сервисов.</p> <p class=""><b class="text-on-surface">1. Какие данные собираются.</b> При заполнении формы обратной связи пользователь предоставляет: имя, контактные данные (телефон или email), текст сообщения. Дополнительно может передаваться IP-адрес и техническая информация.</p> <p class=""><b class="text-on-surface">2. Цель сбора.</b> Данные используются исключительно для связи с пользователем по его запросу, консультирования и предоставления информации об услугах автоматизации.</p> <p class=""><b class="text-on-surface">3. Правовое основание.</b> Обработка осуществляется на основании Федерального закона № 152-ФЗ «О персональных данных» и согласия пользователя, выраженного проставлением галочки в форме.</p> <p class=""><b class="text-on-surface">4. Хранение и защита.</b> Данные хранятся в защищённой электронной форме на серверах на территории РФ. Принимаются организационные и технические меры защиты. Срок хранения — не более 1 года.</p> <p class=""><b class="text-on-surface">5. Передача третьим лицам.</b> Не осуществляется, кроме случаев, предусмотренных законодательством РФ. Сервис FormSubmit.co выступает оператором транзакционной пересылки писем и не сохраняет данные.</p> <p class=""><b class="text-on-surface">6. Права пользователя.</b> Согласие можно отозвать в любой момент письмом на noroutine@ro.ru, а также запросить полное удаление данных.</p> <p class=""><b class="text-on-surface">7. Контакты.</b> Email: noroutine@ro.ru, телефон: +7 927 728-08-27.</p> </div> <div class="mt-space-lg text-right">
+<button class="px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container font-mono text-label-md font-semibold" onclick="closePrivacyModal()" type="button">
+          Понятно / [OK]
         </button>
-        <a href="#contact" class="header-cta">Связаться</a>
-      </nav>
-    </div>
-  </header>
+</div>
+</div>
+</div>
+<!-- ==================== FLOATING THEME TOGGLE DOCK ==================== -->
+<div class="fixed bottom-6 right-6 z-40">
+<button class="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-surface-container-high/90 backdrop-blur-md text-on-surface shadow-[0_8px_24px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all font-mono text-label-sm border border-outline-variant/30" id="floating-theme-toggle" onclick="toggleTheme()" type="button" aria-label="Переключить тему оформления">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span id="theme-label" class="">theme: dark</span>
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim" id="theme-icon">dark_mode</span>
+</button>
+</div>
+</div>
+<script>
+  // 1. Starfield Canvas Simulation
+  (function initStars() {
+    const canvas = document.getElementById('cosmic-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
-  <!-- ========= HERO ========= -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          [system] online · 24/7
-        </div>
-        <h1>
-          <span class="no">No</span><span class="excl">!</span>&nbsp;
-          <span class="letter">R</span><span class="letter">o</span><span class="letter">u</span><span class="letter">t</span><span class="letter">i</span><span class="letter">n</span><span class="letter">e</span><span class="cursor"></span>
-        </h1>
-        <div class="hero-sub">
-          Помогаю освободиться от рутинных задач в проектном управлении и digital-сфере.<br>
-          Никакой магии — <span class="hl-green">только рабочие инструменты</span>: n8n, скрипты,<br>
-          облачные функции и интеграции, которые работают <span class="hl-pink">24/7 вместо вас</span>.
-        </div>
-        <div class="hero-actions">
-          <a href="#services" class="btn btn-primary">$ ./start.sh</a>
-          <a href="#videos" class="btn btn-secondary">$ watch cases</a>
-          <a href="#about" class="btn btn-secondary">$ about</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
 
-  <!-- ========= SERVICES ========= -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-label">services</div>
-      <h2 class="section-title">Автоматизируй,<br>чтобы <span class="green">не утонуть в рутине</span></h2>
-      <p class="section-desc"># готовые решения для ваших задач</p>
+    const stars = Array.from({ length: 90 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.8 + 0.2,
+      speed: Math.random() * 0.2 + 0.05
+    }));
 
-      <div class="services-grid">
-
-        <!-- 1 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.3"/>
-              <circle cx="16" cy="18" r="3" fill="#a78bfa"/>
-              <circle cx="32" cy="16" r="2.5" fill="#06b6d4"/>
-              <circle cx="28" cy="30" r="2.5" fill="#f59e0b"/>
-              <circle cx="14" cy="32" r="2" fill="#00ff41"/>
-              <line x1="18.5" y1="20.5" x2="29.5" y2="17.5" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
-              <line x1="30.5" y1="18.5" x2="26.5" y2="28.5" stroke="#06b6d4" stroke-width="1" opacity="0.5"/>
-              <line x1="20" y1="30" x2="15.5" y2="26" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
-              <circle cx="24" cy="24" r="1.5" fill="#00ff41" opacity="0.4"/>
-            </svg>
-          </div>
-          <h3>Готовые воркфлоу для n8n</h3>
-          <p>Настроенные сценарии автоматизации под любые задачи — от сбора данных до сложных multi-step процессов.</p>
-        </div>
-
-        <!-- 2 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="18" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
-              <path d="M24 8C20 8 14 12 14 20C14 26 17 30 20 32L22 38H26L28 32C31 30 34 26 34 20C34 12 28 8 24 8Z" stroke="#06b6d4" stroke-width="1.4" fill="none"/>
-              <circle cx="24" cy="20" r="4" fill="#a78bfa" opacity="0.6"/>
-              <path d="M22 34L20 40L18 42" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
-              <path d="M26 34L28 40L30 42" stroke="#00ff41" stroke-width="1" opacity="0.4"/>
-              <line x1="20" y1="38" x2="28" y2="38" stroke="#00ff41" stroke-width="1" opacity="0.3"/>
-              <circle cx="24" cy="20" r="1.5" fill="#fff" opacity="0.5"/>
-            </svg>
-          </div>
-          <h3>Чат-боты для Telegram, Max, Яндекс Мессенджер</h3>
-          <p>Интерактивные боты для обратной связи, уведомлений и сбора заявок без единой строчки кода.</p>
-        </div>
-
-        <!-- 3 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
-              <path d="M16 30C16 24 20 18 24 16C28 18 32 24 32 30" stroke="#a78bfa" stroke-width="1.4" fill="none"/>
-              <circle cx="24" cy="14" r="4" fill="#f59e0b" opacity="0.3"/>
-              <circle cx="24" cy="14" r="1.5" fill="#f59e0b" opacity="0.6"/>
-              <line x1="24" y1="18" x2="24" y2="22" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
-              <circle cx="16" cy="28" r="2" fill="#00ff41" opacity="0.2"/>
-              <circle cx="32" cy="28" r="2" fill="#00ff41" opacity="0.2"/>
-              <circle cx="16" cy="28" r="0.8" fill="#00ff41" opacity="0.5"/>
-              <circle cx="32" cy="28" r="0.8" fill="#00ff41" opacity="0.5"/>
-            </svg>
-          </div>
-          <h3>AI-инструменты</h3>
-          <p>Интеграция нейросетей и AI-ассистентов в рабочие процессы — умная автоматизация на основе ИИ.</p>
-        </div>
-
-        <!-- 4 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
-              <circle cx="18" cy="18" r="5" stroke="#a78bfa" stroke-width="1.2" fill="none" opacity="0.6"/>
-              <circle cx="30" cy="18" r="4" stroke="#06b6d4" stroke-width="1.2" fill="none" opacity="0.6"/>
-              <circle cx="24" cy="30" r="4.5" stroke="#f59e0b" stroke-width="1.2" fill="none" opacity="0.6"/>
-              <line x1="22.5" y1="21" x2="26.5" y2="21.5" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-              <line x1="20" y1="25.5" x2="23" y2="28" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-              <line x1="29" y1="22" x2="27" y2="26" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-              <circle cx="18" cy="18" r="1" fill="#a78bfa"/>
-              <circle cx="30" cy="18" r="0.8" fill="#06b6d4"/>
-              <circle cx="24" cy="30" r="1" fill="#f59e0b"/>
-            </svg>
-          </div>
-          <h3>Интеграции с таблицами и БД</h3>
-          <p>Google Таблицы, Airtable, Supabase, Яндекс Cloud и Яндекс360 — синхронизация данных между сервисами.</p>
-        </div>
-
-        <!-- 5 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
-              <path d="M16 32L24 12L32 32" stroke="#f59e0b" stroke-width="1.4" fill="none"/>
-              <line x1="18.5" y1="27" x2="29.5" y2="27" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
-              <circle cx="24" cy="18" r="1.5" fill="#f59e0b" opacity="0.6"/>
-              <circle cx="18" cy="30" r="1" fill="#f59e0b" opacity="0.3"/>
-              <circle cx="30" cy="30" r="1" fill="#f59e0b" opacity="0.3"/>
-              <circle cx="24" cy="32" r="1" fill="#f59e0b" opacity="0.15"/>
-            </svg>
-          </div>
-          <h3>Быстрые скрипты</h3>
-          <p>Кастомные скрипты для ежедневных задач — от обработки файлов до автоматизации отчётов.</p>
-        </div>
-
-        <!-- 6 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
-              <path d="M20 14C16 14 12 18 12 24C12 30 16 34 20 34" stroke="#06b6d4" stroke-width="1.4" fill="none"/>
-              <path d="M28 14C32 14 36 18 36 24C36 30 32 34 28 34" stroke="#06b6d4" stroke-width="1.4" fill="none"/>
-              <line x1="12" y1="24" x2="36" y2="24" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
-              <path d="M20 14L24 4L28 14" stroke="#06b6d4" stroke-width="0.8" opacity="0.3"/>
-              <path d="M20 34L24 44L28 34" stroke="#06b6d4" stroke-width="0.8" opacity="0.3"/>
-              <circle cx="24" cy="24" r="2" fill="#00ff41" opacity="0.3"/>
-            </svg>
-          </div>
-          <h3>Облачные функции и API</h3>
-          <p>Serverless-функции, API-интеграции и вебхуки — связываем любые сервисы в единую экосистему.</p>
-        </div>
-
-        <!-- 7: feature row -->
-        <div class="feature-row fade-in">
-          <svg viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.2"/>
-            <circle cx="16" cy="16" r="3" stroke="#a78bfa" stroke-width="1" fill="none"/>
-            <circle cx="32" cy="16" r="3" stroke="#a78bfa" stroke-width="1" fill="none"/>
-            <circle cx="24" cy="30" r="4" stroke="#f59e0b" stroke-width="1" fill="none"/>
-            <circle cx="16" cy="16" r="1" fill="#a78bfa" opacity="0.6"/>
-            <circle cx="32" cy="16" r="1" fill="#a78bfa" opacity="0.6"/>
-            <circle cx="24" cy="30" r="1.5" fill="#f59e0b" opacity="0.6"/>
-            <line x1="19" y1="18" x2="21" y2="27" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-            <line x1="29" y1="18" x2="27" y2="27" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-            <path d="M24 6V10" stroke="#00ff41" stroke-width="0.8" opacity="0.2"/>
-            <path d="M24 38V42" stroke="#00ff41" stroke-width="0.8" opacity="0.2"/>
-          </svg>
-          <div>
-            <div class="fw">Оптимизация проектного менеджмента</div>
-            <div class="fs">Яндекс Трекер: воркфлоу, триггеры, макросы, дашборды — полная автоматизация управления задачами.</div>
-          </div>
-        </div>
-
-        <!-- 8 -->
-        <div class="service-card fade-in">
-          <div class="service-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="20" stroke="#00ff41" stroke-width="1.2" opacity="0.15"/>
-              <path d="M14 34L24 12L34 34" stroke="#00ff41" stroke-width="1" fill="none" opacity="0.3"/>
-              <path d="M28 28C30 26 34 24 34 20C34 16 30 14 26 16L24 18L22 16C18 14 14 16 14 20C14 24 18 26 20 28" stroke="#a78bfa" stroke-width="1.4" fill="none"/>
-              <circle cx="24" cy="20" r="2" fill="#f59e0b" opacity="0.4"/>
-              <circle cx="24" cy="26" r="2" fill="#06b6d4" opacity="0.4"/>
-              <line x1="24" y1="22" x2="24" y2="24" stroke="#00ff41" stroke-width="0.8" opacity="0.3"/>
-            </svg>
-          </div>
-          <h3>Кейсы из реальной практики</h3>
-          <p>Проверенные решения, которые уже работают в продакшене и приносят результат.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= VIDEOS ========= -->
-  <section class="videos" id="videos">
-    <div class="container">
-      <div class="section-label">case studies</div>
-      <h2 class="section-title">Автоматизация <span class="green">в деле</span></h2>
-      <p class="section-desc"># примеры внедрений, экономящих часы работы каждую неделю</p>
-
-      <div class="videos-grid">
-        <div class="video-card fade-in">
-          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/266f4784cbc6956660f878a1aaa3b89a/">
-            <div class="video-play-overlay">
-              <svg viewBox="0 0 56 56" fill="none">
-                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
-                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
-              </svg>
-              <span>▶ воспроизвести</span>
-            </div>
-          </div>
-          <div class="video-info">
-            <h4>Автоматизация отправки сообщений через чат-бот в Max // Часть 1</h4>
-          </div>
-        </div>
-
-        <div class="video-card fade-in">
-          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/9717098d5b775538052c254cd4719b14/">
-            <div class="video-play-overlay">
-              <svg viewBox="0 0 56 56" fill="none">
-                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
-                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
-              </svg>
-              <span>▶ воспроизвести</span>
-            </div>
-          </div>
-          <div class="video-info">
-            <h4>Бот обратной связи в Max + Google Таблицы | Автоматизация без программирования</h4>
-          </div>
-        </div>
-
-        <div class="video-card fade-in">
-          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/b57b0c7f1c39bc5a3b1ae1416209cdf7/">
-            <div class="video-play-overlay">
-              <svg viewBox="0 0 56 56" fill="none">
-                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
-                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
-              </svg>
-              <span>▶ воспроизвести</span>
-            </div>
-          </div>
-          <div class="video-info">
-            <h4>Яндекс Трекер: автоматизация и интеграции. Быстрый старт | Часть 1</h4>
-          </div>
-        </div>
-
-        <div class="video-card fade-in">
-          <div class="video-wrapper" data-src="https://rutube.ru/play/embed/881f34450229a01303ce7c5f6769be5a/">
-            <div class="video-play-overlay">
-              <svg viewBox="0 0 56 56" fill="none">
-                <circle cx="28" cy="28" r="26" stroke="#00ff41" stroke-width="1.2" opacity="0.4"/>
-                <path d="M24 18L38 28L24 38V18Z" fill="#00ff41" opacity="0.7"/>
-              </svg>
-              <span>▶ воспроизвести</span>
-            </div>
-          </div>
-          <div class="video-info">
-            <h4>Яндекс Трекер + Яндекс Формы: Авто-создание задач | Часть 2</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= FAQ ========= -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <div class="section-label">faq</div>
-      <h2 class="section-title">Частые <span class="green">вопросы</span></h2>
-      <p class="section-desc"># короткие ответы на главные вопросы об автоматизации</p>
-
-      <div class="faq-list">
-        <details class="faq-item fade-in">
-          <summary>Что такое No ! Routine?</summary>
-          <div class="faq-answer"><p>No ! Routine — сервис автоматизации рутинных задач в проектном управлении и digital-сфере. Никакой магии — только рабочие инструменты: n8n, скрипты, облачные функции и интеграции, которые работают 24/7 вместо вас.</p></div>
-        </details>
-        <details class="faq-item fade-in">
-          <summary>Что можно автоматизировать с помощью n8n?</summary>
-          <div class="faq-answer"><p>Готовые воркфлоу для n8n решают задачи сбора данных, отправки уведомлений, интеграции сервисов и сложных multi-step процессов. Это работает без программирования и экономит часы работы каждую неделю.</p></div>
-        </details>
-        <details class="faq-item fade-in">
-          <summary>Какие чат-боты можно создать?</summary>
-          <div class="faq-answer"><p>Создаю чат-боты для Telegram, Max и Яндекс Мессенджер: боты обратной связи, уведомлений и сбора заявок без единой строчки кода — с готовой интеграцией в Google Таблицы и другие сервисы.</p></div>
-        </details>
-        <details class="faq-item fade-in">
-          <summary>С какими сервисами работают интеграции?</summary>
-          <div class="faq-answer"><p>Google Таблицы, Airtable, Supabase, Яндекс Cloud, Яндекс360, а также API-интеграции и вебхуки практически любых сервисов. Объединяю их в единую экосистему.</p></div>
-        </details>
-        <details class="faq-item fade-in">
-          <summary>Как автоматизировать Яндекс Трекер?</summary>
-          <div class="faq-answer"><p>Оптимизация проектного менеджмента в Яндекс Трекер: настройка воркфлоу, триггеров, макросов и дашбордов для автоматического создания и управления задачами, включая авто-создание задач из Яндекс Форм.</p></div>
-        </details>
-        <details class="faq-item fade-in">
-          <summary>Сколько это стоит и как начать?</summary>
-          <div class="faq-answer"><p>Опишите свою задачу через форму или напишите в Telegram @Personalart / Макс. Я покажу, как её решить современными инструментами автоматизации, и предложу оптимальное решение.</p></div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= ABOUT ========= -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="section-label">about</div>
-      <h2 class="section-title">ABOUT <span class="green">ME</span></h2>
-      <div class="about-grid">
-            <figure class="about-photo" id="aboutPhoto">
-              <div class="term-bar"><i></i><i></i><i></i><span>~/novikov.jpg</span></div>
-              <img src="novikov.jpg" alt="Павел Новиков — специалист по автоматизации" loading="lazy" onerror="document.getElementById('aboutPhoto').classList.add('noimg')">
-              <div class="photo-ph" aria-hidden="true">ПН</div>
-              <figcaption><b>$ whoami</b> → Павел Новиков</figcaption>
-            </figure>
-            <div class="about-bio">
-              <h3>Павел Новиков</h3>
-              <div class="role">// специалист по внедрению автоматизации</div>
-              <p>Специалист по внедрению автоматизации рабочих процессов с 15+ годами опыта в IT и диджитал-сфере. Преобразую хаос в структуру: создаю системы управления, автоматизирую процессы, повышаю рентабельность проектов и управляю ресурсами.</p>
-            </div>
-            <div class="about-cert" id="aboutCert">
-              <img src="certificate.jpg" alt="Сертификат: ИИ-агенты и n8n, школа Бруноям, 2026" loading="lazy" onerror="document.getElementById('aboutCert').classList.add('noimg')">
-              <div>
-                <div class="fw">Сертификат: ИИ-агенты и n8n</div>
-                <div class="fs">Школа «Бруноям», 2026 год, № 16950. Подтверждает успешное завершение обучения на курсе «ИИ-агенты и N8N».</div>
-              </div>
-            </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= CONTACT ========= -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="contact-wrap">
-        <div class="contact-info">
-          <div class="section-label">contacts</div>
-          <h2>Давайте <span class="green">автоматизируем</span> вашу рутину</h2>
-          <p>Опишите задачу — и я покажу, как её решить современными инструментами.</p>
-          <div class="contact-links">
-            <a href="tel:+79277280827" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-              </span>
-              +7 927 728-08-27
-            </a>
-            <a href="https://t.me/Personalart" target="_blank" rel="noopener" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M21.5 4.5l-19 7.5 7 2.5 3 9 3-6 6-3-16-7.5z"/>
-                </svg>
-              </span>
-              @Personalart
-            </a>
-            <a href="https://max.ru/u/f9LHodD0cOIwGbNYBgFU6RkmddNyGUlJfQWfrJulagIHM2MEh921Wh9SkzY" target="_blank" rel="noopener" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 8h8v8H8z"/>
-                </svg>
-              </span>
-              Макс
-            </a>
-            <a href="mailto:noroutine@ro.ru" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-              </span>
-              noroutine@ro.ru
-            </a>
-            <div class="contact-divider"><span></span></div>
-            <span class="contact-link-label">Социальные сети:</span>
-            <a href="https://rutube.ru/channel/57269828" target="_blank" rel="noopener" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="2" y="4" width="20" height="16" rx="3"/>
-                  <path d="M10 9l5 3-5 3V9z"/>
-                </svg>
-              </span>
-              Rutube
-            </a>
-            <a href="https://www.youtube.com/@noroutine2026" target="_blank" rel="noopener" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
-                </svg>
-              </span>
-              YouTube
-            </a>
-            <a href="https://vk.ru/noroutine2026" target="_blank" rel="noopener" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
-                  <path d="M12.5 17.5h-1c-3 0-5.5-2.5-5.5-5.5v-3h2v3c0 1.5 1 2.5 2.5 2.5h2v3z"/>
-                  <circle cx="12" cy="8.5" r="1.5"/>
-                </svg>
-              </span>
-              VK
-            </a>
-            <a href="https://dzen.ru/noroutine" target="_blank" rel="noopener" class="contact-link">
-              <span class="cl-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 12l3 3 5-5"/>
-                </svg>
-              </span>
-              Яндекс Дзен
-            </a>
-          </div>
-        </div>
-        <div class="contact-form fade-in">
-          <h3>> _ Заявка</h3>
-          <p class="form-sub"># заполните форму, и я свяжусь с вами</p>
-          <form id="contact-form" action="https://formsubmit.co/ajax/noroutine@ro.ru" method="POST">
-            <input type="text" name="_honey" style="display:none">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_subject" value="Новая заявка с No! Routine">
-            <div class="form-group">
-              <label for="name">имя *</label>
-              <input type="text" id="name" name="name" placeholder="как к вам обращаться?" required>
-            </div>
-            <div class="form-group">
-              <label for="contact-info">контакт *</label>
-              <input type="text" id="contact-info" name="contact" placeholder="телефон / email" required>
-            </div>
-            <div class="form-group">
-              <label for="message">задача</label>
-              <textarea id="message" name="message" placeholder="что хотите автоматизировать?" required></textarea>
-            </div>
-            <div class="form-group agree-group">
-              <label class="agree-label">
-                <input type="checkbox" name="consent" required class="agree-checkbox">
-                <span class="agree-text">Нажимая на кнопку, я даю согласие на обработку <button type="button" class="agree-link" onclick="showPolicy()">персональных данных</button></span>
-              </label>
-            </div>
-            <button type="submit" class="btn-submit">$ ./deploy.sh →</button>
-          </form>
-          <div class="modal-overlay" id="success-modal">
-            <div class="modal">
-              <div class="modal-icon">✓</div>
-              <h3 class="modal-title">Сообщение отправлено!</h3>
-              <p class="modal-text">Спасибо! Я свяжусь с вами в ближайшее время.</p>
-              <button class="modal-btn" onclick="closeModal()">Закрыть</button>
-            </div>
-          </div>
-          <div class="modal-overlay" id="policy-modal">
-            <div class="modal modal-policy">
-              <h3 class="modal-title">Политика конфиденциальности</h3>
-              <div class="policy-body">
-                <p>Настоящая Политика конфиденциальности персональных данных (далее — Политика) действует в отношении всей информации, которую Павел Новиков (далее — Исполнитель) может получить о пользователе во время использования сайта noroutine.ru и его сервисов.</p>
-                <h4>1. Какие данные собираются</h4>
-                <p>При заполнении формы обратной связи пользователь предоставляет: имя, контактные данные (телефон или email), текст сообщения. Дополнительно может передаваться IP-адрес и техническая информация (user-agent).</p>
-                <h4>2. Цель сбора</h4>
-                <p>Сбор данных осуществляется исключительно для связи с пользователем по его запросу, консультирования и предоставления информации об услугах автоматизации.</p>
-                <h4>3. Правовое основание</h4>
-                <p>Обработка осуществляется на основании Федерального закона № 152-ФЗ «О персональных данных» и согласия пользователя, выраженного путём активного проставления галочки в форме.</p>
-                <h4>4. Хранение и защита</h4>
-                <p>Данные хранятся в защищённой электронной форме на серверах, расположенных на территории РФ. Исполнитель принимает необходимые организационные и технические меры для защиты информации от несанкционированного доступа, изменения, раскрытия или уничтожения. Срок хранения — не более 1 года с момента получения.</p>
-                <h4>5. Передача третьим лицам</h4>
-                <p>Передача персональных данных третьим лицам не осуществляется за исключением случаев, предусмотренных законодательством РФ. Для отправки электронных писем используется сервис FormSubmit.co, который выступает оператором транзакционной пересылки данных и не сохраняет их.</p>
-                <h4>6. Права пользователя</h4>
-                <p>Пользователь вправе в любой момент отозвать согласие на обработку, направив запрос на email noroutine@ro.ru. Также пользователь может запросить полное удаление своих данных из системы.</p>
-                <h4>7. Контакты</h4>
-                <p>По всем вопросам, связанным с обработкой персональных данных, обращайтесь:<br>Email: noroutine@ro.ru<br>Телефон: +7 927 728-08-27</p>
-              </div>
-              <button class="modal-btn" onclick="closePolicy()">Закрыть</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= FOOTER ========= -->
-  <footer class="footer">
-    <div class="container">
-      © 2026 Павел Новиков. [all rights reserved]
-    </div>
-  </footer>
-
-  <script>
-    // ── Theme toggle (dark / light) ──
-    (function () {
-      const root = document.documentElement;
-      const KEY = 'noroutine-theme';
-      const toggle = document.getElementById('themeToggle');
-      const meta = document.querySelector('meta[name="theme-color"]');
-      const starRGB = { dark: '200, 220, 255', light: '72, 96, 138' };
-      let useLight = (root.getAttribute('data-theme') === 'light');
-
-      function applyTheme() {
-        root.setAttribute('data-theme', useLight ? 'light' : 'dark');
-        window.__starRGB = starRGB[useLight ? 'light' : 'dark'];
-        if (meta) meta.setAttribute('content', useLight ? '#f4f7f5' : '#07070d');
-        if (toggle) {
-          toggle.setAttribute('aria-checked', useLight ? 'true' : 'false');
-          const flag = toggle.querySelector('.tt-flag');
-          if (flag) flag.textContent = useLight ? 'light' : 'dark';
-        }
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+      for (const s of stars) {
+        s.y -= s.speed;
+        if (s.y < 0) s.y = height;
+        ctx.fillStyle = `rgba(206, 189, 255, ${s.alpha})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
       }
-      function persist() {
-        try { localStorage.setItem(KEY, useLight ? 'light' : 'dark'); } catch (e) {}
-      }
+      requestAnimationFrame(render);
+    }
+    render();
+  })();
 
-      applyTheme();
+  // 2. Interactive FAQ Accordion
+  document.querySelectorAll('.faq-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.faq-item');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
+      const isOpen = !content.classList.contains('hidden');
 
-      if (toggle) {
-        toggle.addEventListener('click', () => { useLight = !useLight; applyTheme(); persist(); });
-        toggle.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); useLight = !useLight; applyTheme(); persist(); }
-        });
-      }
-    })();
-
-    // ── Stars ──
-    (function() {
-      const canvas = document.getElementById('stars-canvas');
-      const ctx = canvas.getContext('2d');
-      let stars = [];
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      function createStars() {
-        stars = [];
-        const count = Math.floor((canvas.width * canvas.height) / 2500);
-        for (let i = 0; i < count; i++) {
-          stars.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 1.2 + 0.3,
-            a: Math.random() * 0.6 + 0.2,
-            speed: Math.random() * 0.3 + 0.1,
-            phase: Math.random() * Math.PI * 2
-          });
-        }
-      }
-      createStars();
-
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const time = Date.now() / 1000;
-        const starRGB = window.__starRGB || '200, 220, 255';
-        stars.forEach(s => {
-          const twinkle = 0.5 + 0.5 * Math.sin(time * s.speed + s.phase);
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${starRGB}, ${s.a * twinkle})`;
-          ctx.fill();
-        });
-        ctx.globalAlpha = 1;
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // ── Scroll animations ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ── Logo random colors ──
-    (function() {
-      const letters = document.querySelectorAll('.logo .letter');
-      const heroLetters = document.querySelectorAll('.hero h1 .letter');
-      const allLetters = [...letters, ...heroLetters];
-      const colors = ['purple', 'green'];
-      let currentIndices = new Set();
-
-      function randomize() {
-        allLetters.forEach(el => el.classList.remove('purple', 'green'));
-        const count = 1 + Math.floor(Math.random() * 2);
-        const pool = [...allLetters];
-        for (let i = 0; i < count && pool.length; i++) {
-          const idx = Math.floor(Math.random() * pool.length);
-          const el = pool.splice(idx, 1)[0];
-          el.classList.add(colors[Math.floor(Math.random() * colors.length)]);
-        }
-      }
-      randomize();
-      setInterval(randomize, 1800);
-    })();
-
-    // ── Video click-to-play ──
-    document.querySelectorAll('.video-wrapper').forEach(wrapper => {
-      wrapper.addEventListener('click', function() {
-        if (this.classList.contains('loaded')) return;
-        const iframe = document.createElement('iframe');
-        iframe.src = this.dataset.src;
-        iframe.setAttribute('allow', 'clipboard-write; autoplay');
-        iframe.setAttribute('allowFullScreen', '');
-        this.appendChild(iframe);
-        this.classList.add('loaded');
+      // Close other items
+      document.querySelectorAll('.faq-item').forEach((otherItem) => {
+        otherItem.querySelector('.faq-content').classList.add('hidden');
+        otherItem.querySelector('.faq-icon').textContent = '[+]';
       });
-    });
 
-    // ── Close modals on overlay click ──
-    document.querySelectorAll('.modal-overlay').forEach(el => {
-      el.addEventListener('click', function(e) {
-        if (e.target === this) this.classList.remove('active');
-      });
-    });
-
-    // ── Form ──
-    const form = document.getElementById('contact-form');
-    const modal = document.getElementById('success-modal');
-
-    function closeModal() {
-      modal.classList.remove('active');
-    }
-
-    function showPolicy() {
-      document.getElementById('policy-modal').classList.add('active');
-    }
-    function closePolicy() {
-      document.getElementById('policy-modal').classList.remove('active');
-    }
-    // ── About: всегда открыт, $ about и меню — якорные ссылки ──
-
-    form?.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('.btn-submit');
-      const orig = btn.textContent;
-
-      btn.textContent = '$ sending...';
-      btn.disabled = true;
-
-      try {
-        const data = new FormData(this);
-        const res = await fetch(this.action, { method: 'POST', body: data });
-
-        if (res.ok) {
-          modal.classList.add('active');
-          this.reset();
-          const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00ff41';
-          btn.textContent = '$ ✓ deployed';
-          btn.style.borderColor = accent;
-          btn.style.color = accent;
-          setTimeout(() => {
-            btn.textContent = orig;
-            btn.style.borderColor = '';
-            btn.style.color = '';
-            btn.disabled = false;
-          }, 2000);
-        } else {
-          throw new Error('Server error');
-        }
-      } catch {
-        btn.textContent = '$ ! error';
-        btn.style.borderColor = '#ef4444';
-        btn.style.color = '#ef4444';
-        btn.disabled = false;
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.style.borderColor = '';
-          btn.style.color = '';
-        }, 3000);
+      if (!isOpen) {
+        content.classList.remove('hidden');
+        icon.textContent = '[-]';
       }
     });
-  </script>
-</body>
-</html>
+  });
+
+  // 3. Lead Form Submission via FormSubmit AJAX
+  async function handleLeadSubmit(event) {
+    event.preventDefault();
+    const form = document.getElementById('lead-form');
+    const btn = document.getElementById('submit-btn');
+    const text = document.getElementById('btn-text');
+    const orig = '$ ./deploy.sh → отправить задачу';
+    btn.disabled = true;
+    text.textContent = '$ executing ./deploy.sh... [processing]';
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/noroutine@ro.ru', { method: 'POST', body: new FormData(form) });
+      if (!res.ok) throw new Error('send failed');
+      form.reset();
+      text.textContent = '$ ./deploy.sh → [ok] отправлено';
+      document.getElementById('success-modal').classList.remove('hidden');
+      setTimeout(function () { btn.disabled = false; text.textContent = orig; }, 2500);
+    } catch (e) {
+      text.textContent = '$ ./deploy.sh → [error] попробуйте ещё раз';
+      btn.disabled = false;
+      setTimeout(function () { text.textContent = orig; }, 3500);
+    }
+  }
+
+  function closeSuccessModal() {
+    document.getElementById('success-modal').classList.add('hidden');
+  }
+
+  // 4. Privacy Policy Modal Controls
+  function openPrivacyModal(event) {
+    event.preventDefault();
+    document.getElementById('privacy-modal').classList.remove('hidden');
+  }
+  function closePrivacyModal() {
+    document.getElementById('privacy-modal').classList.add('hidden');
+  }
+
+  // 5. Video cards link out to Rutube (no modal needed)
+
+  // 6. Interactive Theme Toggle (Dark & Light, persisted)
+  function setTheme(light) {
+    const dark = !light;
+    document.documentElement.classList.toggle('dark', dark);
+    try { localStorage.setItem('nr-theme', light ? 'light' : 'dark'); } catch (e) {}
+    const pairs = [['theme-label', 'theme-icon'], ['top-theme-label', 'top-theme-icon']];
+    pairs.forEach(function (p) {
+      const label = document.getElementById(p[0]);
+      const icon = document.getElementById(p[1]);
+      if (label) label.textContent = light ? 'theme: light' : 'theme: dark';
+      if (label && label.id === 'top-theme-label') label.textContent = light ? 'theme --light' : 'theme --dark';
+      if (icon) icon.textContent = light ? 'light_mode' : 'dark_mode';
+    });
+  }
+  function toggleTheme() {
+    setTheme(document.documentElement.classList.contains('dark'));
+  }
+  function initTheme() {
+    const light = !document.documentElement.classList.contains('dark');
+    setTheme(light);
+    const topBtn = document.getElementById('top-theme-toggle');
+    if (topBtn) topBtn.addEventListener('click', function () { setTheme(document.documentElement.classList.contains('dark')); });
+    const floatBtn = document.getElementById('floating-theme-toggle');
+    if (floatBtn) { floatBtn.removeAttribute('onclick'); floatBtn.addEventListener('click', function () { setTheme(document.documentElement.classList.contains('dark')); }); }
+    const navBtn = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const navIcon = document.getElementById('nav-toggle-icon');
+    if (navBtn && menu) {
+      navBtn.addEventListener('click', function () {
+        const open = menu.classList.toggle('hidden') === false;
+        navBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (navIcon) navIcon.textContent = open ? 'close' : 'menu';
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { menu.classList.add('hidden'); navBtn.setAttribute('aria-expanded', 'false'); if (navIcon) navIcon.textContent = 'menu'; });
+      });
+    }
+  }
+  initTheme();
+</script><footer class="w-full bg-surface-container-lowest relative z-10 py-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.8)]"><div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col items-center md:items-start gap-space-xs"><div class="flex items-center gap-space-xs font-headline-sm text-headline-sm tracking-tight"><span class="text-on-surface">No</span><span class="text-primary-container">!</span><span class="text-on-surface">Routine</span></div><p class="font-label-md text-label-md text-on-surface-variant">© 2026 Павел Новиков. [all rights reserved]</p></div><div class="flex items-center gap-space-md font-label-md text-label-md px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface-variant"><div class="flex items-center gap-space-xs"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span><span class="font-mono text-on-surface">host: production</span></div><span class="text-outline-variant font-mono">//</span><span class="text-primary-fixed-dim font-mono">uptime: 99.98%</span></div><div class="flex items-center gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" data-path="uslugi" href="#services">uslugi.sys</a><a class="hover:text-primary transition-colors" data-path="keysy" href="#cases">cases.log</a><a class="hover:text-primary transition-colors" data-path="kontakty" href="#contact">terminal.io</a><a class="hover:text-primary transition-colors" href="v1/" title="Предыдущая версия сайта">v1.classic</a></div></div></footer>
+
+
+
+
+
+
+
+
+
+</body></html>
