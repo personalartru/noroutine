@@ -1394,10 +1394,9 @@ html.dark{
 
 
 <script>
-// 7. Support chat widget -> Telegram bot
+// 7. Support chat widget -> secure proxy
 (function () {
-  var TG_BOT_TOKEN = '8846592752:AAGphRIo2S5iRJu4abQso4rSZUhqzL6HDCo';
-  var TG_CHAT_ID = '270479866';
+  var CHAT_ENDPOINT = ''; // URL защищённого вебхука/прокси (Cloudflare Worker, n8n или Apps Script)
   var fab = document.getElementById('chat-fab');
   var fabIcon = document.getElementById('chat-fab-icon');
   var panel = document.getElementById('chat-panel');
@@ -1410,7 +1409,6 @@ html.dark{
     statusEl.style.color = ok ? 'var(--t-primary-fixed-dim, #00ff41)' : '#ef4444';
     statusEl.textContent = msg;
   }
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function addMine(text) {
     var d = document.createElement('div');
     d.className = 'rounded-lg bg-primary-container/15 border border-primary-container/25 px-3 py-2 text-on-surface text-right';
@@ -1431,22 +1429,22 @@ html.dark{
     var contact = document.getElementById('chat-contact').value.trim().slice(0, 80);
     var text = document.getElementById('chat-text').value.trim().slice(0, 1000);
     if (!text) { setStatus('Введите сообщение.', false); return; }
-    if (!TG_CHAT_ID) { setStatus('Виджет подключается… а пока напишите в Telegram: @Personalart', false); return; }
+    if (!CHAT_ENDPOINT) { setStatus('Виджет настраивается… Напишите напрямую в Telegram: @Personalart', false); return; }
     sendBtn.disabled = true;
     setStatus('$ sending...', true);
-    var body = '\uD83D\uDCE9 <b>Новое сообщение с сайта No! Routine</b>\n\uD83D\uDC64 Имя: ' + esc(name || '—') + '\n\uD83D\uDCDE Контакт: ' + esc(contact || '—') + '\n\uD83D\uDCAC ' + esc(text) + '\n\uD83D\uDD17 ' + esc(location.href);
     try {
-      var res = await fetch('https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: body, parse_mode: 'HTML' })
+      var res = await fetch(CHAT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, contact: contact, text: text, url: location.href })
       });
       var data = await res.json();
-      if (!data.ok) throw new Error('tg');
+      if (!data.ok) throw new Error(data.error || 'send_failed');
       addMine(text);
       document.getElementById('chat-text').value = '';
       setStatus('Сообщение отправлено ✓ Павел ответит по указанному контакту.', true);
     } catch (e) {
-      setStatus('Не удалось отправить. Попробуйте позже или напишите в Telegram: @Personalart', false);
+      setStatus('Не удалось отправить. Напишите напрямую в Telegram: @Personalart', false);
     }
     sendBtn.disabled = false;
   });
