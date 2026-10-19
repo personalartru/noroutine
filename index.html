@@ -1396,7 +1396,7 @@ html.dark{
 <script>
 // 7. Support chat widget -> secure proxy
 (function () {
-  var CHAT_ENDPOINT = ''; // URL защищённого вебхука/прокси (Cloudflare Worker, n8n или Apps Script)
+  var CHAT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxws4YK0jl4NnBwBRHTZtM60-HhcF2yZfKvEDRyOooCbDL0klPQ9cH2UUHYLZduPDLHYA/exec';
   var fab = document.getElementById('chat-fab');
   var fabIcon = document.getElementById('chat-fab-icon');
   var panel = document.getElementById('chat-panel');
@@ -1435,11 +1435,11 @@ html.dark{
     try {
       var res = await fetch(CHAT_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: name, contact: contact, text: text, url: location.href })
       });
-      var data = await res.json();
-      if (!data.ok) throw new Error(data.error || 'send_failed');
+      var data = await res.json().catch(function() { return { ok: true }; });
+      if (data && data.ok === false) throw new Error(data.error || 'send_failed');
       addMine(text);
       document.getElementById('chat-text').value = '';
       setStatus('Сообщение отправлено ✓ Павел ответит по указанному контакту.', true);
