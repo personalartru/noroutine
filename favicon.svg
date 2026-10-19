@@ -5,8 +5,8 @@
       <stop offset="100%" stop-color="#07070d" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="bang" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#9dffb8"/>
-      <stop offset="100%" stop-color="#00ff41"/>
+      <stop offset="0%" stop-color="#A8F0D4"/>
+      <stop offset="100%" stop-color="#2ECE9A"/>
     </linearGradient>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="1.8" result="b"/>
@@ -26,5 +26,5 @@
     <rect x="27.5" y="14" width="9" height="22" rx="4.5" fill="url(#bang)"/>
     <circle cx="32" cy="43.5" r="4.5" fill="url(#bang)"/>
   </g>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#00ff41" stroke-opacity=".28" stroke-width="1.5"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#2ECE9A" stroke-opacity=".28" stroke-width="1.5"/>
 </svg>
