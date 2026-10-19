@@ -1438,8 +1438,10 @@ html.dark{
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: name, contact: contact, text: text, url: location.href })
       });
-      var data = await res.json().catch(function() { return { ok: true }; });
-      if (data && data.ok === false) throw new Error(data.error || 'send_failed');
+      var raw = await res.text();
+      var data;
+      try { data = JSON.parse(raw); } catch (e2) { data = { ok: false, error: 'bad_response' }; }
+      if (!data.ok) throw new Error(data.error || 'send_failed');
       addMine(text);
       document.getElementById('chat-text').value = '';
       setStatus('Сообщение отправлено ✓ Павел ответит по указанному контакту.', true);
