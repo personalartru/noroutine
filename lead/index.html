@@ -1,0 +1,435 @@
+<!DOCTYPE html><html class="dark" lang="ru" style=""><head><meta charset="utf-8">
+<script>
+/* no-flash theme init */
+(function(){var l=false;try{var v=localStorage.getItem('nr-theme');l=v?v==='light':(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches);}catch(e){}document.documentElement.classList.toggle('dark',!l);})();
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=110947701','ym');
+ym(110947701,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:'dataLayer',accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110947701" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter --><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Лид-магнит: 5 готовых n8n-воркфлоу | No ! Routine</title><meta name="author" content="Павел Новиков"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU">
+
+
+
+
+
+
+<meta name="twitter:description" content="Автоматизация бизнес-процессов с n8n, чат-ботами и Яндекс Трекером."><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="alternate icon" href="favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><meta name="theme-color" content="#07070d"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}@keyframes crt-scan{0%{background-position:0 0;}100%{background-position:0 100%;}}@keyframes neon-flicker{0%,19.999%,22%,62.999%,64%,64.999%,70%,100%{opacity:1;text-shadow:0 0 10px #2ECE9A,0 0 20px #2ECE9A;}20%,21.999%,63%,63.999%,65%,69.999%{opacity:0.3;text-shadow:none;}}@keyframes cursor-blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}.neon-glitch-bang{animation:neon-flicker 3.5s infinite;}.terminal-cursor{animation:cursor-blink 1s infinite;}
+.hero-logo-wrap{position:relative;display:block;width:fit-content;max-width:100%;margin:0 auto;}
+.hero-logo{width:clamp(260px,86vw,632px);height:auto;display:block;overflow:visible;filter:drop-shadow(0 0 16px rgba(46,206,154,0.14));}
+.lg-ink{fill:rgb(var(--t-on-surface));}
+.lg-shade{fill:#2ECE9A;}
+html.dark .lg-shade{fill:#000000;}
+.lg-bang{fill:#2ECE9A;transform-box:fill-box;transform-origin:center;}
+.hero-logo .logo-art path{stroke:url(#lgGlint);stroke-width:2.4;stroke-dasharray:22 540;animation:lg-trace 7s linear infinite;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.lg-bar{animation:lg-bang-bar 3.6s ease-in-out infinite;}
+.lg-dot{transform-origin:center top;animation:lg-bang-dot 1.8s cubic-bezier(.34,1.5,.64,1) infinite;}
+
+@keyframes lg-trace{from{stroke-dashoffset:584;}to{stroke-dashoffset:0;}}
+@keyframes lg-bang-bar{0%,100%{transform:scaleY(1);filter:drop-shadow(0 0 0 rgba(46,206,154,0));}42%{transform:scaleY(1.045);filter:drop-shadow(0 0 9px rgba(46,206,154,0.85));}58%{transform:scaleY(1.045);filter:drop-shadow(0 0 6px rgba(46,206,154,0.6));}}
+@keyframes lg-bang-dot{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+
+@media (prefers-reduced-motion: reduce){.hero-logo .logo-art path,.lg-bar,.lg-dot{animation:none;}}
+</style><script src="https://cdn.tailwindcss.com"></script>
+<style>
+html{scroll-behavior:smooth}
+.logo-img--light{display:none}
+html:not(.dark) .logo-img--dark{display:none}
+html:not(.dark) .logo-img--light{display:block}
+section[id]{scroll-margin-top:88px}
+:root{
+  --t-surface: 244 246 243;
+  --t-surface-dim: 233 237 232;
+  --t-surface-bright: 255 255 255;
+  --t-surface-container-lowest: 223 229 222;
+  --t-surface-container-low: 236 239 236;
+  --t-surface-container: 255 255 255;
+  --t-surface-container-high: 247 249 247;
+  --t-surface-container-highest: 238 241 238;
+  --t-surface-variant: 227 233 226;
+  --t-on-surface: 17 24 39;
+  --t-on-surface-variant: 75 85 99;
+  --t-inverse-surface: 17 24 39;
+  --t-inverse-on-surface: 244 246 243;
+  --t-outline: 157 179 160;
+  --t-outline-variant: 213 221 212;
+  --t-surface-tint: 5 150 105;
+  --t-primary: 4 120 87;
+  --t-on-primary: 255 255 255;
+  --t-primary-container: 46 206 154;
+  --t-on-primary-container: 5 46 22;
+  --t-inverse-primary: 6 95 70;
+  --t-secondary: 109 40 217;
+  --t-on-secondary: 255 255 255;
+  --t-secondary-container: 237 233 254;
+  --t-on-secondary-container: 76 29 149;
+  --t-tertiary: 14 116 144;
+  --t-on-tertiary: 255 255 255;
+  --t-tertiary-container: 207 250 254;
+  --t-on-tertiary-container: 22 78 99;
+  --t-error: 220 38 38;
+  --t-on-error: 255 255 255;
+  --t-error-container: 254 226 226;
+  --t-on-error-container: 127 29 29;
+  --t-primary-fixed: 5 150 105;
+  --t-primary-fixed-dim: 4 120 87;
+  --t-on-primary-fixed: 255 255 255;
+  --t-on-primary-fixed-variant: 209 250 229;
+  --t-secondary-fixed: 124 58 237;
+  --t-secondary-fixed-dim: 109 40 217;
+  --t-on-secondary-fixed: 255 255 255;
+  --t-on-secondary-fixed-variant: 237 233 254;
+  --t-tertiary-fixed: 14 116 144;
+  --t-tertiary-fixed-dim: 2 132 199;
+  --t-on-tertiary-fixed: 255 255 255;
+  --t-on-tertiary-fixed-variant: 207 250 254;
+  --t-background: 244 246 243;
+  --t-on-background: 17 24 39;
+}
+html.dark{
+  --t-on-tertiary-fixed-variant: 0 78 90;
+  --t-on-primary: 0 57 7;
+  --t-on-background: 228 225 235;
+  --t-on-error-container: 255 218 214;
+  --t-on-secondary-fixed-variant: 79 49 156;
+  --t-secondary-fixed: 232 221 255;
+  --t-secondary-container: 79 49 156;
+  --t-error-container: 147 0 10;
+  --t-error: 255 180 171;
+  --t-inverse-primary: 0 110 22;
+  --t-on-secondary-fixed: 33 0 94;
+  --t-surface-container-lowest: 14 14 20;
+  --t-surface-tint: 0 230 57;
+  --t-tertiary-fixed: 162 238 255;
+  --t-inverse-on-surface: 48 48 55;
+  --t-on-tertiary-fixed: 0 31 37;
+  --t-secondary-fixed-dim: 206 189 255;
+  --t-surface-container-high: 42 41 48;
+  --t-inverse-surface: 228 225 235;
+  --t-on-error: 105 0 5;
+  --t-outline-variant: 59 75 55;
+  --t-surface-container: 31 31 38;
+  --t-primary-container: 46 206 154;
+  --t-tertiary-fixed-dim: 47 217 244;
+  --t-surface: 19 19 25;
+  --t-on-secondary-container: 190 168 255;
+  --t-tertiary: 239 252 255;
+  --t-secondary: 206 189 255;
+  --t-on-primary-fixed: 0 34 3;
+  --t-outline: 132 150 126;
+  --t-on-tertiary: 0 54 62;
+  --t-primary-fixed-dim: 35 176 128;
+  --t-primary-fixed: 120 232 196;
+  --t-primary: 235 255 226;
+  --t-on-surface: 228 225 235;
+  --t-background: 19 19 25;
+  --t-on-surface-variant: 185 204 178;
+  --t-surface-container-low: 27 27 34;
+  --t-surface-container-highest: 53 52 59;
+  --t-surface-dim: 19 19 25;
+  --t-surface-variant: 53 52 59;
+  --t-on-secondary: 56 19 133;
+  --t-tertiary-container: 138 235 255;
+  --t-on-primary-fixed-variant: 0 83 14;
+  --t-on-tertiary-container: 0 107 122;
+  --t-on-primary-container: 5 46 22;
+  --t-surface-bright: 57 56 64;
+}
+</style><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-fixed-variant": "rgb(var(--t-on-tertiary-fixed-variant) / <alpha-value>)",
+          "on-primary": "rgb(var(--t-on-primary) / <alpha-value>)",
+          "on-background": "rgb(var(--t-on-background) / <alpha-value>)",
+          "on-error-container": "rgb(var(--t-on-error-container) / <alpha-value>)",
+          "on-secondary-fixed-variant": "rgb(var(--t-on-secondary-fixed-variant) / <alpha-value>)",
+          "secondary-fixed": "rgb(var(--t-secondary-fixed) / <alpha-value>)",
+          "secondary-container": "rgb(var(--t-secondary-container) / <alpha-value>)",
+          "error-container": "rgb(var(--t-error-container) / <alpha-value>)",
+          "error": "rgb(var(--t-error) / <alpha-value>)",
+          "inverse-primary": "rgb(var(--t-inverse-primary) / <alpha-value>)",
+          "on-secondary-fixed": "rgb(var(--t-on-secondary-fixed) / <alpha-value>)",
+          "surface-container-lowest": "rgb(var(--t-surface-container-lowest) / <alpha-value>)",
+          "surface-tint": "rgb(var(--t-surface-tint) / <alpha-value>)",
+          "tertiary-fixed": "rgb(var(--t-tertiary-fixed) / <alpha-value>)",
+          "inverse-on-surface": "rgb(var(--t-inverse-on-surface) / <alpha-value>)",
+          "on-tertiary-fixed": "rgb(var(--t-on-tertiary-fixed) / <alpha-value>)",
+          "secondary-fixed-dim": "rgb(var(--t-secondary-fixed-dim) / <alpha-value>)",
+          "surface-container-high": "rgb(var(--t-surface-container-high) / <alpha-value>)",
+          "inverse-surface": "rgb(var(--t-inverse-surface) / <alpha-value>)",
+          "on-error": "rgb(var(--t-on-error) / <alpha-value>)",
+          "outline-variant": "rgb(var(--t-outline-variant) / <alpha-value>)",
+          "surface-container": "rgb(var(--t-surface-container) / <alpha-value>)",
+          "primary-container": "rgb(var(--t-primary-container) / <alpha-value>)",
+          "tertiary-fixed-dim": "rgb(var(--t-tertiary-fixed-dim) / <alpha-value>)",
+          "surface": "rgb(var(--t-surface) / <alpha-value>)",
+          "on-secondary-container": "rgb(var(--t-on-secondary-container) / <alpha-value>)",
+          "tertiary": "rgb(var(--t-tertiary) / <alpha-value>)",
+          "secondary": "rgb(var(--t-secondary) / <alpha-value>)",
+          "on-primary-fixed": "rgb(var(--t-on-primary-fixed) / <alpha-value>)",
+          "outline": "rgb(var(--t-outline) / <alpha-value>)",
+          "on-tertiary": "rgb(var(--t-on-tertiary) / <alpha-value>)",
+          "primary-fixed-dim": "rgb(var(--t-primary-fixed-dim) / <alpha-value>)",
+          "primary-fixed": "rgb(var(--t-primary-fixed) / <alpha-value>)",
+          "primary": "rgb(var(--t-primary) / <alpha-value>)",
+          "on-surface": "rgb(var(--t-on-surface) / <alpha-value>)",
+          "background": "rgb(var(--t-background) / <alpha-value>)",
+          "on-surface-variant": "rgb(var(--t-on-surface-variant) / <alpha-value>)",
+          "surface-container-low": "rgb(var(--t-surface-container-low) / <alpha-value>)",
+          "surface-container-highest": "rgb(var(--t-surface-container-highest) / <alpha-value>)",
+          "surface-dim": "rgb(var(--t-surface-dim) / <alpha-value>)",
+          "surface-variant": "rgb(var(--t-surface-variant) / <alpha-value>)",
+          "on-secondary": "rgb(var(--t-on-secondary) / <alpha-value>)",
+          "tertiary-container": "rgb(var(--t-tertiary-container) / <alpha-value>)",
+          "on-primary-fixed-variant": "rgb(var(--t-on-primary-fixed-variant) / <alpha-value>)",
+          "on-tertiary-container": "rgb(var(--t-on-tertiary-container) / <alpha-value>)",
+          "on-primary-container": "rgb(var(--t-on-primary-container) / <alpha-value>)",
+          "surface-bright": "rgb(var(--t-surface-bright) / <alpha-value>)"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "gutter": "1.25rem",
+          "space-sm": "0.5rem",
+          "margin-mobile": "1rem",
+          "gutter-mobile": "0.75rem",
+          "space-xl": "2.5rem",
+          "space-md": "1rem",
+          "margin": "2rem",
+          "space-lg": "1.5rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "JetBrains Mono"
+          ],
+          "headline-md": [
+            "JetBrains Mono"
+          ],
+          "label-sm": [
+            "JetBrains Mono"
+          ],
+          "label-lg": [
+            "JetBrains Mono"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "label-md": [
+            "JetBrains Mono"
+          ],
+          "headline-xl-mobile": [
+            "JetBrains Mono"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "JetBrains Mono"
+          ],
+          "headline-lg-mobile": [
+            "JetBrains Mono"
+          ],
+          "headline-xl": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-xl-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "700"
+            }
+          ],
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg-mobile": [
+            "26px",
+            {
+              "lineHeight": "34px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-xl": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "fontWeight": "700"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head>
+<body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen relative selection:bg-primary-container selection:text-on-primary-container">
+<div class="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(79,49,156,0.15),rgba(19,19,25,0))] pointer-events-none z-0"></div>
+
+<header class="sticky top-0 z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
+<div class="max-w-5xl mx-auto px-gutter h-16 flex items-center justify-between gap-space-md">
+<a class="flex items-center gap-space-xs" href="../" aria-label="No ! Routine — на главную">
+<img src="../logo-dark.svg" alt="No! Routine" class="logo-img--dark h-8 w-auto" width="409" height="146">
+<img src="../logo-light.svg" alt="No! Routine" class="logo-img--light h-8 w-auto" width="409" height="146">
+</a>
+<div class="flex items-center gap-space-sm">
+<a class="hidden sm:inline text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="../#contact">Обсудить задачу</a>
+<a class="group relative inline-flex items-center justify-center gap-space-xs px-3 sm:px-space-md py-2 rounded-full bg-primary-container text-on-primary-container font-headline-sm text-label-lg font-bold shadow-[0_0_20px_rgba(46,206,154,0.35)] hover:shadow-[0_0_28px_rgba(46,206,154,0.55)] hover:scale-[1.02] transition-all" href="https://t.me/noroutine_ai_bot?start=site">
+<span class="hidden sm:inline text-on-primary-container font-mono text-[14px]">$ ./get_pack.sh</span>
+<span class="material-symbols-outlined text-[18px] text-on-primary-container">arrow_forward</span>
+</a>
+</div>
+</div>
+</header>
+
+<main class="relative z-10 max-w-5xl mx-auto px-gutter py-space-xl w-full">
+
+<section class="mb-space-xl">
+<div class="font-mono text-label-sm text-primary-container uppercase tracking-wider mb-space-sm">// Лид-магнит · version 1.0</div>
+<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-on-surface mb-space-sm">5 готовых <span class="text-primary-container">n8n-воркфлоу</span><br>для рутины, которая съедает день</h1>
+<p class="text-on-surface-variant text-body-md max-w-2xl">Импортируются в n8n за минуту и сразу делают работу за вас: заявки из форм становятся задачами, статусы назначают ответственных, боты собирают обращения в таблицу. Каждый воркфлоу — рабочий JSON, а не скриншот.</p>
+<div class="flex flex-wrap items-center gap-space-sm mt-space-md">
+<a class="group relative inline-flex items-center justify-center gap-space-xs px-5 py-3 rounded-full bg-primary-container text-on-primary-container font-headline-sm text-label-lg font-bold shadow-[0_0_30px_rgba(46,206,154,0.45)] hover:shadow-[0_0_42px_rgba(46,206,154,0.7)] hover:scale-105 active:scale-95 transition-all" href="https://t.me/noroutine_ai_bot?start=site">
+<span class="">Получить 5 воркфлоу бесплатно</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<span class="text-on-surface-variant font-label-sm text-label-sm">или отсканируйте QR</span>
+<img src="lead-qr.png" alt="QR-код для получения 5 n8n-воркфлоу" class="w-16 h-16 rounded-lg bg-white p-1" width="64" height="64">
+</div>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-space-sm">Бот попросит подписаться на канал <span class="font-mono text-on-surface">@noroutine2026</span> — и сразу пришлёт архив.</p>
+</section>
+
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-space-md mb-space-xl">
+<div class="p-space-md bg-surface-container-low rounded-xl border border-surface-container-high">
+<div class="font-mono text-label-sm text-primary-container mb-space-sm">01 · Tracker — вебхук → новая задача</div>
+<p class="text-on-surface-variant text-label-sm">Заявка с сайта летит в вебхук, n8n собирает поля и создаёт задачу в Яндекс Трекере с проектом и типом. Руками в трекере — ноль.</p>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl border border-surface-container-high">
+<div class="font-mono text-label-sm text-primary-container mb-space-sm">02 · Tracker — автоназначение и уведомление</div>
+<p class="text-on-surface-variant text-label-sm">Смена статуса триггерит назначение ответственного и уведомление в Telegram. Статусы перестают быть «никто не знает».</p>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl border border-surface-container-high">
+<div class="font-mono text-label-sm text-primary-container mb-space-sm">03 · Яндекс Формы → задачи в Трекере</div>
+<p class="text-on-surface-variant text-label-sm">Ответы формы разбираются в заголовок, описание и поля, дальше — задача в нужной очереди. Поддержка, HR и маркетинг перестают переносить заявки руками.</p>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl border border-surface-container-high">
+<div class="font-mono text-label-sm text-primary-container mb-space-sm">04 · Telegram-бот обратной связи → Google Sheets</div>
+<p class="text-on-surface-variant text-label-sm">Бот принимает заявку в чате, пишет её в таблицу и отвечает подтверждением. Данные приходят в CRM-формате, а не в переписке.</p>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl border border-surface-container-high sm:col-span-2">
+<div class="font-mono text-label-sm text-primary-container mb-space-sm">05 · MAX-бот → Google Sheets → ответ в MAX</div>
+<p class="text-on-surface-variant text-label-sm">Сообщения из мессенджера MAX ловятся вебхуком, попадают в таблицу, пользователь получает ответ. Схема из кейса «Бот обратной связи в MAX + Google Таблицы».</p>
+</div>
+</section>
+
+<section class="p-space-md bg-surface-container-low rounded-xl border border-surface-container-high mb-space-xl">
+<div class="font-mono text-label-sm text-primary-container uppercase tracking-wider mb-space-sm">// Как это работает</div>
+<ol class="space-y-2 text-on-surface-variant text-label-sm">
+<li><span class="font-mono text-on-surface">01</span> Откройте бота в Telegram и нажмите <span class="font-mono text-on-surface">/start</span>.</li>
+<li><span class="font-mono text-on-surface">02</span> Подпишитесь на канал <span class="font-mono text-on-surface">@noroutine2026</span> — туда же идут разборы кейсов и видео.</li>
+<li><span class="font-mono text-on-surface">03</span> Бот пришлёт ZIP: <span class="font-mono text-on-surface">workflows/</span> — пять воркфлоу, <span class="font-mono text-on-surface">workflows-bonus/</span> — ещё пять, <span class="font-mono text-on-surface">functions/</span> — обработчик для Yandex Cloud Functions и гайд по переменным окружения.</li>
+</ol>
+</section>
+
+<section class="p-space-md bg-surface-container-low rounded-xl border border-primary-container/30 mb-space-xl">
+<div class="font-mono text-label-sm text-primary-container uppercase tracking-wider mb-space-sm">// Нужна связка под ваш процесс</div>
+<p class="text-on-surface-variant text-label-sm mb-space-sm">Готовые воркфлоу — это основа. Если нужен разбор именно вашего процесса (Трекер, формы, таблицы, боты, отчёты) — разберу и соберу под задачу.</p>
+<div class="flex flex-wrap gap-space-sm">
+<a class="inline-flex items-center gap-space-xs px-4 py-2.5 rounded-full bg-primary-container text-on-primary-container font-semibold hover:shadow-lg transition-shadow" href="../#contact">Описать задачу</a>
+<a class="inline-flex items-center gap-space-xs px-4 py-2.5 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors" href="https://t.me/Personalart">Написать в Telegram</a>
+</div>
+</section>
+
+<div class="flex flex-wrap items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="../">Главная</a>
+<span class="text-outline-variant font-mono">//</span>
+<a class="hover:text-primary transition-colors" href="https://t.me/noroutine2026">Telegram-канал</a>
+<span class="text-outline-variant font-mono">//</span>
+<a class="hover:text-primary transition-colors" href="https://max.ru/channel_noroutine">Канал в MAX</a>
+</div>
+</main>
+
+<footer class="w-full bg-surface-container-lowest relative z-10 py-space-md shadow-[0_-1px_12px_rgba(0,0,0,0.8)]">
+<div class="max-w-5xl mx-auto px-gutter flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2026 Павел Новиков · No ! Routine</p>
+<div class="flex items-center gap-space-sm font-mono text-label-sm text-on-surface-variant">
+<span>noroutine@ro.ru</span>
+<span class="text-outline-variant">//</span>
+<span>+7 927 728-08-27</span>
+</div>
+</div>
+</footer>
+</body>
+</html>
