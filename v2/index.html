@@ -381,12 +381,19 @@ html.dark .result[data-level="hybrid"] .level-badge{color:#9be5ff;border-color:r
 .copy{align-self:flex-start;display:inline-flex;align-items:center;gap:5px;background:none;border:1px dashed rgb(var(--outline-variant));border-radius:6px;padding:4px 7px;font-family:var(--mono);font-size:9.5px;color:rgb(var(--on-surface-variant));transition:color .2s,border-color .2s}
 .copy:hover{color:var(--accent-text);border-color:var(--accent-border)}
 .copy .material-symbols-outlined{font-size:13px}
+.dis-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px}
+.dis-foot .legal-links{margin:0;gap:6px;letter-spacing:0}
+.dis-foot .copy{white-space:nowrap;align-self:center}
 .disclaimer{border:1px solid rgb(var(--outline-variant)/.55);border-left:2px solid var(--accent-border);border-radius:8px;background:rgb(var(--surface-container-highest)/.5);padding:9px 11px;font-size:11px;line-height:1.5;color:rgb(var(--on-surface-variant));margin:0;display:grid;gap:6px}
 .disclaimer p{margin:0}
 .d-label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text)}
 .legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.02em}
 .legal-links a{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;transition:color .2s}
 .legal-links a:hover{color:var(--accent-ui)}
+@media (min-width:981px) and (max-width:1120px){
+  .dis-foot .legal-links{flex-direction:column;align-items:flex-start;gap:2px}
+  .dis-foot .legal-links>span{display:none}
+}
 .legal-links span{opacity:.45}
 
 /* ---------- final cta ---------- */
@@ -494,6 +501,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
   .result{padding:16px}
   .disclaimer{font-size:11.5px;padding:10px 11px}
   .legal-links{font-size:11px}
+  .dis-foot{grid-template-columns:1fr;justify-items:start;gap:9px}
   .rbig .num{font-size:2.9rem}
   .rbig.money .num{font-size:2.45rem}
   .matrix{gap:2.5px}
@@ -907,11 +915,17 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
             <div class="disclaimer" role="note">
               <span class="d-label">предварительный расчёт</span>
               <p>Расчёт носит демонстрационный характер и не гарантирует достижения показанных показателей на 100%. Фактический эффект зависит от процессов и внедрения; точные цифры — после бесплатного аудита.</p>
-              <p class="legal-links">
-                <a href="../index.html#privacy">согласие на обработку ПДн</a>
-                <span aria-hidden="true">·</span>
-                <a href="../index.html#cookies">cookies</a>
-              </p>
+              <div class="dis-foot">
+                <p class="legal-links">
+                  <a href="../index.html#privacy">согласие на обработку ПДн</a>
+                  <span aria-hidden="true">·</span>
+                  <a href="../index.html#cookies">cookies</a>
+                </p>
+                <button class="copy" id="copyBtn" type="button">
+                  <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+                  <span id="copyLabel">copy --summary</span>
+                </button>
+              </div>
             </div>
 
             <div class="matrix-block">
@@ -944,11 +958,6 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
                 Как я это делаю
               </a>
             </div>
-
-            <button class="copy" id="copyBtn" type="button">
-              <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-              <span id="copyLabel">copy --summary</span>
-            </button>
           </aside>
         </div>
       </div>
