@@ -1666,6 +1666,15 @@ html.dark{
     if (acc) { acc.addEventListener('click', function () { setCookieConsent('accept'); }); }
     if (rej) { rej.addEventListener('click', function () { setCookieConsent('reject'); }); }
   })();
+  // Deep links from other pages: #privacy opens the policy, #cookies — cookie settings
+  (function initLegalDeepLinks() {
+    function applyHash() {
+      if (location.hash === '#privacy') openPrivacyModal();
+      else if (location.hash === '#cookies') openCookieModal();
+    }
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+  })();
   (function initCasesExpanded() {
     var wrap = document.getElementById('more-cases-wrap');
     var btnWrap = document.getElementById('show-more-cases-wrap');

@@ -192,7 +192,7 @@ html.dark .lg-shade{fill:#000000;}
 @keyframes lg-trace{from{stroke-dashoffset:584;}to{stroke-dashoffset:0;}}
 @keyframes lg-bang-bar{0%,100%{transform:scaleY(1);filter:drop-shadow(0 0 0 rgba(46,206,154,0));}42%{transform:scaleY(1.045);filter:drop-shadow(0 0 9px rgba(46,206,154,.85));}58%{transform:scaleY(1.045);filter:drop-shadow(0 0 6px rgba(46,206,154,.6));}}
 @keyframes lg-bang-dot{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
-.hero h1{font-size:clamp(2.05rem,5vw,4.15rem);line-height:1.02;max-width:900px}
+.hero h1{font-size:clamp(2.05rem,5vw,4.15rem);line-height:1.02;max-width:900px;text-align:center;margin-inline:auto}
 .hero h1 .hl{color:var(--accent-text);text-shadow:0 0 34px rgba(46,206,154,.18)}
 .hero-sub{max-width:680px;margin-top:18px;font-size:clamp(14px,1.35vw,17px);line-height:1.65;color:rgb(var(--on-surface-variant))}
 .hero-sub b{color:rgb(var(--on-surface));font-weight:600}
@@ -378,7 +378,12 @@ html.dark .result[data-level="hybrid"] .level-badge{color:#9be5ff;border-color:r
 .copy{align-self:flex-start;display:inline-flex;align-items:center;gap:5px;background:none;border:1px dashed rgb(var(--outline-variant));border-radius:6px;padding:4px 7px;font-family:var(--mono);font-size:8.5px;color:rgb(var(--on-surface-variant));transition:color .2s,border-color .2s}
 .copy:hover{color:var(--accent-text);border-color:var(--accent-border)}
 .copy .material-symbols-outlined{font-size:12px}
-.disclaimer{font-size:8.5px;line-height:1.5;color:rgb(var(--on-surface-variant)/.85);margin:0}
+.disclaimer{font-size:9px;line-height:1.55;color:rgb(var(--on-surface-variant)/.9);margin:0;display:grid;gap:6px}
+.disclaimer p{margin:0}
+.legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;letter-spacing:.02em}
+.legal-links a{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;transition:color .2s}
+.legal-links a:hover{color:var(--accent-ui)}
+.legal-links span{opacity:.45}
 
 /* ---------- final cta ---------- */
 .final{position:relative;z-index:1;padding:clamp(48px,7vw,88px) 0 clamp(40px,6vw,64px);scroll-margin-top:calc(var(--head) + 8px)}
@@ -482,6 +487,8 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
   .budget{grid-template-columns:1fr}
   .budget-card b{font-size:16px}
   .result{padding:16px}
+  .disclaimer{font-size:9.5px}
+  .legal-links{font-size:9.5px}
   .rbig .num{font-size:2.6rem}
   .rbig.money .num{font-size:2.2rem}
   .matrix{gap:2.5px}
@@ -925,7 +932,14 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
               <span id="copyLabel">copy --summary</span>
             </button>
 
-            <p class="disclaimer">* Ориентировочная оценка стоимости высвобожденного времени. Фактический эффект зависит от процессов и внедрения. Точные цифры — после бесплатного аудита.</p>
+            <div class="disclaimer">
+              <p>* Расчёт носит предварительный и демонстрационный характер и не гарантирует достижения показанных показателей на 100%. Фактический эффект зависит от процессов и внедрения; точные цифры — после бесплатного аудита.</p>
+              <p class="legal-links">
+                <a href="../index.html#privacy">согласие на обработку ПДн</a>
+                <span aria-hidden="true">·</span>
+                <a href="../index.html#cookies">cookies</a>
+              </p>
+            </div>
           </aside>
         </div>
       </div>
@@ -938,7 +952,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
         <div class="final-inner">
           <div>
             <div class="kicker">next_step</div>
-            <h2>Хватит платить<br><span class="hl">рутиной.</span></h2>
+            <h2>Хватит платить<br><span class="hl">за рутину.</span></h2>
             <p>Покажу, какие процессы можно забрать у команды уже в этом месяце — и сколько это вернёт в часах и деньгах. Разбор бесплатный, 20–30 минут.</p>
           </div>
           <div class="final-actions">
