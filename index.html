@@ -179,6 +179,163 @@ html.dark{
   --t-on-primary-container: 5 46 22;
   --t-surface-bright: 57 56 64;
 }
+/* ---- Hero calculator teaser ---- */
+.calc-teaser{
+  position:relative;display:block;width:100%;max-width:1120px;margin:0 auto;
+  border:1px solid rgb(var(--t-outline-variant)/.65);border-radius:18px;overflow:hidden;
+  text-align:left;text-decoration:none;color:rgb(var(--t-on-surface));isolation:isolate;
+  background:
+    radial-gradient(110% 150% at 0% 0%, rgb(var(--t-primary-container)/.13), transparent 58%),
+    linear-gradient(135deg, rgb(var(--t-surface-container)/.96), rgb(var(--t-surface-container-low)/.96));
+  box-shadow:0 18px 44px rgb(0 0 0/.18), inset 0 1px 0 rgb(255 255 255/.04);
+  transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease;
+}
+html.dark .calc-teaser{box-shadow:0 22px 60px rgb(0 0 0/.55), 0 0 32px rgb(var(--t-primary-container)/.07), inset 0 1px 0 rgb(255 255 255/.03);}
+.calc-teaser:hover,.calc-teaser:focus-visible{
+  border-color:rgb(var(--t-primary-container)/.6);transform:translateY(-2px);outline:none;
+  box-shadow:0 26px 64px rgb(0 0 0/.32), 0 0 40px rgb(var(--t-primary-container)/.14);
+}
+.calc-teaser:focus-visible{outline:2px solid rgb(var(--t-primary-container));outline-offset:3px;}
+.ct-aura{
+  position:absolute;left:-10%;right:-10%;top:-55%;height:120%;pointer-events:none;z-index:0;
+  background:radial-gradient(50% 50% at 50% 50%, rgb(var(--t-primary-container)/.18), transparent 70%);
+  filter:blur(18px);animation:ct-aura 9s ease-in-out infinite;
+}
+@keyframes ct-aura{0%,100%{opacity:.5;transform:translate3d(-4%,0,0) scale(.95);}50%{opacity:.95;transform:translate3d(6%,3%,0) scale(1.08);}}
+.ct-head{
+  position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:10px 16px;
+  border-bottom:1px solid rgb(var(--t-outline-variant)/.5);background:rgb(var(--t-surface-container-high)/.6);
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.06em;
+  color:rgb(var(--t-on-surface-variant));backdrop-filter:blur(8px);
+}
+.ct-dots{display:inline-flex;gap:5px;flex:none;}
+.ct-dots i{width:8px;height:8px;border-radius:50%;background:rgb(var(--t-outline-variant));}
+.ct-dots i:nth-child(1){background:#ef4444;}
+.ct-dots i:nth-child(2){background:#eab308;}
+.ct-dots i:nth-child(3){background:rgb(var(--t-primary-container));}
+.ct-path{color:rgb(var(--t-on-surface));opacity:.88;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.ct-live{
+  margin-left:auto;display:inline-flex;align-items:center;gap:6px;flex:none;
+  color:rgb(var(--t-primary-fixed-dim));font-size:9.5px;text-transform:uppercase;letter-spacing:.14em;
+}
+.ct-live i{width:6px;height:6px;border-radius:50%;background:rgb(var(--t-primary-container));box-shadow:0 0 9px rgb(var(--t-primary-container)/.9);animation:ct-pulse 1.8s ease-in-out infinite;}
+@keyframes ct-pulse{0%,100%{opacity:.45;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+.ct-body{
+  position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);
+  align-items:center;gap:28px;padding:22px 24px 24px;
+}
+.ct-copy{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;}
+.ct-kicker{
+  display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgb(var(--t-primary-fixed-dim));
+}
+.ct-kicker::before{content:"";width:18px;height:1px;background:rgb(var(--t-primary-container));}
+.ct-title{
+  margin:0;font-size:clamp(20px,2.35vw,27px);line-height:1.2;font-weight:600;letter-spacing:-.03em;
+  color:rgb(var(--t-on-surface));max-width:26ch;
+}
+.ct-sub{margin:0;font-size:13px;line-height:1.55;color:rgb(var(--t-on-surface-variant));max-width:44ch;}
+.ct-cta{
+  margin-top:4px;display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;
+  background:rgb(var(--t-primary-container));color:rgb(var(--t-on-primary-container));
+  font-size:13.5px;font-weight:700;letter-spacing:-.01em;
+  box-shadow:0 0 0 1px rgb(var(--t-primary-container)/.4),0 10px 26px rgb(var(--t-primary-container)/.22);
+  transition:box-shadow .25s ease,gap .25s ease;
+}
+.ct-cta .material-symbols-outlined{font-size:18px;transition:transform .25s ease;}
+.calc-teaser:hover .ct-cta{box-shadow:0 0 0 1px rgb(var(--t-primary-container)/.55),0 12px 34px rgb(var(--t-primary-container)/.34);}
+.calc-teaser:hover .ct-cta .material-symbols-outlined{transform:translateX(4px);}
+.ct-hint{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:9.5px;letter-spacing:.05em;color:rgb(var(--t-on-surface-variant));opacity:.8;
+}
+.ct-demo{
+  position:relative;display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden;
+  padding:15px 16px 16px;border:1px solid rgb(var(--t-outline-variant)/.5);border-radius:12px;
+  background:rgb(var(--t-surface-container-lowest)/.55);
+}
+html.dark .ct-demo{background:rgb(var(--t-surface-container-lowest)/.72);}
+.ct-demo::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:linear-gradient(100deg,transparent 20%,rgb(var(--t-primary-container)/.08) 50%,transparent 80%);
+  transform:translateX(-120%);animation:ct-scan 7s linear infinite;
+}
+@keyframes ct-scan{0%{transform:translateX(-120%);}60%,100%{transform:translateX(120%);}}
+.ct-row{position:relative;z-index:1;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:6px 10px;}
+.ct-label{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgb(var(--t-on-surface-variant));opacity:.85;
+}
+.ct-spheres{display:flex;flex-wrap:wrap;gap:5px;min-width:0;}
+.ct-chip{
+  padding:2px 9px;border-radius:99px;border:1px solid rgb(var(--t-outline-variant)/.65);
+  background:rgb(var(--t-surface-container)/.7);font-size:10.5px;line-height:1.6;
+  color:rgb(var(--t-on-surface-variant));white-space:nowrap;
+  transition:background .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+.ct-chip.is-on{
+  background:rgb(var(--t-primary-container));border-color:rgb(var(--t-primary-container));
+  color:rgb(var(--t-on-primary-container));font-weight:600;box-shadow:0 0 14px rgb(var(--t-primary-container)/.35);
+}
+.ct-routine{grid-template-columns:auto minmax(0,1fr) auto;}
+.ct-slider{position:relative;height:6px;border-radius:99px;background:rgb(var(--t-outline-variant)/.5);overflow:hidden;}
+.ct-fill{
+  position:absolute;inset:0 auto 0 0;width:60%;border-radius:99px;
+  background:linear-gradient(90deg,rgb(var(--t-primary-container)/.5),rgb(var(--t-primary-container)));
+  box-shadow:0 0 12px rgb(var(--t-primary-container)/.5);
+  transition:width .7s cubic-bezier(.22,1,.36,1);
+}
+.ct-value{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;font-weight:600;color:rgb(var(--t-on-surface));font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.ct-tools{display:flex;flex-wrap:wrap;gap:5px;min-width:0;}
+.ct-tool{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 8px 2px 6px;border-radius:7px;
+  border:1px solid rgb(var(--t-outline-variant)/.6);background:rgb(var(--t-surface-container)/.55);
+  font-size:10px;line-height:1.6;color:rgb(var(--t-on-surface-variant));
+  transition:color .3s ease,border-color .3s ease,background .3s ease,transform .3s ease,box-shadow .3s ease;
+}
+.ct-tool.is-pulse{
+  border-color:rgb(var(--t-primary-container)/.75);background:rgb(var(--t-primary-container)/.22);
+  color:rgb(var(--t-on-surface));transform:translateY(-1px);box-shadow:0 0 12px rgb(var(--t-primary-container)/.25);
+}
+.ct-tool .material-symbols-outlined{font-size:13px;}
+.ct-tool .ct-check{font-size:11px;color:rgb(var(--t-primary-container));opacity:0;transform:scale(.6);transition:opacity .3s ease,transform .3s ease;}
+.ct-tool.is-on{color:rgb(var(--t-on-surface));border-color:rgb(var(--t-primary-container)/.45);background:rgb(var(--t-primary-container)/.1);}
+.ct-tool.is-on .ct-check{opacity:1;transform:scale(1);}
+.ct-out{
+  position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  margin-top:2px;padding-top:11px;border-top:1px dashed rgb(var(--t-outline-variant)/.65);
+}
+.ct-out-item{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.ct-out-label{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgb(var(--t-on-surface-variant));
+}
+.ct-out-val{font-size:15px;font-weight:600;letter-spacing:-.02em;color:rgb(var(--t-on-surface));font-variant-numeric:tabular-nums;white-space:nowrap;}
+.ct-out-val b{color:rgb(var(--t-primary-fixed-dim));font-weight:700;}
+@media (max-width:900px){
+  .ct-body{grid-template-columns:1fr;gap:18px;padding:20px;}
+  .ct-title{max-width:none;}
+  .ct-demo{max-width:none;width:100%;}
+}
+@media (max-width:640px){
+  .calc-teaser{border-radius:14px;}
+  .ct-head{padding:9px 12px;gap:8px;font-size:9px;}
+  .ct-body{padding:17px 15px 18px;gap:16px;}
+  .ct-cta{width:100%;justify-content:center;padding:12px 16px;font-size:13px;}
+  .ct-hint{align-self:center;text-align:center;}
+  .ct-demo{padding:13px 12px 14px;gap:10px;}
+  .ct-chip{font-size:10px;padding:2px 8px;}
+  .ct-label{font-size:8.5px;letter-spacing:.09em;}
+  .ct-out-val{font-size:13.5px;}
+  .ct-out{gap:6px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .ct-aura,.ct-demo::after,.ct-live i{animation:none;}
+  .ct-fill,.ct-chip,.ct-tool,.ct-tool .ct-check,.ct-cta,.ct-cta .material-symbols-outlined{transition:none;}
+}
 </style><script id="tailwind-config">tailwind.config = {
     darkMode: "class",
     theme: {
@@ -536,49 +693,60 @@ html.dark{
 <span class="material-symbols-outlined text-[16px]" aria-hidden="true">terminal</span>
 </a>
 </div>
-<!-- Live Interactive Terminal Preview -->
-<div class="w-full max-w-4xl bg-surface-container-lowest/95 backdrop-blur-xl rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.65)] overflow-hidden text-left">
-<!-- Terminal Titlebar -->
-<div class="bg-surface-container-high/90 px-space-md py-2.5 flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-[#ef4444] inline-block"></span>
-<span class="w-3 h-3 rounded-full bg-[#eab308] inline-block"></span>
-<span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span>
-<span class="ml-2 font-mono text-label-sm text-on-surface-variant">bash ~ /usr/bin/pipeline-monitor</span>
+<!-- Interactive Calculator Teaser -->
+<a class="calc-teaser" href="v2/" id="calcTeaser" aria-label="Открыть интерактивный калькулятор автоматизации: посчитать, сколько часов и денег съедает рутина">
+<span class="ct-aura" aria-hidden="true"></span>
+<div class="ct-head" aria-hidden="true">
+<span class="ct-dots"><i></i><i></i><i></i></span>
+<span class="ct-path">~/calculator --demo</span>
+<span class="ct-live"><i></i> live расчёт</span>
 </div>
-<div class="flex items-center gap-2 font-mono text-label-sm text-primary-fixed-dim">
-<span class="material-symbols-outlined text-[14px]" aria-hidden="true">tune</span>
-<span>node: n8n-primary-prod</span>
+<div class="ct-body">
+<div class="ct-copy">
+<span class="ct-kicker">интерактивный калькулятор</span>
+<p class="ct-title">Верните часы и деньги, которые съедает рутина</p>
+<p class="ct-sub">Выберите отрасль и объём задач — калькулятор за 30 секунд покажет, сколько времени и бюджета вернёт автоматизация.</p>
+<span class="ct-cta">Посчитать свою экономию <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
+<span class="ct-hint">без регистрации · демо-расчёт</span>
 </div>
-</div>
-<!-- Terminal Body -->
-<div class="p-space-lg font-mono text-label-md leading-relaxed space-y-2 select-text break-words [overflow-wrap:anywhere]" id="terminal-feed">
-<div class="text-on-surface-variant flex items-center gap-2">
-<span class="text-primary-container">$</span>
-<span>curl -X POST https://flow.noroutine.dev/webhook/v1/lead-ingest</span>
-</div>
-<div class="text-secondary flex items-start gap-2">
-<span class="text-primary-container">✓</span>
-<span>HTTP/2 200 OK · payload: {"client":"pm_agency","pipeline":"tracker_sync","status":"init"}</span>
-</div>
-<div class="text-on-surface flex items-start gap-2">
-<span class="text-tertiary-fixed-dim">↳</span>
-<span class="text-primary-fixed-dim">[n8n core]</span>
-<span>trigger: webhook_received → parsing payload → classification: LLM agent (GPT-4o)</span>
-</div>
-<div class="text-on-surface flex items-start gap-2">
-<span class="text-tertiary-fixed-dim">↳</span>
-<span class="text-secondary-fixed-dim">[yandex.tracker]</span>
-<span>queue: DEV · issue created: DEV-482 "Автоматизация онбординга" · assignee: auto</span>
-</div>
-<div class="text-primary-container flex items-center gap-2 font-semibold">
-<span>[OK]</span>
-<span>Workflow pipeline finished in 412ms · 0 manual hours spent</span>
-<span class="w-2 h-4 bg-primary-container terminal-cursor inline-block ml-1"></span>
+<div class="ct-demo" aria-hidden="true">
+<div class="ct-row">
+<span class="ct-label">отрасль</span>
+<div class="ct-spheres">
+<span class="ct-chip is-on">агентство</span>
+<span class="ct-chip">e-commerce</span>
+<span class="ct-chip">IT</span>
+<span class="ct-chip">производство</span>
+<span class="ct-chip">услуги</span>
+<span class="ct-chip">финансы</span>
 </div>
 </div>
+<div class="ct-row ct-routine">
+<span class="ct-label">рутина</span>
+<span class="ct-slider"><span class="ct-fill" id="ctFill"></span></span>
+<span class="ct-value" id="ctRoutine">180 ч/мес</span>
+</div>
+<div class="ct-row">
+<span class="ct-label">инструменты</span>
+<div class="ct-tools">
+<span class="ct-tool is-on"><span class="material-symbols-outlined">smart_toy</span>чат-бот<span class="ct-check material-symbols-outlined">check</span></span>
+<span class="ct-tool is-on"><span class="material-symbols-outlined">psychology</span>AI-агент<span class="ct-check material-symbols-outlined">check</span></span>
+<span class="ct-tool is-on"><span class="material-symbols-outlined">view_kanban</span>Трекер<span class="ct-check material-symbols-outlined">check</span></span>
 </div>
 </div>
+<div class="ct-out">
+<div class="ct-out-item">
+<span class="ct-out-label">экономия времени</span>
+<span class="ct-out-val">≈ <b id="ctHours">112</b> ч/мес</span>
+</div>
+<div class="ct-out-item">
+<span class="ct-out-label">экономия бюджета</span>
+<span class="ct-out-val">≈ <b id="ctMoney">134 000</b> ₽/мес</span>
+</div>
+</div>
+</div>
+</div>
+</a>
 </section>
 <!-- ==================== 2. SERVICES GRID ==================== -->
 <section class="relative z-10 max-w-7xl mx-auto px-gutter py-space-xl w-full" id="services" aria-label="Услуги и модули автоматизации">
@@ -1690,6 +1858,103 @@ html.dark{
       try { localStorage.setItem('nr-cases-expanded', 'true'); } catch (e) {}
     });
     try { if (localStorage.getItem('nr-cases-expanded') === 'true') expand(); } catch (e) {}
+  })();
+  // 10. Hero calculator teaser: cycle through industries and preview the calculation
+  (function initCalcTeaser() {
+    var root = document.getElementById('calcTeaser');
+    if (!root) return;
+    var chips = Array.prototype.slice.call(root.querySelectorAll('.ct-chip'));
+    var tools = Array.prototype.slice.call(root.querySelectorAll('.ct-tool'));
+    var fill = document.getElementById('ctFill');
+    var routineEl = document.getElementById('ctRoutine');
+    var hoursEl = document.getElementById('ctHours');
+    var moneyEl = document.getElementById('ctMoney');
+    if (!chips.length || !tools.length || !fill || !routineEl || !hoursEl || !moneyEl) return;
+    var profiles = [
+      { hours: 180, saved: 112, money: 134000 },
+      { hours: 240, saved: 149, money: 119000 },
+      { hours: 160, saved: 99, money: 149000 },
+      { hours: 200, saved: 124, money: 87000 },
+      { hours: 140, saved: 87, money: 78000 },
+      { hours: 170, saved: 105, money: 116000 }
+    ];
+    var moneyFmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F'); };
+    var idx = 0;
+    var current = { hours: profiles[0].saved, money: profiles[0].money, routine: profiles[0].hours };
+    var frame = 0;
+    var timer = 0;
+    var toolTimers = [];
+    var visible = false;
+    var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    function paintInstant(profile) {
+      current = { hours: profile.saved, money: profile.money, routine: profile.hours };
+      routineEl.textContent = profile.hours + '\u00A0ч/мес';
+      hoursEl.textContent = profile.saved;
+      moneyEl.textContent = moneyFmt(profile.money);
+      fill.style.width = Math.min(100, Math.round((profile.hours / 300) * 100)) + '%';
+    }
+    function animateTo(profile) {
+      cancelAnimationFrame(frame);
+      var from = { hours: current.hours, money: current.money, routine: current.routine };
+      var started = 0;
+      function step(now) {
+        if (!started) started = now;
+        var p = Math.min(1, (now - started) / 650);
+        var e = 1 - Math.pow(1 - p, 3);
+        current.hours = Math.round(from.hours + (profile.saved - from.hours) * e);
+        current.money = Math.round(from.money + (profile.money - from.money) * e);
+        current.routine = Math.round(from.routine + (profile.hours - from.routine) * e);
+        hoursEl.textContent = current.hours;
+        moneyEl.textContent = moneyFmt(current.money);
+        routineEl.textContent = current.routine + '\u00A0ч/мес';
+        if (p < 1) frame = requestAnimationFrame(step);
+      }
+      frame = requestAnimationFrame(step);
+      fill.style.width = Math.min(100, Math.round((profile.hours / 300) * 100)) + '%';
+    }
+    function pulseTools() {
+      toolTimers.forEach(clearTimeout);
+      toolTimers = [];
+      tools.forEach(function (tool, i) {
+        tool.classList.remove('is-pulse');
+        toolTimers.push(setTimeout(function () { tool.classList.add('is-pulse'); }, i * 140));
+        toolTimers.push(setTimeout(function () { tool.classList.remove('is-pulse'); }, 380 + i * 140));
+      });
+    }
+    function show(i, instant) {
+      idx = (i + profiles.length) % profiles.length;
+      chips.forEach(function (chip, j) { chip.classList.toggle('is-on', j === idx); });
+      var profile = profiles[idx];
+      if (instant) paintInstant(profile);
+      else { animateTo(profile); pulseTools(); }
+    }
+    function start() {
+      if (reduced || timer) return;
+      timer = setInterval(function () { show(idx + 1); }, 3000);
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = 0; }
+      cancelAnimationFrame(frame);
+      toolTimers.forEach(clearTimeout);
+      toolTimers = [];
+      tools.forEach(function (tool) { tool.classList.remove('is-pulse'); });
+    }
+
+    show(0, true);
+    if (reduced) return;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) start(); else stop();
+      }, { threshold: 0.2 }).observe(root);
+    } else {
+      visible = true;
+      start();
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else if (visible) start();
+    });
   })();
 </script><footer class="w-full bg-surface-container-lowest relative z-10 py-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.8)]"><div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col items-center md:items-start gap-space-xs"><div class="flex items-center"><img src="logo-dark.svg" alt="No! Routine" class="logo-img--dark h-9 w-auto" width="409" height="146"><img src="logo-light.svg" alt="No! Routine" class="logo-img--light h-9 w-auto" width="409" height="146"></div><p class="font-label-md text-label-md text-on-surface-variant">© 2026 Павел Новиков. [all rights reserved]</p></div><div class="flex items-center gap-space-md font-label-md text-label-md px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface-variant"><div class="flex items-center gap-space-xs"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span><span class="font-mono text-on-surface">host: production</span></div><span class="text-outline-variant font-mono">//</span><span class="text-primary-fixed-dim font-mono">uptime: 99.98%</span></div><div class="flex items-center gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" data-path="uslugi" href="#services">uslugi.sys</a><a class="hover:text-primary transition-colors" data-path="keysy" href="#cases">cases.log</a><a class="hover:text-primary transition-colors" data-path="kontakty" href="#contact">terminal.io</a><a class="hover:text-primary transition-colors" data-path="cookies" href="#" onclick="openCookieModal(event)">cookies.sys</a><a class="hover:text-primary transition-colors" data-path="privacy" href="#" onclick="openPrivacyModal(event)">policy.sys</a></div></div></footer>
 
