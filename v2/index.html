@@ -193,6 +193,7 @@ html.dark .lg-shade{fill:#000000;}
 @keyframes lg-bang-bar{0%,100%{transform:scaleY(1);filter:drop-shadow(0 0 0 rgba(46,206,154,0));}42%{transform:scaleY(1.045);filter:drop-shadow(0 0 9px rgba(46,206,154,.85));}58%{transform:scaleY(1.045);filter:drop-shadow(0 0 6px rgba(46,206,154,.6));}}
 @keyframes lg-bang-dot{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
 .hero h1{font-size:clamp(2.05rem,5vw,4.15rem);line-height:1.02;max-width:900px;text-align:center;margin-inline:auto}
+.hero h1 .h1-a{display:block}
 .hero h1 .hl{color:var(--accent-text);text-shadow:0 0 34px rgba(46,206,154,.18)}
 .hero-sub{max-width:680px;margin-top:18px;font-size:clamp(14px,1.35vw,17px);line-height:1.65;color:rgb(var(--on-surface-variant))}
 .hero-sub b{color:rgb(var(--on-surface));font-weight:600}
@@ -380,9 +381,10 @@ html.dark .result[data-level="hybrid"] .level-badge{color:#9be5ff;border-color:r
 .copy{align-self:flex-start;display:inline-flex;align-items:center;gap:5px;background:none;border:1px dashed rgb(var(--outline-variant));border-radius:6px;padding:4px 7px;font-family:var(--mono);font-size:9.5px;color:rgb(var(--on-surface-variant));transition:color .2s,border-color .2s}
 .copy:hover{color:var(--accent-text);border-color:var(--accent-border)}
 .copy .material-symbols-outlined{font-size:13px}
-.disclaimer{font-size:10px;line-height:1.55;color:rgb(var(--on-surface-variant)/.9);margin:0;display:grid;gap:6px}
+.disclaimer{border:1px solid rgb(var(--outline-variant)/.55);border-left:2px solid var(--accent-border);border-radius:8px;background:rgb(var(--surface-container-highest)/.5);padding:9px 11px;font-size:11px;line-height:1.5;color:rgb(var(--on-surface-variant));margin:0;display:grid;gap:6px}
 .disclaimer p{margin:0}
-.legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;letter-spacing:.02em}
+.d-label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text)}
+.legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.02em}
 .legal-links a{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;transition:color .2s}
 .legal-links a:hover{color:var(--accent-ui)}
 .legal-links span{opacity:.45}
@@ -475,6 +477,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
   .head-cta .label{display:none}
   .head-cta .material-symbols-outlined{font-size:17px}
   .hero{padding-top:26px}
+  .hero h1 .h1-a{display:inline}
   .hero-metrics{width:100%}
   .metric{flex:1 1 33%;padding:10px 12px;text-align:center;min-width:0}
   .metric b{font-size:16px}
@@ -489,8 +492,8 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
   .budget{grid-template-columns:1fr}
   .budget-card b{font-size:18px}
   .result{padding:16px}
-  .disclaimer{font-size:10.5px}
-  .legal-links{font-size:10.5px}
+  .disclaimer{font-size:11.5px;padding:10px 11px}
+  .legal-links{font-size:11px}
   .rbig .num{font-size:2.9rem}
   .rbig.money .num{font-size:2.45rem}
   .matrix{gap:2.5px}
@@ -539,7 +542,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
     <a class="brand" href="#top" aria-label="No! Routine — наверх">
       <img src="../logo-dark.svg" alt="No! Routine" class="brand-dark" width="409" height="146">
       <img src="../logo-light.svg" alt="No! Routine" class="brand-light" width="409" height="146">
-      <span class="ver">sys://v2.0-beta</span>
+      <span class="ver">sys://v2.1-beta</span>
     </a>
     <nav class="head-nav" aria-label="Навигация">
       <a href="#calc">Калькулятор</a>
@@ -564,7 +567,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
     <div class="wrap hero-inner">
       <div class="badge" data-reveal style="--d:.02s">
         <span class="pulse" aria-hidden="true"></span>
-        <span>[system] online · <b>v2.0-beta</b> · roi_calculator</span>
+        <span>[system] online · <b>v2.1-beta</b> · roi_calculator</span>
       </div>
 
       <div class="hero-logo-wrap" data-reveal style="--d:.08s">
@@ -677,7 +680,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
     </svg>
       </div>
 
-      <h1 data-reveal style="--d:.14s">Рутина съедает <br><span class="hl">часы и деньги.</span></h1>
+      <h1 data-reveal style="--d:.14s"><span class="h1-a">Рутина съедает часы</span> <span class="hl">и деньги.</span></h1>
       <p class="hero-sub" data-reveal style="--d:.2s">
         Соберите сценарий автоматизации за 30 секунд: выберите сферу, объём рутины и инструменты.
         Калькулятор покажет, сколько <b>часов и рублей</b> вернёт бизнесу чат-бот, AI-агент или Яндекс Трекер.
@@ -901,6 +904,16 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
               <p class="insight"><span class="material-symbols-outlined" aria-hidden="true">trending_up</span><span id="insight">≈ 15 рабочих дней · 0,7 FTE без найма</span></p>
             </div>
 
+            <div class="disclaimer" role="note">
+              <span class="d-label">предварительный расчёт</span>
+              <p>Расчёт носит демонстрационный характер и не гарантирует достижения показанных показателей на 100%. Фактический эффект зависит от процессов и внедрения; точные цифры — после бесплатного аудита.</p>
+              <p class="legal-links">
+                <a href="../index.html#privacy">согласие на обработку ПДн</a>
+                <span aria-hidden="true">·</span>
+                <a href="../index.html#cookies">cookies</a>
+              </p>
+            </div>
+
             <div class="matrix-block">
               <div class="matrix-head"><span>уровень автоматизации</span><b id="levelPct">57%</b></div>
               <div class="matrix" id="matrix" aria-hidden="true"></div>
@@ -936,15 +949,6 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
               <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
               <span id="copyLabel">copy --summary</span>
             </button>
-
-            <div class="disclaimer">
-              <p>* Расчёт носит предварительный и демонстрационный характер и не гарантирует достижения показанных показателей на 100%. Фактический эффект зависит от процессов и внедрения; точные цифры — после бесплатного аудита.</p>
-              <p class="legal-links">
-                <a href="../index.html#privacy">согласие на обработку ПДн</a>
-                <span aria-hidden="true">·</span>
-                <a href="../index.html#cookies">cookies</a>
-              </p>
-            </div>
           </aside>
         </div>
       </div>
@@ -987,7 +991,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
     <div class="foot-brand">
       <img src="../logo-dark.svg" alt="No! Routine" class="brand-dark" width="409" height="146">
       <img src="../logo-light.svg" alt="No! Routine" class="brand-light" width="409" height="146">
-      <p>© 2026 Павел Новиков · v2.0-beta</p>
+      <p>© 2026 Павел Новиков · v2.1-beta</p>
     </div>
     <nav class="foot-links" aria-label="Ссылки в подвале">
       <a href="../index.html">полная версия сайта</a>
