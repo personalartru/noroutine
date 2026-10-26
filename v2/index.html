@@ -274,6 +274,11 @@ html.dark .lg-shade{fill:#000000;}
 .range-row{display:flex;flex-direction:column;gap:2px;padding:9px 12px 8px;border:1px solid rgb(var(--outline-variant)/.65);border-radius:11px;background:rgb(var(--surface-container-low)/.45);transition:border-color .2s,background .2s}
 .range-row:focus-within{border-color:rgba(46,206,154,.55);background:rgb(var(--surface-container-low)/.8)}
 .range-row.full{grid-column:1/-1}
+.roles{grid-column:1/-1;display:flex;align-items:center;gap:8px 10px;flex-wrap:wrap;margin-top:0;padding:8px 10px;border:1px dashed rgb(var(--outline-variant)/.75);border-radius:10px;background:rgb(var(--surface-container-lowest)/.3)}
+.roles-cap{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgb(var(--on-surface-variant));flex:none}
+.roles-list{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.role{display:inline-flex;align-items:center;gap:5px;padding:2px 8px 2px 5px;border:1px solid rgb(var(--outline-variant)/.7);border-radius:99px;background:rgb(var(--surface-container-low)/.65);font-size:10.5px;line-height:1.4;color:rgb(var(--on-surface));white-space:nowrap}
+.role .material-symbols-outlined{font-size:14px;color:var(--accent-text);flex:none}
 .range-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .range-top label{font-size:12px;line-height:1.4;color:rgb(var(--on-surface-variant))}
 .range-top output{font-family:var(--mono);font-size:15.5px;font-weight:600;letter-spacing:-.02em;color:rgb(var(--on-surface));white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -496,6 +501,8 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
   .tools{grid-template-columns:1fr}
   .tool small{min-height:0}
   .ranges{gap:8px}
+  .roles{padding:7px 9px;gap:6px 8px}
+  .role{font-size:10px}
   .budget{grid-template-columns:1fr}
   .budget-card b{font-size:18px}
   .result{padding:16px}
@@ -825,6 +832,10 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
                   </div>
                   <input id="hours" type="range" min="1" max="40" step="1" value="8" aria-describedby="formulaNote">
                 </div>
+                <div class="roles" id="peopleRoles" aria-live="polite">
+                  <span class="roles-cap">кого можно заменить</span>
+                  <div class="roles-list" id="peopleRolesList"></div>
+                </div>
                 <div class="range-row full">
                   <div class="range-top">
                     <label for="rate">Стоимость часа</label>
@@ -912,22 +923,6 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
               <p class="insight"><span class="material-symbols-outlined" aria-hidden="true">trending_up</span><span id="insight">≈ 15 рабочих дней · 0,7 FTE без найма</span></p>
             </div>
 
-            <div class="disclaimer" role="note">
-              <span class="d-label">предварительный расчёт</span>
-              <p>Расчёт носит демонстрационный характер и не гарантирует достижения показанных показателей на 100%. Фактический эффект зависит от процессов и внедрения; точные цифры — после бесплатного аудита.</p>
-              <div class="dis-foot">
-                <p class="legal-links">
-                  <a href="../index.html#privacy">согласие на обработку ПДн</a>
-                  <span aria-hidden="true">·</span>
-                  <a href="../index.html#cookies">cookies</a>
-                </p>
-                <button class="copy" id="copyBtn" type="button">
-                  <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-                  <span id="copyLabel">copy --summary</span>
-                </button>
-              </div>
-            </div>
-
             <div class="matrix-block">
               <div class="matrix-head"><span>уровень автоматизации</span><b id="levelPct">57%</b></div>
               <div class="matrix" id="matrix" aria-hidden="true"></div>
@@ -946,6 +941,22 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
             <div class="compare" aria-label="Рутина до и после автоматизации">
               <div class="compare-row"><span>сейчас</span><span class="bar before"><i id="beforeBar"></i></span><b id="beforeH">208 ч</b></div>
               <div class="compare-row"><span>после</span><span class="bar after"><i id="afterBar" style="width:43%"></i></span><b id="afterH">90 ч</b></div>
+            </div>
+
+            <div class="disclaimer" role="note">
+              <span class="d-label">предварительный расчёт</span>
+              <p>Расчёт носит демонстрационный характер и не гарантирует достижения показанных показателей на 100%. Фактический эффект зависит от процессов и внедрения; точные цифры — после бесплатного аудита.</p>
+              <div class="dis-foot">
+                <p class="legal-links">
+                  <a href="../index.html#privacy">согласие на обработку ПДн</a>
+                  <span aria-hidden="true">·</span>
+                  <a href="../index.html#cookies">cookies</a>
+                </p>
+                <button class="copy" id="copyBtn" type="button">
+                  <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+                  <span id="copyLabel">copy --summary</span>
+                </button>
+              </div>
             </div>
 
             <div class="rcta">
@@ -1116,12 +1127,42 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
 
   /* ---------- calculator data ---------- */
   var SPHERES = {
-    agency:     { name: 'Digital / агентство', people: 6,  hours: 8,  rate: 1800 },
-    ecom:       { name: 'E-commerce',          people: 8,  hours: 10, rate: 1200 },
-    it:         { name: 'IT / продукт',        people: 10, hours: 7,  rate: 2500 },
-    production: { name: 'Производство',        people: 12, hours: 9,  rate: 900  },
-    services:   { name: 'Услуги / бьюти',      people: 4,  hours: 8,  rate: 900  },
-    finance:    { name: 'Финансы / учёт',      people: 5,  hours: 12, rate: 1500 }
+    agency:     { name: 'Digital / агентство', people: 6,  hours: 8,  rate: 1800, roles: [
+      { name: 'аккаунт-менеджер', icon: 'support_agent' },
+      { name: 'копирайтер', icon: 'edit_note' },
+      { name: 'таргетолог', icon: 'ads_click' },
+      { name: 'дизайнер', icon: 'palette' }
+    ] },
+    ecom:       { name: 'E-commerce',          people: 8,  hours: 10, rate: 1200, roles: [
+      { name: 'оператор поддержки', icon: 'support_agent' },
+      { name: 'менеджер заказов', icon: 'inventory_2' },
+      { name: 'контент-менеджер', icon: 'edit_note' },
+      { name: 'менеджер маркетплейсов', icon: 'storefront' }
+    ] },
+    it:         { name: 'IT / продукт',        people: 10, hours: 7,  rate: 2500, roles: [
+      { name: 'L1-поддержка', icon: 'headset_mic' },
+      { name: 'аналитик', icon: 'analytics' },
+      { name: 'тестировщик', icon: 'bug_report' },
+      { name: 'проджект-менеджер', icon: 'assignment' }
+    ] },
+    production: { name: 'Производство',        people: 12, hours: 9,  rate: 900, roles: [
+      { name: 'диспетчер', icon: 'headset_mic' },
+      { name: 'менеджер закупок', icon: 'shopping_cart' },
+      { name: 'кладовщик', icon: 'inventory_2' },
+      { name: 'мастер смены', icon: 'assignment_ind' }
+    ] },
+    services:   { name: 'Услуги / бьюти',      people: 4,  hours: 8,  rate: 900, roles: [
+      { name: 'администратор', icon: 'support_agent' },
+      { name: 'диспетчер заявок', icon: 'calendar_month' },
+      { name: 'контент-менеджер', icon: 'edit_note' },
+      { name: 'маркетолог', icon: 'campaign' }
+    ] },
+    finance:    { name: 'Финансы / учёт',      people: 5,  hours: 12, rate: 1500, roles: [
+      { name: 'бухгалтер', icon: 'calculate' },
+      { name: 'оператор сверок', icon: 'sync_alt' },
+      { name: 'финменеджер', icon: 'account_balance' },
+      { name: 'кадровик', icon: 'badge' }
+    ] }
   };
 
   var TOOLS = {
@@ -1154,6 +1195,7 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
     people: $('#people'), hours: $('#hours'), rate: $('#rate'),
     peopleOut: $('#peopleOut'), hoursOut: $('#hoursOut'), rateOut: $('#rateOut'),
     budgetHours: $('#budgetHours'), budgetMoney: $('#budgetMoney'),
+    roles: $('#peopleRoles'), rolesList: $('#peopleRolesList'),
     saveHours: $('#saveHours'), saveMoney: $('#saveMoney'), saveYear: $('#saveYear'),
     insight: $('#insight'), coverageOut: $('#coverageOut'), coverageFill: $('#coverageFill'),
     rec: $('#rec'), matrix: $('#matrix'), levelPct: $('#levelPct'), levelBadge: $('#levelBadge'),
@@ -1319,8 +1361,32 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
       btn.setAttribute('aria-pressed', state.tools.has(btn.getAttribute('data-tool')) ? 'true' : 'false');
     });
     updateStepper();
+    renderRoles();
     if (els.sampleTag) els.sampleTag.classList.toggle('hide', state.touched);
     render(animateValues);
+  }
+
+  var rolesSphere = null;
+  function renderRoles() {
+    if (!els.roles || !els.rolesList) return;
+    var profile = SPHERES[state.sphere];
+    if (!profile || rolesSphere === state.sphere) return;
+    rolesSphere = state.sphere;
+    els.rolesList.textContent = '';
+    profile.roles.forEach(function (role) {
+      var chip = document.createElement('span');
+      chip.className = 'role';
+      var ico = document.createElement('span');
+      ico.className = 'material-symbols-outlined';
+      ico.setAttribute('aria-hidden', 'true');
+      ico.textContent = role.icon;
+      var label = document.createElement('span');
+      label.textContent = role.name;
+      chip.appendChild(ico);
+      chip.appendChild(label);
+      els.rolesList.appendChild(chip);
+    });
+    els.roles.setAttribute('aria-label', 'Кого можно заменить: ' + profile.roles.map(function (role) { return role.name; }).join(', '));
   }
 
   function recommendation(r) {
