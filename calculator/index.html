@@ -7,6 +7,12 @@
 /* no-flash theme init */
 (function(){var l=false;try{var v=localStorage.getItem('nr-theme');l=v?v==='light':(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches);}catch(e){}document.documentElement.classList.toggle('dark',!l);document.documentElement.classList.add('js');})();
 </script>
+<!-- Yandex.Metrika counter — загружается только после согласия на cookie (localStorage nr-cookies) -->
+<script>
+window.__nrLoadMetrika=function(){if(window.__nrYmLoaded)return;window.__nrYmLoaded=true;(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=110947701','ym');ym(110947701,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:'dataLayer',accurateTrackBounce:true,trackLinks:true});};
+try{if(localStorage.getItem('nr-cookies')==='accept'){window.__nrLoadMetrika();}}catch(e){}
+</script>
+<!-- /Yandex.Metrika counter -->
 <title>Калькулятор автоматизации — No! Routine</title>
 <meta name="description" content="Посчитайте экономию от автоматизации за 30 секунд: выберите сферу, объём рутины и инструменты — чат-бот, AI-агент, Яндекс Трекер, n8n. Часы и рубли в реальном времени.">
 <meta name="robots" content="index, follow">
@@ -541,6 +547,25 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
 @media (max-width:360px){
   .spheres{grid-template-columns:1fr}
 }
+
+/* ---------- cookie banner (consent → Yandex.Metrika) ---------- */
+.cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:90;display:flex;justify-content:center;pointer-events:none}
+.cookie[hidden]{display:none}
+.cookie-card{pointer-events:auto;width:100%;max-width:760px;border:1px solid rgb(var(--outline-variant)/.8);border-radius:14px;background:rgb(var(--surface-container-lowest)/.94);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:var(--shadow);padding:14px 16px}
+.cookie-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-text)}
+.cookie-head::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(46,206,154,.6)}
+.cookie-card p{margin:0;font-size:13px;line-height:1.55;color:rgb(var(--on-surface-variant))}
+.cookie-card p b{color:rgb(var(--on-surface));font-weight:600}
+.cookie-card code{font-family:var(--mono);font-size:11px;color:var(--accent-text);background:rgb(var(--surface-container-high)/.6);border:1px solid rgb(var(--outline-variant)/.6);border-radius:4px;padding:1px 5px}
+.cookie-card a{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;transition:color .2s}
+.cookie-card a:hover{color:var(--accent-ui)}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.cookie-actions .btn{padding:10px 18px;font-size:12px}
+@media (max-width:640px){
+  .cookie{left:10px;right:10px;bottom:10px}
+  .cookie-card{padding:12px 13px}
+  .cookie-card p{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -1038,6 +1063,18 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
 </div>
 
 <p class="sr-only" id="liveSummary" aria-live="polite"></p>
+
+<!-- ==================== COOKIE BANNER (consent → Yandex.Metrika) ==================== -->
+<div class="cookie" id="cookie-banner" role="region" aria-label="Уведомление об использовании файлов cookie" hidden>
+  <div class="cookie-card">
+    <div class="cookie-head">cookies.txt</div>
+    <p>Сайт использует файлы <b>cookie</b> и сервис веб-аналитики <b>Яндекс.Метрика</b> (счётчик 110947701): он сохраняет служебные cookie (<code>_ym_uid</code>, <code>_ym_d</code>, <code>_ym_isad</code>, <code>_ym_visorc</code>), собирает IP-адрес, данные о браузере, устройстве и действиях на страницах (Вебвизор, карта кликов) — для анализа и улучшения работы сайта. Также применяются технические записи localStorage: <code>nr-theme</code> (тема) и <code>nr-cookies</code> (ваше решение). Оператор — Новиков Павел, e-mail: noroutine@ro.ru. Обработка персональных данных — в соответствии со ст. 9 Федерального закона № 152-ФЗ. Нажимая «Принять», вы даёте согласие на обработку данных Яндекс.Метрикой; при отказе аналитика не загружается и это не влияет на доступность сайта. <a href="../index.html#privacy">Подробнее — Политика конфиденциальности</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn btn-primary" id="cookie-accept" type="button">Принять</button>
+      <button class="btn btn-ghost" id="cookie-reject" type="button">Отказаться</button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -1614,6 +1651,28 @@ html.js [data-reveal].is-in{opacity:1;transform:none}
 
   /* ---------- init ---------- */
   syncControls(false);
+})();
+</script>
+<script>
+/* cookie consent → Yandex.Metrika (тот же контракт, что на index.html: localStorage nr-cookies) */
+(function () {
+  'use strict';
+  function setCookieConsent(mode) {
+    try { localStorage.setItem('nr-cookies', mode); } catch (e) {}
+    var b = document.getElementById('cookie-banner');
+    if (b) b.hidden = true;
+    if (mode === 'accept' && typeof window.__nrLoadMetrika === 'function') window.__nrLoadMetrika();
+  }
+  var stored = null;
+  try { stored = localStorage.getItem('nr-cookies'); } catch (e) {}
+  if (stored !== 'accept' && stored !== 'reject') {
+    var b = document.getElementById('cookie-banner');
+    if (b) b.hidden = false;
+  }
+  var acc = document.getElementById('cookie-accept');
+  var rej = document.getElementById('cookie-reject');
+  if (acc) acc.addEventListener('click', function () { setCookieConsent('accept'); });
+  if (rej) rej.addEventListener('click', function () { setCookieConsent('reject'); });
 })();
 </script>
 </body>
